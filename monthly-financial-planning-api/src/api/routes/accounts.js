@@ -1,6 +1,7 @@
 import Router from 'koa-joi-router';
 
 import accounts from '../controllers/accounts';
+import validator from '../validators/accounts';
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.route([
   {
     method: 'POST',
     path: '/',
-    handler: [accounts.addAccounts]
+    handler: [validator.validSave, accounts.addAccounts]
   },
   {
     method: 'GET',

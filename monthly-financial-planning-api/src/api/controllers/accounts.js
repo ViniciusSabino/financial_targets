@@ -1,7 +1,12 @@
-const addAccounts = async ctx =>
-  await ctx.created({
+import service from '../services/accounts';
+
+const addAccounts = async ctx => {
+  const account = ctx.request.body;
+  await service.saveAccount(account);
+  return ctx.created({
     ok: ctx.request.body
   });
+};
 
 const listAccounts = async ctx =>
   await ctx.ok({
