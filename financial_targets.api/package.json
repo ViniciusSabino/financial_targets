@@ -1,7 +1,7 @@
 {
-    "name": "monthly-financial-plan.api",
+    "name": "financial_targets.api",
     "version": "1.0.0",
-    "description": "platform for monthly financial planning",
+    "description": "API for application responsible for all my financial control",
     "main": "index.js",
     "scripts": {
         "start": "nodenv ./dist/api/server.js",
@@ -19,7 +19,8 @@
         "financial",
         "plan",
         "montly-financial",
-        "node.js"
+        "node.js",
+        "financial targets"
     ],
     "author": "Vinícius Rocha <vnc.chelsea@gmail.com>",
     "license": "ISC",

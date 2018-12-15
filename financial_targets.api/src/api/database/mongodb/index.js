@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import config from '../../config';
 
 const createConnection = () => {
-  mongoose.connect(config.mongo.connection);
+  mongoose.connect(config.mongo.connection,  { useNewUrlParser: true });
   const db = mongoose.connection;
 
   db.on('error', console.error.bind(console, 'connection error'));

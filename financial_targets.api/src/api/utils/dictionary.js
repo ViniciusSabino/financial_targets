@@ -5,7 +5,8 @@ const account = {
   valueIsEmpty: { message: 'Informe o valor que precisa ser pago.' },
   dueDateIsEmpty: { message: 'Insira a data do vencimento.' },
   typeIsEmpty: { message: 'Informe o tipo.' },
-  paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' }
+  paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' },
+  nameIsEmpty: { message: 'O nome da mensalidade é obrigatório' }
 };
 
 export default {

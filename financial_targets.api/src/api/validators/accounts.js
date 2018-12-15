@@ -9,6 +9,8 @@ const validSave = (ctx, next) => {
 
   const valueLimit = 5000;
 
+  if (!account.name) errors.push(dictionary.account.nameIsEmpty);
+
   if (!account.description) errors.push(dictionary.account.descriptionIsEmpty);
 
   if (!account.value) errors.push(dictionary.account.valueIsEmpty);
@@ -17,18 +19,15 @@ const validSave = (ctx, next) => {
   if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
   else if (account.dueDate < moment().format('YYYY-MM-DD HH:mm:ss')) account.status = enumerator.account.status.expired;
 
-  console.log(account.dueDate);
-  console.log(moment().format('YYYY-MM-DD HH:mm:ss'));
-
   if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
-  if (account.amountPaid === account.value) account.status = enumerator.account.status.done;
+  else if (account.amountPaid === account.value) account.status = enumerator.account.status.done;
   else account.status = enumerator.account.status.pending;
 
   if (!account.type) errors.push(dictionary.account.typeIsEmpty);
 
   if (!account.paymentForm) errors.push(dictionary.account.paymentFormIsEmpty);
 
-  if (errors.length) return ctx.badRequest(errors);
+  if (errors.length) return ctx.badRequest({ errors });
 
   ctx.request.body = account;
 

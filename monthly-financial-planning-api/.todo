@@ -1,8 +1,0 @@
-Configurações iniciais e configurações de organização da API
-
-- Corrigir script de precommit do Husky
-- Criar o Readme.md com informações sobre a API e como executar o projeto em ambiente de desenvolvimento
-
-Importante verificar 
-
-- Se os pacotes da API estão atualizados e se podem ser atualizados sem problemas 
