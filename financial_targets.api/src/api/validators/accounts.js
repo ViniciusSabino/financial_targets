@@ -8,26 +8,25 @@ const validSave = (ctx, next) => {
   const errors = [];
 
   const valueLimit = 5000;
+  const currentDate = moment().format();
 
   if (!account.name) errors.push(dictionary.account.nameIsEmpty);
 
-  if (!account.description) errors.push(dictionary.account.descriptionIsEmpty);
-
   if (!account.value) errors.push(dictionary.account.valueIsEmpty);
   else if (account.value > valueLimit) errors.push(dictionary.account.valueExceeded);
-
-  if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
-  else if (account.dueDate < moment().format('YYYY-MM-DD HH:mm:ss')) account.status = enumerator.account.status.expired;
-
-  if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
-  else if (account.amountPaid === account.value) account.status = enumerator.account.status.done;
-  else account.status = enumerator.account.status.pending;
 
   if (!account.type) errors.push(dictionary.account.typeIsEmpty);
 
   if (!account.paymentForm) errors.push(dictionary.account.paymentFormIsEmpty);
 
-  if (errors.length) return ctx.badRequest({ errors });
+  if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
+
+  if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
+
+  if (!errors.length)
+    //managing the status of the account payable
+    account.status = account.amountPaid === account.value ? enumerator.account.status.done : account.dueDate < currentDate ? enumerator.account.status.expired : enumerator.account.status.pending;
+  else return ctx.badRequest({ errors });
 
   ctx.request.body = account;
 

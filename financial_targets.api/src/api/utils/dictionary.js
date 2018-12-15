@@ -1,12 +1,11 @@
 const account = {
+  nameIsEmpty: { message: 'Informe o nome da mensalidade' },
+  valueIsEmpty: { message: 'Informe o valor da mensalidade.' },
   valueExceeded: { message: 'O valor da mensalidade está acima de R$ 5.000,00.' },
-  amountPaidIsInvalid: { message: 'O valor pago da mensalidade não pode ser maior que o seu valor.' },
-  descriptionIsEmpty: { message: 'Informe a descrição.' },
-  valueIsEmpty: { message: 'Informe o valor que precisa ser pago.' },
-  dueDateIsEmpty: { message: 'Insira a data do vencimento.' },
-  typeIsEmpty: { message: 'Informe o tipo.' },
-  paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' },
-  nameIsEmpty: { message: 'O nome da mensalidade é obrigatório' }
+  dueDateIsEmpty: { message: 'Informe a data de vencimento da mensalidade.' },
+  amountPaidIsInvalid: { message: 'O valor pago até o momento não pode ser maior que valor da mensalidade.' },
+  typeIsEmpty: { message: 'Informe o tipo da mensalidade' },
+  paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' }
 };
 
 export default {
