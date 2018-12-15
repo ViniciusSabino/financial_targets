@@ -7,6 +7,12 @@ Importante verificar
 
 - Se os pacotes da API estão atualizados e se podem ser atualizados sem problemas 
 
+Tarefas pendendes
+
+- Criar uma solução para verificar se a mensalidade está marcada para se repetir, 
+se sim, verificar se ela já foi paga corretamente para então trocar a data de vencimento e zerar o valor pago se não manter como 
+atrasada
+
 
 
 ----------------------- HELP ----------------------------

@@ -6,7 +6,8 @@ const TagSchema = mongoose.Schema;
 const tagSchema = new TagSchema(
   {
     name: { type: String, required: true },
-    color: { type: String, required: true }
+    color: { type: String, required: true },
+    default: { type: Boolean, required: true }
   },
   {
     versionKey: false

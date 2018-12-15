@@ -1,4 +1,4 @@
-import Account from '../models/accounts';
+import Account from '../models/account';
 
 const saveAccount = async input => {
   const account = new Account(input);
