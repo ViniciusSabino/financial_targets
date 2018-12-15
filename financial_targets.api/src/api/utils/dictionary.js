@@ -5,7 +5,8 @@ const account = {
   dueDateIsEmpty: { message: 'Informe a data de vencimento da mensalidade.' },
   amountPaidIsInvalid: { message: 'O valor pago até o momento não pode ser maior que valor da mensalidade.' },
   typeIsEmpty: { message: 'Informe o tipo da mensalidade' },
-  paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' }
+  paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' },
+  tagsIsExceeded: { message: 'A mensalidade não deve conter mais do que 3 tags' }
 };
 
 export default {

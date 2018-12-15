@@ -1,6 +1,17 @@
 import mongoose from 'mongoose';
 
 const AccountSchema = mongoose.Schema;
+const TagSchema = mongoose.Schema;
+
+const tagSchema = new TagSchema(
+  {
+    name: { type: String, required: true },
+    color: { type: String, required: true }
+  },
+  {
+    versionKey: false
+  }
+);
 
 const accountSchema = new AccountSchema(
   {
@@ -13,7 +24,8 @@ const accountSchema = new AccountSchema(
     type: { type: String, required: true },
     paymentForm: { type: String, required: true },
     isRepeat: { type: Boolean, default: false },
-    userId: { type: Number, required: true }
+    userId: { type: Number, required: true },
+    tags: [tagSchema]
   },
   {
     timestamps: true,

@@ -8,6 +8,7 @@ const validSave = (ctx, next) => {
   const errors = [];
 
   const valueLimit = 5000;
+  const tagsLimit = 3;
   const currentDate = moment().format();
 
   if (!account.name) errors.push(dictionary.account.nameIsEmpty);
@@ -22,6 +23,8 @@ const validSave = (ctx, next) => {
   if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
 
   if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
+
+  if (account.tags.length > tagsLimit) errors.push(dictionary.account.tagsIsExceeded);
 
   if (!errors.length)
     //managing the status of the account payable
