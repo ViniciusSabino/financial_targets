@@ -26,7 +26,7 @@ router.route([
   {
     method: 'PUT',
     path: '/',
-    handler: [accounts.editAccounts]
+    handler: [validator.validEdit, accounts.editAccount]
   },
   {
     method: 'DELETE',

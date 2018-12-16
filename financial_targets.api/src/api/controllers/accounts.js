@@ -22,20 +22,25 @@ const listAllAccounts = async ctx => {
   });
 };
 
-const editAccounts = async ctx =>
-  await ctx.ok({
-    ok: ctx.request.body
+const editAccount = async ctx => {
+  const account = ctx.request.body;
+  const { accountid } = ctx.request.header;
+  const accountUpdated = await service.editAccount(accountid, account);
+  return ctx.ok({
+    data: accountUpdated
   });
+};
 
-const deleteAccounts = async ctx =>
-  await ctx.ok({
-    ok: 'Excluida'
-  });
+const deleteAccounts = async ctx => {
+  const { accountsIds } = ctx.request.body;
+  await service.deleteAccounts(accountsIds);
+  return ctx.ok();
+};
 
 const makePayment = async ctx => {
   const { accountsIds } = ctx.request.body;
   const adjustedData = await service.makePayment(accountsIds);
-  await ctx.ok({
+  return ctx.ok({
     data: adjustedData
   });
 };
@@ -54,7 +59,7 @@ export default {
   addAccounts,
   listAccounts,
   listAllAccounts,
-  editAccounts,
+  editAccount,
   deleteAccounts,
   makePayment,
   makePartialPayment,

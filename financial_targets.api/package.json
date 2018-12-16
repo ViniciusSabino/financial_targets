@@ -29,6 +29,7 @@
     },
     "homepage": "https://github.com/ViniciusSabino/studies_node#readme",
     "dependencies": {
+        "chalk": "^2.4.1",
         "kcors": "^2.2.2",
         "koa": "^2.6.2",
         "koa-bodyparser": "^4.2.1",

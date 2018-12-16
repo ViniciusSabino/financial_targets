@@ -1,0 +1,19 @@
+----------------------- HELP ----------------------------
+
+FORMAS DE PAGAMENTO (MENSALIDADE - ACCOUNTS)
+
+    1 - 'CREDIT' - Crédito
+    2 - 'DEBIT CARD' - Cartão de Débito
+    3 - 'TICKET' - Boleto Bancário
+  }
+
+TIPOS DE PAGAMENTO (MENSALIDAE - ACCOUNTS)
+
+    1 - 'MONTHLY' - Mensal
+    2 - 'YEARLY' - Anual
+
+TIPO DE MENSALIDADE (ACCOUNTS)
+
+    1 - 'EXPIRED' - Expirado
+    2 - 'PENDING' - Pendente
+    3 - 'DONE' - Pagamento Realizado

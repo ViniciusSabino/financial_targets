@@ -1,7 +1,7 @@
 Configurações iniciais e configurações de organização da API
 
 - Corrigir script de precommit do Husky
-- Criar o Readme.md com informações sobre a API e como executar o projeto em ambiente de desenvolvimento
+- Criar o Readme.md 
 
 Importante verificar 
 
@@ -10,27 +10,12 @@ Importante verificar
 Tarefas pendendes
 
 - Criar uma solução para verificar se a mensalidade está marcada para se repetir, 
-se sim, verificar se ela já foi paga corretamente para então trocar a data de vencimento e zerar o valor pago se não manter como 
+se estiver então verificar se ela já foi paga corretamente para então trocar a data de vencimento e zerar o valor pago se não manter como 
 atrasada
 
+- Criar um middleware na API para que qualquer errro/excessão que apareça, esse problema seja tratado e uma resposta seja enviada na requisição
+sem printar o erro no console
 
 
------------------------ HELP ----------------------------
 
-FORMAS DE PAGAMENTO (MENSALIDADE - ACCOUNTS)
-
-    1 - 'CREDIT' - Crédito
-    2 - 'DEBIT CARD' - Cartão de Débito
-    3 - 'TICKET' - Boleto Bancário
-  }
-
-TIPOS DE PAGAMENTO (MENSALIDAE - ACCOUNTS)
-
-    1 - 'MONTHLY' - Mensal
-    2 - 'YEARLY' - Anual
-
-TIPO DE MENSALIDADE (ACCOUNTS)
-
-    1 - 'EXPIRED' - Expirado
-    2 - 'PENDING' - Pendente
 

@@ -7,7 +7,8 @@ const account = {
   typeIsEmpty: { message: 'Informe o tipo da mensalidade' },
   paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' },
   tagsIsExceeded: { message: 'A mensalidade não deve conter mais do que 3 tags' },
-  userIdIsEmpty: { message: 'Informe o id do usuário' }
+  userIdIsEmpty: { message: 'Informe o id do usuário' },
+  dataEditIsInvalid: { message: 'A data da mensalidade não pode ser menor que a data atual' }
 };
 
 export default {

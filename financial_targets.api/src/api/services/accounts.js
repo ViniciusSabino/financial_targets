@@ -29,8 +29,17 @@ const makePayment = async accountsIds => {
   return adjustedData;
 };
 
+const deleteAccounts = async accountsIds => await Account.deleteMany({ _id: accountsIds });
+
+const editAccount = async (accountId, account) => {
+  const accountUpdated = await Account.findOneAndUpdate({ _id: accountId }, account, { new: true });
+  return accountUpdated;
+};
+
 export default {
   listAllAccounts,
   saveAccount,
-  makePayment
+  makePayment,
+  deleteAccounts,
+  editAccount
 };
