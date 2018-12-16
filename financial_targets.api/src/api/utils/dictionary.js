@@ -6,7 +6,8 @@ const account = {
   amountPaidIsInvalid: { message: 'O valor pago até o momento não pode ser maior que valor da mensalidade.' },
   typeIsEmpty: { message: 'Informe o tipo da mensalidade' },
   paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' },
-  tagsIsExceeded: { message: 'A mensalidade não deve conter mais do que 3 tags' }
+  tagsIsExceeded: { message: 'A mensalidade não deve conter mais do que 3 tags' },
+  userIdIsEmpty: { message: 'Informe o id do usuário' }
 };
 
 export default {

@@ -19,6 +19,11 @@ router.route([
     handler: [accounts.listAccounts]
   },
   {
+    method: 'GET',
+    path: '/all',
+    handler: [validator.validFindAllAccounts, accounts.listAllAccounts]
+  },
+  {
     method: 'PUT',
     path: '/',
     handler: [accounts.editAccounts]

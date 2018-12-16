@@ -1,7 +1,15 @@
 import moment from 'moment';
 
 import dictionary from '../utils/dictionary';
-import enumerator from '../utils/enumerators';
+import enumerators from '../utils/enumerators';
+
+const validFindAllAccounts = (ctx, next) => {
+  const { userid } = ctx.request.header;
+
+  if (!userid) return ctx.badRequest({ errors: [dictionary.account.userIdIsEmpty] });
+
+  return next();
+};
 
 const validSave = (ctx, next) => {
   const account = ctx.request.body;
@@ -28,7 +36,7 @@ const validSave = (ctx, next) => {
 
   if (!errors.length)
     //managing the status of the account payable
-    account.status = account.amountPaid === account.value ? enumerator.account.status.done : account.dueDate < currentDate ? enumerator.account.status.expired : enumerator.account.status.pending;
+    account.status = account.amountPaid === account.value ? enumerators.account.status.done : account.dueDate < currentDate ? enumerators.account.status.expired : enumerators.account.status.pending;
   else return ctx.badRequest({ errors });
 
   ctx.request.body = account;
@@ -37,5 +45,6 @@ const validSave = (ctx, next) => {
 };
 
 export default {
+  validFindAllAccounts,
   validSave
 };

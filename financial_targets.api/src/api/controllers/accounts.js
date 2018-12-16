@@ -13,6 +13,15 @@ const listAccounts = async ctx =>
     ok: 'Listar mensalidades'
   });
 
+const listAllAccounts = async ctx => {
+  const { userid } = ctx.request.header;
+  const accounts = await service.listAllAccounts(userid);
+  return ctx.ok({
+    count: accounts.length,
+    data: accounts
+  });
+};
+
 const editAccounts = async ctx =>
   await ctx.ok({
     ok: ctx.request.body
@@ -23,10 +32,13 @@ const deleteAccounts = async ctx =>
     ok: 'Excluida'
   });
 
-const makePayment = async ctx =>
+const makePayment = async ctx => {
+  const { accountsIds } = ctx.request.body;
+  const adjustedData = await service.makePayment(accountsIds);
   await ctx.ok({
-    ok: ctx.request.body
+    data: adjustedData
   });
+};
 
 const makePartialPayment = async ctx =>
   await ctx.ok({
@@ -41,6 +53,7 @@ const sendNext = async ctx =>
 export default {
   addAccounts,
   listAccounts,
+  listAllAccounts,
   editAccounts,
   deleteAccounts,
   makePayment,
