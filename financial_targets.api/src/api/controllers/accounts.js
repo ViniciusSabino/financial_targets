@@ -45,10 +45,11 @@ const makePayment = async ctx => {
   });
 };
 
-const makePartialPayment = async ctx =>
-  await ctx.ok({
-    ok: ctx.request.headers.valuetopay
-  });
+const makePartialPayment = async ctx => {
+  const { amountPaid, accountId } = ctx.request.body;
+  const data = await service.makePartialPayment({ amountPaid, accountId });
+  return data.errors.length ? ctx.badRequest(data) : ctx.ok(data);
+};
 
 const sendNext = async ctx =>
   await ctx.ok({

@@ -30,7 +30,7 @@ const validEdit = (ctx, next) => {
   const currentDate = moment().format();
 
   if (!errors.length) {
-    if (account.dueDate < currentDate) return ctx.badRequest({ errors: [...errors, dictionary.account.dataEditIsInvalid] });
+    if (account.dueDate < currentDate) return ctx.badRequest({ errors: [dictionary.account.dataEditIsInvalid] });
     account.status =
       (account.status === enumerators.account.status.expired && account.dueDate > currentDate) || (account.status === enumerators.account.status.done && account.amountPaid < account.value)
         ? enumerators.account.status.pending
@@ -40,6 +40,14 @@ const validEdit = (ctx, next) => {
   } else return ctx.badRequest({ errors });
 
   ctx.request.body = account;
+
+  return next();
+};
+
+const validMakePartialPayment = (ctx, next) => {
+  const { accountId } = ctx.request.body;
+
+  if (!accountId) return ctx.badRequest({ errors: dictionary.account.accountIdIsEmpty });
 
   return next();
 };
@@ -70,5 +78,6 @@ const validDataSubmitted = account => {
 export default {
   validFindAllAccounts,
   validSave,
-  validEdit
+  validEdit,
+  validMakePartialPayment
 };

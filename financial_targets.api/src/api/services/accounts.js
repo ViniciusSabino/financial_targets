@@ -1,6 +1,9 @@
+import moment from 'moment';
+
 import Account from '../models/account';
 import enumerators from '../utils/enumerators';
-import moment from 'moment';
+import dictionary from '../utils/dictionary';
+import accountUtil from '../utils/accounts';
 
 const listAllAccounts = async userId => {
   const accounts = await Account.find({ userId });
@@ -17,9 +20,7 @@ const makePayment = async accountsIds => {
   const accounts = await Account.find({ _id: ids });
   const adjustedData = accounts.map(account => {
     const { value, type, _id, dueDate } = account;
-    const days = moment().daysInMonth();
-    const dueDateMoment = moment(dueDate);
-    const ajustedDate = type === enumerators.account.type.monthly ? dueDateMoment.add(days, 'days') : dueDateMoment.add(12, 'months');
+    const ajustedDate = accountUtil.setAccountDate(dueDate, type);
     return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
   });
   adjustedData.forEach(async account => {
@@ -36,10 +37,25 @@ const editAccount = async (accountId, account) => {
   return accountUpdated;
 };
 
+const makePartialPayment = async input => {
+  const account = await Account.findOne({ _id: input.accountId });
+  let data = input.amountPaid > account.value ? { errors: [dictionary.account.amountPaidIsInvalid] } : { errors: [] };
+  if (data.errors.length) return data;
+  const adjustedDate = accountUtil.setAccountDate(account.dueDate, account.type);
+  const accountUpdated = await Account.findOneAndUpdate(
+    { _id: input.accountId },
+    { amountPaid: input.amountPaid, status: account.value == input.amountPaid ? enumerators.account.status.done : account.status, dueDate: adjustedDate },
+    { new: true }
+  );
+
+  return { ...data, data: accountUpdated };
+};
+
 export default {
   listAllAccounts,
   saveAccount,
   makePayment,
   deleteAccounts,
-  editAccount
+  editAccount,
+  makePartialPayment
 };
