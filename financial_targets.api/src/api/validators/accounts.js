@@ -14,10 +14,14 @@ const validSave = (ctx, next) => {
   const errors = validDataSubmitted(account);
   const currentDate = moment().format();
 
-  if (!errors.length)
+  if (!errors.length) {
     //managing the status of the account payable
-    account.status = account.amountPaid === account.value ? enumerators.account.status.done : account.dueDate < currentDate ? enumerators.account.status.expired : enumerators.account.status.pending;
-  else return ctx.badRequest({ errors });
+    account.status = do {
+      if (account.amountPaid === account.value) enumerators.account.status.done;
+      else if (account.dueDate < currentDate) enumerators.account.status.expired;
+      else enumerators.account.status.pending;
+    };
+  } else return ctx.badRequest({ errors });
 
   ctx.request.body = account;
 
@@ -31,12 +35,12 @@ const validEdit = (ctx, next) => {
 
   if (!errors.length) {
     if (account.dueDate < currentDate) return ctx.badRequest({ errors: [dictionary.account.dataEditIsInvalid] });
-    account.status =
-      (account.status === enumerators.account.status.expired && account.dueDate > currentDate) || (account.status === enumerators.account.status.done && account.amountPaid < account.value)
-        ? enumerators.account.status.pending
-        : account.status === enumerators.account.status.pending && account.amountPaid === account.value
-          ? enumerators.account.status.done
-          : account.status;
+    account.status = do {
+      if ((account.status === enumerators.account.status.expired && account.dueDate > currentDate) || (account.status === enumerators.account.status.done && account.amountPaid < account.value))
+        enumerators.account.status.pending;
+      else if (account.status === enumerators.account.status.pending && account.amountPaid === account.value) enumerators.account.status.done;
+      else account.status;
+    };
   } else return ctx.badRequest({ errors });
 
   ctx.request.body = account;

@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import Account from '../models/account';
 import enumerators from '../utils/enumerators';
 import dictionary from '../utils/dictionary';

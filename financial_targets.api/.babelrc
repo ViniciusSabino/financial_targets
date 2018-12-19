@@ -15,6 +15,7 @@
             {
                 "proposal": "minimal"
             }
-        ]
+        ],
+        ["@babel/plugin-proposal-do-expressions"]
     ]
 }
