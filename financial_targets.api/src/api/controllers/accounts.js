@@ -51,10 +51,13 @@ const makePartialPayment = async ctx => {
   return data.errors.length ? ctx.badRequest(data) : ctx.ok(data);
 };
 
-const sendNext = async ctx =>
-  await ctx.ok({
-    ok: ctx.request.body
+const sendNext = async ctx => {
+  const { accountid } = ctx.request.header;
+  const accountUpdated = await service.sendNext(accountid);
+  return ctx.ok({
+    data: accountUpdated
   });
+};
 
 export default {
   addAccounts,

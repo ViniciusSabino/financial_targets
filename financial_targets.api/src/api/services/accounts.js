@@ -36,8 +36,8 @@ const editAccount = async (accountId, account) => {
 };
 
 const makePartialPayment = async input => {
-  const account = await Account.findOne({ _id: input.accountId });
-  let data = input.amountPaid > account.value ? { errors: [dictionary.account.amountPaidIsInvalid] } : { errors: [] };
+  const account = await Account.findById(input.accountId);
+  const data = input.amountPaid > account.value ? { errors: [dictionary.account.amountPaidIsInvalid] } : { errors: [] };
   if (data.errors.length) return data;
   const adjustedDate = accountUtil.setAccountDate(account.dueDate, account.type);
   const accountUpdated = await Account.findOneAndUpdate(
@@ -49,11 +49,20 @@ const makePartialPayment = async input => {
   return { ...data, data: accountUpdated };
 };
 
+const sendNext = async accountId => {
+  const { type, dueDate } = await Account.findById(accountId);
+  const adjustedDate = accountUtil.setAccountDate(dueDate, type);
+  const adjustedStatus = enumerators.account.status.pending;
+  const accountUpdated = await Account.findOneAndUpdate({ _id: accountId }, { dueDate: adjustedDate, status: adjustedStatus }, { new: true });
+  return accountUpdated;
+};
+
 export default {
   listAllAccounts,
   saveAccount,
   makePayment,
   deleteAccounts,
   editAccount,
-  makePartialPayment
+  makePartialPayment,
+  sendNext
 };
