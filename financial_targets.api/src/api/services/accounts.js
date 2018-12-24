@@ -3,6 +3,8 @@ import enumerators from '../utils/enumerators';
 import dictionary from '../utils/dictionary';
 import accountUtil from '../utils/accounts';
 
+const accountStatus = enumerators.account.status;
+
 const listAllAccounts = async userId => {
   const accounts = await Account.find({ userId });
   return accounts;
@@ -22,7 +24,7 @@ const makePayment = async accountsIds => {
     return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
   });
   adjustedData.forEach(async account => {
-    await Account.updateOne({ _id: account._id }, { amountPaid: account.amountPaid, dueDate: account.dueDate, status: enumerators.account.status.done });
+    await Account.updateOne({ _id: account._id }, { amountPaid: account.amountPaid, dueDate: account.dueDate, status: accountStatus.done });
   });
 
   return adjustedData;
@@ -42,7 +44,7 @@ const makePartialPayment = async input => {
   const adjustedDate = accountUtil.setAccountDate(account.dueDate, account.type);
   const accountUpdated = await Account.findOneAndUpdate(
     { _id: input.accountId },
-    { amountPaid: input.amountPaid, status: account.value == input.amountPaid ? enumerators.account.status.done : account.status, dueDate: adjustedDate },
+    { amountPaid: input.amountPaid, status: account.value == input.amountPaid ? accountStatus.done : account.status, dueDate: adjustedDate },
     { new: true }
   );
 
@@ -52,7 +54,7 @@ const makePartialPayment = async input => {
 const sendNext = async accountId => {
   const { type, dueDate } = await Account.findById(accountId);
   const adjustedDate = accountUtil.setAccountDate(dueDate, type);
-  const adjustedStatus = enumerators.account.status.pending;
+  const adjustedStatus = accountStatus.pending;
   const accountUpdated = await Account.findOneAndUpdate({ _id: accountId }, { dueDate: adjustedDate, status: adjustedStatus }, { new: true });
   return accountUpdated;
 };

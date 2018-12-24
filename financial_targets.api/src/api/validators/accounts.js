@@ -3,6 +3,8 @@ import moment from 'moment';
 import dictionary from '../utils/dictionary';
 import enumerators from '../utils/enumerators';
 
+const accountStatus = enumerators.account.status;
+
 const validFindAllAccounts = (ctx, next) => {
   const { userid } = ctx.request.header;
   if (!userid) return ctx.badRequest({ errors: [dictionary.account.userIdIsEmpty] });
@@ -17,9 +19,9 @@ const validSave = (ctx, next) => {
   if (!errors.length) {
     //managing the status of the account payable
     account.status = do {
-      if (account.amountPaid === account.value) enumerators.account.status.done;
-      else if (account.dueDate < currentDate) enumerators.account.status.expired;
-      else enumerators.account.status.pending;
+      if (account.amountPaid === account.value) accountStatus.done;
+      else if (account.dueDate < currentDate) accountStatus.expired;
+      else accountStatus.pending;
     };
   } else return ctx.badRequest({ errors });
 
@@ -36,9 +38,11 @@ const validEdit = (ctx, next) => {
   if (!errors.length) {
     if (account.dueDate < currentDate) return ctx.badRequest({ errors: [dictionary.account.dataEditIsInvalid] });
     account.status = do {
-      if ((account.status === enumerators.account.status.expired && account.dueDate > currentDate) || (account.status === enumerators.account.status.done && account.amountPaid < account.value))
-        enumerators.account.status.pending;
-      else if (account.status === enumerators.account.status.pending && account.amountPaid === account.value) enumerators.account.status.done;
+      if ((account.status === accountStatus.expired && account.dueDate > currentDate)
+        || (account.status === accountStatus.done && account.amountPaid < account.value))
+        accountStatus.pending;
+      else if (account.status === accountStatus.pending && account.amountPaid === account.value)
+        accountStatus.done;
       else account.status;
     };
   } else return ctx.badRequest({ errors });
