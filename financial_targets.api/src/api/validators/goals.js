@@ -1,1 +1,29 @@
+import moment from 'moment';
+
 import dictionary from '../utils/dictionary';
+
+const validCreate = (ctx, next) => {
+  const goal = ctx.request.body;
+  const errors = validDataSubmitted(goal);
+  return errors.length ? ctx.badRequest({ errors }) : next();
+};
+
+const validDataSubmitted = goal => {
+  const errors = [];
+  const currentDate = moment().format();
+
+  if (!goal.name) errors.push(dictionary.goals.nameIsEmpty);
+
+  if (!goal.amount || goal.amount < 0) errors.push(dictionary.goals.amountIsEmpty);
+
+  if (!goal.targetDate) errors.push(dictionary.goals.targetDateIsEmpty);
+  else if (goal.targetDate < currentDate) errors.push(dictionary.goals.targetDateIsInvalid);
+
+  if (!goal.userId) errors.push(dictionary.goals.userIdIsEmpty);
+
+  return errors;
+};
+
+export default {
+  validCreate
+};

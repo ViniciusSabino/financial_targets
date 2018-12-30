@@ -7,8 +7,7 @@ const accountStatus = enumerators.account.status;
 
 const validFindAllAccounts = (ctx, next) => {
   const { userid } = ctx.request.header;
-  if (!userid) return ctx.badRequest({ errors: [dictionary.account.userIdIsEmpty] });
-  return next();
+  return !userid ? ctx.badRequest({ errors: [dictionary.account.userIdIsEmpty] }) : next();
 };
 
 const validCreate = (ctx, next) => {
@@ -17,7 +16,6 @@ const validCreate = (ctx, next) => {
   const currentDate = moment().format();
 
   if (!errors.length) {
-    //managing the status of the account payable
     account.status = do {
       if (account.amountPaid === account.value) accountStatus.done;
       else if (account.dueDate < currentDate) accountStatus.expired;
@@ -54,10 +52,7 @@ const validEdit = (ctx, next) => {
 
 const validMakePartialPayment = (ctx, next) => {
   const { accountId } = ctx.request.body;
-
-  if (!accountId) return ctx.badRequest({ errors: dictionary.account.accountIdIsEmpty });
-
-  return next();
+  return !accountId ? ctx.badRequest({ errors: dictionary.account.accountIdIsEmpty }) : next();
 };
 
 const validDataSubmitted = account => {
@@ -67,7 +62,7 @@ const validDataSubmitted = account => {
 
   if (!account.name) errors.push(dictionary.account.nameIsEmpty);
 
-  if (!account.value) errors.push(dictionary.account.valueIsEmpty);
+  if (!account.value || account.value < 0) errors.push(dictionary.account.valueIsEmpty);
   else if (account.value > valueLimit) errors.push(dictionary.account.valueExceeded);
 
   if (!account.type) errors.push(dictionary.account.typeIsEmpty);
@@ -76,8 +71,11 @@ const validDataSubmitted = account => {
   if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
 
   if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
+  else if(account.amountPaid < 0) errors.push(dictionary.account.amoountPaidIsNegative);
 
   if (account.tags?.length > tagsLimit) errors.push(dictionary.account.tagsIsExceeded);
+
+  if (!account.userId) errors.push(dictionary.account.userIdIsEmpty);
 
   return errors;
 };

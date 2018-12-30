@@ -4,6 +4,7 @@ const account = {
   valueExceeded: { message: 'O valor da mensalidade está acima de R$ 5.000,00.' },
   dueDateIsEmpty: { message: 'Informe a data de vencimento da mensalidade.' },
   amountPaidIsInvalid: { message: 'O valor pago até o momento não pode ser maior que valor da mensalidade.' },
+  amoountPaidIsNegative: { message: 'O valor pago não pode ser um valor abaixo que 0.' },
   typeIsEmpty: { message: 'Informe o tipo da mensalidade.' },
   paymentFormIsEmpty: { message: 'A forma de pagamento precisa ser informada.' },
   tagsIsExceeded: { message: 'A mensalidade não deve conter mais do que 3 tags.' },
@@ -17,7 +18,8 @@ const goals = {
   amountIsEmpty: { message: 'Informe o valor que se deseja alcançar.' },
   targetDateIsEmpty: { message: 'Quando deseja atingir essa meta?' },
   targetDateIsInvalid: { message: 'A Data para atingir a meta está inválida.' },
-  goalTypeIsEmpty: { message: 'O Tipo da meta precisa ser informado.' }
+  typeIsEmpty: { message: 'O Tipo da meta precisa ser informado.' },
+  userIdIsEmpty: { message: 'Informe o id do usuário.' }
 };
 
 export default {

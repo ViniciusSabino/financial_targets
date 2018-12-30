@@ -1,5 +1,7 @@
 import Router from 'koa-joi-router';
 
+import validator from '../validators/goals';
+
 const router = Router();
 
 router.prefix('/goals');
@@ -13,6 +15,8 @@ router.route([
   {
     method: 'POST',
     path: '/',
-    handler: []
+    handler: [validator.validCreate]
   }
 ]);
+
+export default router;
