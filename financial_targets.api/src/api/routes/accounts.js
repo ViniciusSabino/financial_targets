@@ -11,7 +11,7 @@ router.route([
   {
     method: 'POST',
     path: '/',
-    handler: [validator.validSave, accounts.addAccounts]
+    handler: [validator.validCreate, accounts.addAccounts]
   },
   {
     method: 'GET',

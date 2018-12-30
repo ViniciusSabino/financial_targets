@@ -16,6 +16,7 @@
                 "proposal": "minimal"
             }
         ],
-        ["@babel/plugin-proposal-do-expressions"]
+        ["@babel/plugin-proposal-do-expressions"],
+        ["@babel/plugin-proposal-optional-chaining"]
     ]
 }

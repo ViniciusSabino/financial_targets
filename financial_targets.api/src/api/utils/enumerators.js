@@ -12,11 +12,20 @@ const account = {
 
   paymentForm: {
     credit: 'CREDIT',
-    debitCard: 'DEBIT CARD',
+    debitCard: 'DEBIT_CARD',
     ticket: 'TICKET'
   }
 };
 
+const goal = {
+  type: {
+    shortRun: 'SHORT_RUN',
+    middleRun: 'MIDDLE_RUN',
+    longRun: 'LONG_RUN'
+  }
+};
+
 export default {
-  account
+  account,
+  goal
 };

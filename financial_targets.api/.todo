@@ -9,12 +9,14 @@ Importante verificar
 
 Tarefas pendendes
 
-- Criar uma solução para verificar se a mensalidade está marcada para se repetir, 
+- (Account) - Criar uma solução para verificar automáticamente se a mensalidade está marcada para se repetir, 
 se estiver então verificar se ela já foi paga corretamente para então trocar a data de vencimento e zerar o valor pago se não manter como 
 atrasada
 
-- Criar um middleware na API para que qualquer errro/excessão que apareça, esse problema seja tratado e uma resposta seja enviada na requisição
-sem printar o erro no console
+- (Server) - Criar um middleware na API para que qualquer erro/excessão que apareça, esse problema seja tratado e uma resposta seja enviada na requisição
+sem mostrar o erro no console
+
+
 
 
 

@@ -11,7 +11,7 @@ const validFindAllAccounts = (ctx, next) => {
   return next();
 };
 
-const validSave = (ctx, next) => {
+const validCreate = (ctx, next) => {
   const account = ctx.request.body;
   const errors = validDataSubmitted(account);
   const currentDate = moment().format();
@@ -71,21 +71,20 @@ const validDataSubmitted = account => {
   else if (account.value > valueLimit) errors.push(dictionary.account.valueExceeded);
 
   if (!account.type) errors.push(dictionary.account.typeIsEmpty);
-
   if (!account.paymentForm) errors.push(dictionary.account.paymentFormIsEmpty);
 
   if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
 
   if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
 
-  if (account.tags.length > tagsLimit) errors.push(dictionary.account.tagsIsExceeded);
+  if (account.tags?.length > tagsLimit) errors.push(dictionary.account.tagsIsExceeded);
 
   return errors;
 };
 
 export default {
   validFindAllAccounts,
-  validSave,
+  validCreate,
   validEdit,
   validMakePartialPayment
 };
