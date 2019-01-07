@@ -1,6 +1,6 @@
 import service from '../services/accounts';
 
-const addAccounts = async ctx => {
+const addAccount = async ctx => {
   const account = ctx.request.body;
   await service.saveAccount(account);
   return ctx.created({
@@ -60,7 +60,7 @@ const sendNext = async ctx => {
 };
 
 export default {
-  addAccounts,
+  addAccount,
   listAccounts,
   listAllAccounts,
   editAccount,

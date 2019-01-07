@@ -1,6 +1,5 @@
-import moment from 'moment';
-
 import dictionary from '../utils/dictionary';
+import functions from '../utils/functions';
 
 const validCreate = (ctx, next) => {
   const goal = ctx.request.body;
@@ -10,8 +9,7 @@ const validCreate = (ctx, next) => {
 
 const validDataSubmitted = goal => {
   const errors = [];
-  const currentDate = moment().format();
-
+  const currentDate = functions.getCurrentDate();
   if (!goal.name) errors.push(dictionary.goals.nameIsEmpty);
 
   if (!goal.amount || goal.amount < 0) errors.push(dictionary.goals.amountIsEmpty);

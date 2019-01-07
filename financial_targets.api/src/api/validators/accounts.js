@@ -1,5 +1,4 @@
-import moment from 'moment';
-
+import functions from '../utils/functions';
 import dictionary from '../utils/dictionary';
 import enumerators from '../utils/enumerators';
 
@@ -13,7 +12,7 @@ const validFindAllAccounts = (ctx, next) => {
 const validCreate = (ctx, next) => {
   const account = ctx.request.body;
   const errors = validDataSubmitted(account);
-  const currentDate = moment().format();
+  const currentDate = functions.getCurrentDate();
 
   if (!errors.length) {
     account.status = do {
@@ -31,7 +30,7 @@ const validCreate = (ctx, next) => {
 const validEdit = (ctx, next) => {
   const account = ctx.request.body;
   const errors = validDataSubmitted(account);
-  const currentDate = moment().format();
+  const currentDate = functions.getCurrentDate();
 
   if (!errors.length) {
     if (account.dueDate < currentDate) return ctx.badRequest({ errors: [dictionary.account.dataEditIsInvalid] });

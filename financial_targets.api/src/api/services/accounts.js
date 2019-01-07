@@ -1,7 +1,7 @@
 import Account from '../models/account';
 import enumerators from '../utils/enumerators';
 import dictionary from '../utils/dictionary';
-import accountUtil from '../utils/accounts';
+import accountsUtil from '../utils/accounts';
 
 const accountStatus = enumerators.account.status;
 
@@ -20,7 +20,7 @@ const makePayment = async accountsIds => {
   const accounts = await Account.find({ _id: ids });
   const adjustedData = accounts.map(account => {
     const { value, type, _id, dueDate } = account;
-    const ajustedDate = accountUtil.setAccountDate(dueDate, type);
+    const ajustedDate = accountsUtil.setAccountDate(dueDate, type);
     return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
   });
   adjustedData.forEach(async account => {
@@ -41,7 +41,7 @@ const makePartialPayment = async input => {
   const account = await Account.findById(input.accountId);
   const data = input.amountPaid > account.value ? { errors: [dictionary.account.amountPaidIsInvalid] } : { errors: [] };
   if (data.errors.length) return data;
-  const adjustedDate = accountUtil.setAccountDate(account.dueDate, account.type);
+  const adjustedDate = accountsUtil.setAccountDate(account.dueDate, account.type);
   const accountUpdated = await Account.findOneAndUpdate(
     { _id: input.accountId },
     { amountPaid: input.amountPaid, status: account.value == input.amountPaid ? accountStatus.done : account.status, dueDate: adjustedDate },
@@ -53,7 +53,7 @@ const makePartialPayment = async input => {
 
 const sendNext = async accountId => {
   const { type, dueDate } = await Account.findById(accountId);
-  const adjustedDate = accountUtil.setAccountDate(dueDate, type);
+  const adjustedDate = accountsUtil.setAccountDate(dueDate, type);
   const adjustedStatus = accountStatus.pending;
   const accountUpdated = await Account.findOneAndUpdate({ _id: accountId }, { dueDate: adjustedDate, status: adjustedStatus }, { new: true });
   return accountUpdated;
