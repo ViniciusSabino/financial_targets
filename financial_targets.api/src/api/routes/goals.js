@@ -1,6 +1,7 @@
 import Router from 'koa-joi-router';
 
 import validator from '../validators/goals';
+import goals from '../controllers/goals';
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.route([
   {
     method: 'POST',
     path: '/',
-    handler: [validator.validCreate]
+    handler: [validator.validCreate, goals.addGoal]
   }
 ]);
 
