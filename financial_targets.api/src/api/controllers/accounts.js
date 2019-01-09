@@ -2,10 +2,8 @@ import service from '../services/accounts';
 
 const addAccount = async ctx => {
   const account = ctx.request.body;
-  await service.saveAccount(account);
-  return ctx.created({
-    ok: ctx.request.body
-  });
+  const data = await service.saveAccount(account);
+  return ctx.created({ data });
 };
 
 const listAccounts = async ctx =>
@@ -25,10 +23,8 @@ const listAllAccounts = async ctx => {
 const editAccount = async ctx => {
   const account = ctx.request.body;
   const { accountid } = ctx.request.header;
-  const accountUpdated = await service.editAccount(accountid, account);
-  return ctx.ok({
-    data: accountUpdated
-  });
+  const data = await service.editAccount(accountid, account);
+  return ctx.ok({ data });
 };
 
 const deleteAccounts = async ctx => {
@@ -39,10 +35,8 @@ const deleteAccounts = async ctx => {
 
 const makePayment = async ctx => {
   const { accountsIds } = ctx.request.body;
-  const adjustedData = await service.makePayment(accountsIds);
-  return ctx.ok({
-    data: adjustedData
-  });
+  const data = await service.makePayment(accountsIds);
+  return ctx.ok({ data });
 };
 
 const makePartialPayment = async ctx => {
@@ -53,10 +47,8 @@ const makePartialPayment = async ctx => {
 
 const sendNext = async ctx => {
   const { accountid } = ctx.request.header;
-  const accountUpdated = await service.sendNext(accountid);
-  return ctx.ok({
-    data: accountUpdated
-  });
+  const data = await service.sendNext(accountid);
+  return ctx.ok({ data });
 };
 
 export default {

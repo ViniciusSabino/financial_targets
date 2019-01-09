@@ -11,6 +11,11 @@ router.route([
     method: 'GET',
     path: '/tags',
     handler: [configuration.listDefaultTags]
+  },
+  {
+    method: 'POST',
+    path: '/',
+    handler: [configuration.saveConfiguration]
   }
 ]);
 

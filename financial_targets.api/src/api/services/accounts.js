@@ -12,7 +12,7 @@ const listAllAccounts = async userId => {
 
 const saveAccount = async input => {
   const account = new Account(input);
-  await account.save();
+  return await account.save();
 };
 
 const makePayment = async accountsIds => {

@@ -8,6 +8,13 @@ const listDefaultTags = async ctx => {
   });
 };
 
+const saveConfiguration = async ctx => {
+  const configuration = ctx.request.body;
+  const data = await service.saveConfiguration(configuration);
+  return ctx.created({ data });
+};
+
 export default {
-  listDefaultTags
+  listDefaultTags,
+  saveConfiguration
 };

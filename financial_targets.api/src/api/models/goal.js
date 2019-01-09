@@ -9,7 +9,8 @@ const goalSchema = new GoalSchema(
     amount: { type: Number, required: true },
     action: { type: String },
     targetDate: { type: Date, required: true },
-    goalType: { type: String, required: true }
+    goalType: { type: String, required: true },
+    userId: { type: Number, required: true }
   },
   {
     versionKey: false,
