@@ -2,8 +2,8 @@ import enumerators from './enumerators';
 import functions from './functions';
 
 const getGoalType = targetDate => {
-  const { type } = enumerators.goal;
-  const dateDifferences = enumerators.date.differences;
+  const { type } = enumerators.goals;
+  const dateDifferences = enumerators.others.date.differences;
   const currentDate = functions.getCurrentDate();
   const targetDateCompare = functions.createMomentDate(targetDate);
   const daysDifference = functions.getDateDifference(dateDifferences.days, targetDateCompare, currentDate);

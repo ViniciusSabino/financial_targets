@@ -20,6 +20,6 @@ TIPOS DE MENSALIDADE (ACCOUNTS)
 
 TIPOS DE METAS (GOALS)
 
-    1 - 'SHORT_RUN - Curto Prazo
-    2 - 'MIDDLE_RUN - Médio Prazo
-    3 - 'LONG_RUN - Longo Prazo
+    1 - 'SHORT_RUN - Curto Prazo (1 - 2 Meses)
+    2 - 'MIDDLE_RUN - Médio Prazo (2 Meses à 1 Ano)
+    3 - 'LONG_RUN - Longo Prazo (1 Ano para mais)

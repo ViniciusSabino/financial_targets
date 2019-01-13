@@ -2,14 +2,14 @@ import moment from 'moment';
 
 import enumerators from './enumerators';
 
-const getCurrentDate = () => moment();
+const getCurrentDate = () => moment().format();
 
 const getDaysInCurrentMonth = () => moment().daysInMonth();
 
 const createMomentDate = date => moment(date);
 
 const getDateDifference = (differenceType, dateA, dateB) => {
-  const { differences } = enumerators.date;
+  const { differences } = enumerators.others.date;
   switch (differenceType) {
     case differences.milliseconds:
       return dateA.diff(dateB);

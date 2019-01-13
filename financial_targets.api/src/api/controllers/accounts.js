@@ -1,8 +1,7 @@
 import service from '../services/accounts';
 
 const addAccount = async ctx => {
-  const account = ctx.request.body;
-  const data = await service.saveAccount(account);
+  const data = await service.saveAccount(ctx.request.body);
   return ctx.created({ data });
 };
 
@@ -13,17 +12,13 @@ const listAccounts = async ctx =>
 
 const listAllAccounts = async ctx => {
   const { userid } = ctx.request.header;
-  const accounts = await service.listAllAccounts(userid);
-  return ctx.ok({
-    count: accounts.length,
-    data: accounts
-  });
+  const data = await service.listAllAccounts(userid);
+  return ctx.ok(data);
 };
 
 const editAccount = async ctx => {
-  const account = ctx.request.body;
   const { accountid } = ctx.request.header;
-  const data = await service.editAccount(accountid, account);
+  const data = await service.editAccount(accountid, ctx.request.body);
   return ctx.ok({ data });
 };
 

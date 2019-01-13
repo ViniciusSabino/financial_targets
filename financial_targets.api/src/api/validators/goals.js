@@ -15,7 +15,8 @@ const validDataSubmitted = goal => {
   if (!goal.amount || goal.amount < 0) errors.push(dictionary.goals.amountIsEmpty);
 
   if (!goal.targetDate) errors.push(dictionary.goals.targetDateIsEmpty);
-  else if (goal.targetDate < currentDate) errors.push(dictionary.goals.targetDateIsInvalid);
+
+  if (goal.targetDate < currentDate) errors.push(dictionary.goals.targetDateIsInvalid);
 
   if (!goal.userId) errors.push(dictionary.goals.userIdIsEmpty);
 

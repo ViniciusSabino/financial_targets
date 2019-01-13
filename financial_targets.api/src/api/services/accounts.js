@@ -7,24 +7,30 @@ const accountStatus = enumerators.account.status;
 
 const listAllAccounts = async userId => {
   const accounts = await Account.find({ userId });
-  return accounts;
+
+  return {
+    count: accounts.length,
+    data: accounts
+  };
 };
 
-const saveAccount = async input => {
-  const account = new Account(input);
-  return await account.save();
+const saveAccount = async account => {
+  const accountSaved = new Account(account);
+  return await accountSaved.save();
 };
 
 const makePayment = async accountsIds => {
-  const ids = accountsIds;
-  const accounts = await Account.find({ _id: ids });
+  const accounts = await Account.find({ _id: accountsIds });
   const adjustedData = accounts.map(account => {
     const { value, type, _id, dueDate } = account;
     const ajustedDate = accountsUtil.setAccountDate(dueDate, type);
+
     return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
   });
+
   adjustedData.forEach(async account => {
-    await Account.updateOne({ _id: account._id }, { amountPaid: account.amountPaid, dueDate: account.dueDate, status: accountStatus.done });
+    const accountUpdate = { amountPaid: account.amountPaid, dueDate: account.dueDate, status: accountStatus.done };
+    await Account.updateOne({ _id: account._id }, accountUpdate);
   });
 
   return adjustedData;
@@ -42,11 +48,8 @@ const makePartialPayment = async input => {
   const data = input.amountPaid > account.value ? { errors: [dictionary.account.amountPaidIsInvalid] } : { errors: [] };
   if (data.errors.length) return data;
   const adjustedDate = accountsUtil.setAccountDate(account.dueDate, account.type);
-  const accountUpdated = await Account.findOneAndUpdate(
-    { _id: input.accountId },
-    { amountPaid: input.amountPaid, status: account.value == input.amountPaid ? accountStatus.done : account.status, dueDate: adjustedDate },
-    { new: true }
-  );
+  const accountStatus = input.amountPaid ? accountStatus.done : account.status;
+  const accountUpdated = await Account.findOneAndUpdate({ _id: input.accountId }, { amountPaid: input.amountPaid, status: account.value == accountStatus, dueDate: adjustedDate }, { new: true });
 
   return { ...data, data: accountUpdated };
 };
