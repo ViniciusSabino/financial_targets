@@ -1,9 +1,9 @@
 import Account from '../models/account';
 import enumerators from '../utils/enumerators';
-import dictionary from '../utils/dictionary';
+import dictionary from '../utils/dictionaries';
 import accountsUtil from '../utils/accounts';
 
-const accountStatus = enumerators.account.status;
+const accountStatus = enumerators.accounts.status;
 
 const listAllAccounts = async userId => {
   const accounts = await Account.find({ userId });

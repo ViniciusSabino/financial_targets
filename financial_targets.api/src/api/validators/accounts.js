@@ -1,8 +1,8 @@
 import functions from '../utils/functions';
-import dictionary from '../utils/dictionary';
+import dictionary from '../utils/dictionaries';
 import enumerators from '../utils/enumerators';
 
-const accountStatus = enumerators.account.status;
+const accountStatus = enumerators.accounts.status;
 
 const validFindAllAccounts = (ctx, next) => {
   const { userid } = ctx.request.header;

@@ -23,3 +23,9 @@ TIPOS DE METAS (GOALS)
     1 - 'SHORT_RUN - Curto Prazo (1 - 2 Meses)
     2 - 'MIDDLE_RUN - Médio Prazo (2 Meses à 1 Ano)
     3 - 'LONG_RUN - Longo Prazo (1 Ano para mais)
+
+TIPOS DE CONFIGURAÇÕES (CONFIGURATION)
+
+    1 - 'ACCOUNT_VALUE_LIMIT' - Valor máximo que uma mensalidade pode ser cadastrada (Máximo: R$ 20.000 - Minímo: R$ 5)
+    2 - 'ACCOUNT_VALUE' = Quantidade máxima de mensalidades permitidas (Máximo: 30)
+    3 - 'ACCOUNT_TAGS_LIMIT' - Quantidade máxima de tags permitidas (Máximo: 30)

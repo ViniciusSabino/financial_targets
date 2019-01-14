@@ -1,6 +1,7 @@
 import Router from 'koa-joi-router';
 
 import configuration from '../controllers/configuration';
+import validator from '../validators/configuration';
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.route([
   {
     method: 'POST',
     path: '/',
-    handler: [configuration.saveConfiguration]
+    handler: [validator.validSaveConfiguration, configuration.saveConfiguration]
   }
 ]);
 

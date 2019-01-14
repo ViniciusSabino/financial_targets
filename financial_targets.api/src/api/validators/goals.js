@@ -1,4 +1,4 @@
-import dictionary from '../utils/dictionary';
+import dictionary from '../utils/dictionaries';
 import functions from '../utils/functions';
 
 const validCreate = (ctx, next) => {

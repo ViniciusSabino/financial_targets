@@ -1,10 +1,10 @@
-import account from './accounts';
+import accounts from './accounts';
 import goals from './goals';
 import configuration from './configuration';
 import others from './others';
 
 export default {
-  account,
+  accounts,
   goals,
   configuration,
   others
