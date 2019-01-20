@@ -1,20 +1,16 @@
-Configurações iniciais e configurações de organização da API
+Configurações de organização da API
 
 - Corrigir script de precommit do Husky
 - Criar o Readme.md 
 
-Importante verificar 
-
-- Se os pacotes da API estão atualizados e se podem ser atualizados sem problemas 
-
 Tarefas pendendes
 
 - (Account) - Criar uma solução para verificar automáticamente se a mensalidade está marcada para se repetir, 
-se estiver então verificar se ela já foi paga corretamente para então trocar a data de vencimento e zerar o valor pago se não manter como 
-atrasada
+se estiver, então verificar se ela já foi paga corretamente para trocar a data de vencimento e zerar o valor pago se não manter como 
+atrasada.
 
-- (Server) - Criar um middleware na API para que qualquer erro/excessão que apareça, esse problema seja tratado e uma resposta seja enviada na requisição
-sem mostrar o erro no console
+- (Server) - Criar um middleware na API para que qualquer erro/excessão que aconteça, ela seja tratada de forma generica e uma 
+resposta seja enviada na requisição.
 
 
 
