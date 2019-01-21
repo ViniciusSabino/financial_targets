@@ -1,11 +1,11 @@
-import accounts from './accounts';
-import goals from './goals';
-import configuration from './configuration';
-import others from './others';
+import accounts from "./accounts";
+import goals from "./goals";
+import configuration from "./configuration";
+import application from "./application";
 
 export default {
-  accounts,
-  goals,
-  configuration,
-  others
+    accounts,
+    goals,
+    configuration,
+    application
 };

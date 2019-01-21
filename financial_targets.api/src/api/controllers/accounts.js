@@ -5,14 +5,13 @@ const addAccount = async ctx => {
     return ctx.created({ data });
 };
 
-const listAccounts = async ctx =>
-    await ctx.ok({
-        ok: "Listar mensalidades"
-    });
+const listAccounts = async ctx => {
+    const data = await service.findAccounts(ctx.request.headers);
+    return await ctx.ok(data);
+};
 
 const listAllAccounts = async ctx => {
-    const { userid } = ctx.request.header;
-    const data = await service.listAllAccounts(userid);
+    const data = await service.listAllAccounts(ctx.request.header);
     return ctx.ok(data);
 };
 

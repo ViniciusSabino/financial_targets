@@ -4,7 +4,7 @@ import functions from "./functions";
 const getGoalType = targetDate => {
     const {
         goals: { type },
-        others: {
+        application: {
             date: { differences }
         }
     } = enumerators;
