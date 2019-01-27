@@ -1,14 +1,18 @@
 import Account from "../../models/account";
 import enumerators from "../../utils/enumerators";
 import dictionary from "../../utils/dictionaries";
-import accountsUtil from "../../utils/accounts";
-import util from "../../utils/functions";
+import accountsUtil from "../../utils/modules/accounts";
+import search from "../../utils/functions/search";
 import AccountAllfilters from "../accounts/accountFilters";
+import api from "../../utils/functions/api";
 
 const { accounts: accountEnum } = enumerators;
 
-const listAllAccounts = async userId => {
-    const accounts = await Account.find({ userId });
+const listAllAccounts = async params => {
+    const { sort, limit, order } = params;
+    const accounts = await Account.find({ userId: params.userId })
+        .sort(search.sortBy(order, sort))
+        .limit(Number(limit));
 
     return {
         count: accounts.length,
@@ -17,14 +21,16 @@ const listAllAccounts = async userId => {
 };
 
 const findAccounts = async params => {
-    const accountFilter = util.createFilterConditions(
+    const accountFilter = search.createFilterConditions(
         params,
         AccountAllfilters
     );
-    console.log(accountFilter);
-    const accounts = await Account.find(accountFilter);
+    const { limit, order, sort } = params;
+    const accounts = await Account.find(accountFilter)
+        .sort(search.sortBy(order, sort))
+        .limit(Number(limit));
 
-    return util.createResult(accounts);
+    return api.createResult(accounts);
 };
 
 const saveAccount = async account => {
@@ -47,6 +53,7 @@ const makePayment = async accountsIds => {
             dueDate: account.dueDate,
             status: accountEnum.status.done
         };
+
         await Account.updateOne({ _id: account._id }, accountUpdate);
     });
 

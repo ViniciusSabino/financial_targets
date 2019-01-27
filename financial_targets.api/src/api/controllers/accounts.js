@@ -11,7 +11,14 @@ const listAccounts = async ctx => {
 };
 
 const listAllAccounts = async ctx => {
-    const data = await service.listAllAccounts(ctx.request.header);
+    const { userid, order, sort, limit } = ctx.request.header;
+    const data = await service.listAllAccounts({
+        userId: userid,
+        order,
+        sort,
+        limit
+    });
+
     return ctx.ok(data);
 };
 

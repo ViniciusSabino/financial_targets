@@ -1,5 +1,5 @@
-import enumerators from "./enumerators";
-import functions from "./functions";
+import enumerators from "../enumerators";
+import date from "../functions/dates";
 
 const getGoalType = targetDate => {
     const {
@@ -9,11 +9,11 @@ const getGoalType = targetDate => {
         }
     } = enumerators;
 
-    const targetDateCompare = functions.createMomentDate(targetDate);
-    const daysDifference = functions.getDateDifference(
+    const targetDateCompare = date.createMomentDate(targetDate);
+    const daysDifference = date.getDateDifference(
         differences.days,
         targetDateCompare,
-        functions.getCurrentDate()
+        date.getCurrentDate()
     );
 
     const goalType = do {

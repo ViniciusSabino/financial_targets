@@ -1,10 +1,12 @@
 const { env } = process;
 
 export default {
-   port: env.PORT,
-   environment: env.NODE_ENV || "production",
+    port: env.PORT,
+    environment: env.NODE_ENV || "production",
 
-   mongo: {
-      connection: `mongodb://${env.MONGODB_CONNECTION}/${env.MONGODB_DATABASE}`
-   }
+    mongo: {
+        connection: `mongodb://${env.MONGODB_CONNECTION}/${
+            env.MONGODB_DATABASE
+        }`
+    }
 };

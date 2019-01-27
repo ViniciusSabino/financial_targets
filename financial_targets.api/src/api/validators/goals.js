@@ -1,5 +1,5 @@
 import dictionary from "../utils/dictionaries";
-import functions from "../utils/functions";
+import date from "../utils/functions/dates";
 
 const validCreate = (ctx, next) => {
     const goal = ctx.request.body;
@@ -9,7 +9,7 @@ const validCreate = (ctx, next) => {
 
 const validDataSubmitted = goal => {
     const errors = [];
-    const currentDate = functions.getCurrentDate();
+    const currentDate = date.getCurrentDate();
     if (!goal.name) errors.push(dictionary.goals.nameIsEmpty);
 
     if (!goal.amount || goal.amount < 0)

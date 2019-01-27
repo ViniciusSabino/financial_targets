@@ -1,11 +1,11 @@
 import Tag from "../models/tag";
 import Configuration from "../models/configuration";
-import util from "../utils/functions";
+import api from "../utils/functions/api";
 
 const listDefaultTags = async () => {
     const defaultTags = await Tag.find({ default: true });
 
-    return util.createResult(defaultTags);
+    return api.createResult(defaultTags);
 };
 
 const saveConfiguration = async configuration => {
