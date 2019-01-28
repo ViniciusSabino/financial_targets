@@ -1,4 +1,7 @@
 import moment from "moment";
+import enumerators from "../enumerators";
+
+const { differences } = enumerators.application.date;
 
 const getCurrentDate = () => moment().format();
 
@@ -7,7 +10,6 @@ const getDaysInCurrentMonth = () => moment().daysInMonth();
 const createMomentDate = date => moment(date);
 
 const getDateDifference = (differenceType, dateA, dateB) => {
-    const { differences } = enumerators.application.date;
     switch (differenceType) {
         case differences.milliseconds:
             return dateA.diff(dateB);
@@ -26,9 +28,23 @@ const getDateDifference = (differenceType, dateA, dateB) => {
     }
 };
 
+const remainingPeriod = date => {
+    const currentDate = getCurrentDate();
+    return {
+        inSeconds: date.diff(currentDate),
+        inMinutes: date.diff(currentDate, differences.minutes),
+        inHours: date.diff(currentDate, differences.hours),
+        onDays: date.diff(currentDate, differences.days),
+        inWeeks: date.diff(currentDate, differences.weeks),
+        inMonths: date.diff(currentDate, differences.months),
+        inYears: date.diff(currentDate, differences.years, true)
+    };
+};
+
 export default {
     getCurrentDate,
     getDaysInCurrentMonth,
     createMomentDate,
-    getDateDifference
+    getDateDifference,
+    remainingPeriod
 };

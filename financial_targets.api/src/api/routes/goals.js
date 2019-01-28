@@ -17,6 +17,16 @@ router.route([
         method: "POST",
         path: "/",
         handler: [validator.validCreate, goals.addGoal]
+    },
+    {
+        method: "GET",
+        path: "/all",
+        handler: [goals.listAllGoals]
+    },
+    {
+        method: "GET",
+        path: "/details",
+        handler: [goals.details]
     }
 ]);
 
