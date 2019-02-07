@@ -7,7 +7,7 @@ const addAccount = async ctx => {
 
 const listAccounts = async ctx => {
     const data = await service.findAccounts(ctx.request.headers);
-    return await ctx.ok(data);
+    return ctx.ok(data);
 };
 
 const listAllAccounts = async ctx => {

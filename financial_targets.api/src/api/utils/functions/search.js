@@ -41,6 +41,8 @@ const createFilterConditions = (params, allFilters) => {
                     conditions[filter.nameFilter] = {
                         $in: JSON.parse(values[index])
                     };
+                    break;
+                default:
             }
         }
     });

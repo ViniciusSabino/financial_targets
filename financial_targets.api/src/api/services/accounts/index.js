@@ -3,7 +3,7 @@ import enumerators from "../../utils/enumerators";
 import dictionary from "../../utils/dictionaries";
 import accountsUtil from "../../utils/modules/accounts";
 import search from "../../utils/functions/search";
-import AccountAllfilters from "../accounts/accountFilters";
+import AccountAllfilters from "./accountFilters";
 import api from "../../utils/functions/api";
 
 const { accounts: accountEnum } = enumerators;
@@ -35,8 +35,7 @@ const findAccounts = async params => {
 
 const saveAccount = async account => {
     const accountObj = new Account(account);
-
-    return await accountObj.save();
+    return accountObj.save();
 };
 
 const makePayment = async accountsIds => {
@@ -61,7 +60,7 @@ const makePayment = async accountsIds => {
 };
 
 const deleteAccounts = async accountsIds =>
-    await Account.deleteMany({ _id: accountsIds });
+    Account.deleteMany({ _id: accountsIds });
 
 const editAccount = async (accountId, account) => {
     const accountUpdated = await Account.findOneAndUpdate(
@@ -84,7 +83,7 @@ const makePartialPayment = async input => {
     if (result.errors.length) return result;
 
     const changedData = do {
-        if (account.value == amountPaid)
+        if (account.value === amountPaid)
             ({
                 status: accountEnum.status.done,
                 dueDate: accountsUtil.setAccountDate(

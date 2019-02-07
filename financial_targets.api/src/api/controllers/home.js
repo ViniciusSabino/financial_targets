@@ -1,7 +1,7 @@
 import config from "../config";
 
-const home = async ctx =>
-    await ctx.ok({
+const home = ctx =>
+    ctx.ok({
         title: "API Information",
         environment: config.environment,
         port: config.port

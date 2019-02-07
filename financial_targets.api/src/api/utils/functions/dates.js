@@ -25,6 +25,7 @@ const getDateDifference = (differenceType, dateA, dateB) => {
             return dateA.diff(dateB, differences.months);
         case differences.years:
             return dateA.diff(dateA, differences.years, true);
+        default:
     }
 };
 
