@@ -9,6 +9,9 @@ parserOptions:
     allowImportExportEverywhere: false
     parser: optionalChaining
     codeFrame: false
+
+# 0 = Desativa a Regra, 1 = Ativa a regra como um aviso, 2 = Ativa a regra como um erro
+
 rules:
     arrow-body-style: [2, as-needed]
     arrow-spacing: 2
