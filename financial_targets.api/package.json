@@ -9,11 +9,6 @@
         "build": "babel ./src -d ./dist --source-maps",
         "lint": "./node_modules/.bin/eslint src/**"
     },
-    "husky": {
-        "hooks": {
-            "pre-push": "npm run lint"
-        }
-    },
     "nodemonConfig": {
         "exec": "babel-node ./src/api/server.js"
     },
