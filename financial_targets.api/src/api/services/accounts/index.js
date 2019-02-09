@@ -35,7 +35,7 @@ const findAccounts = async params => {
 
 const saveAccount = async account => {
     const accountObj = new Account(account);
-    return accountObj.save();
+    await accountObj.save();
 };
 
 const makePayment = async accountsIds => {
@@ -53,14 +53,16 @@ const makePayment = async accountsIds => {
             status: accountEnum.status.done
         };
 
+        // eslint-disable-next-line no-underscore-dangle
         await Account.updateOne({ _id: account._id }, accountUpdate);
     });
 
     return adjustedData;
 };
 
-const deleteAccounts = async accountsIds =>
-    Account.deleteMany({ _id: accountsIds });
+const deleteAccounts = async accountsIds => {
+    await Account.deleteMany({ _id: accountsIds });
+};
 
 const editAccount = async (accountId, account) => {
     const accountUpdated = await Account.findOneAndUpdate(
