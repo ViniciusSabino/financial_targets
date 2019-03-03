@@ -26,7 +26,7 @@ router.route([
     {
         method: "GET",
         path: "/details",
-        handler: [goals.details]
+        handler: [validator.validFindGoal, goals.details]
     }
 ]);
 

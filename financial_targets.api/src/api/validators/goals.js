@@ -25,6 +25,18 @@ const validCreate = (ctx, next) => {
     return errors.length ? ctx.badRequest({ errors }) : next();
 };
 
+const validFindGoal = (ctx, next) => {
+    const errors = [];
+    const { goalid, userid } = ctx.request.headers;
+
+    if (!goalid) errors.push(dictionary.goals.goalIdIsEmpty);
+
+    if (!userid) errors.push(dictionary.goals.userIdIsEmpty);
+
+    return errors.length ? ctx.badRequest({ errors }) : next();
+};
+
 export default {
-    validCreate
+    validCreate,
+    validFindGoal
 };

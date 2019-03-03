@@ -8,7 +8,8 @@ const goals = {
         message: "A Data para atingir a meta está inválida."
     },
     typeIsEmpty: { message: "O Tipo da meta precisa ser informado." },
-    userIdIsEmpty: { message: "Informe o id do usuário." }
+    userIdIsEmpty: { message: "Informe o id do usuário." },
+    goalIdIsEmpty: { message: "O Id da meta precisa ser informado" }
 };
 
 export default goals;
