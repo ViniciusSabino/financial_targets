@@ -1,8 +1,8 @@
 import service from "../services/accounts";
 
 const addAccount = async ctx => {
-    const data = await service.saveAccount(ctx.request.body);
-    return ctx.created({ data });
+    await service.saveAccount(ctx.request.body);
+    return ctx.created();
 };
 
 const listAccounts = async ctx => {

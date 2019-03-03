@@ -1,45 +1,45 @@
-import enumerators from "../../utils/enumerators";
+import enumerators from "../../../utils/enumerators";
 
 const { typeFilters } = enumerators.application;
 
 const accountFilters = [
     {
-        name: "name",
+        parameter: "name",
         nameFilter: "name",
         type: typeFilters.inputText
     },
     {
-        name: "duedatestart",
+        parameter: "duedatestart",
         nameFilter: "dueDate",
         type: typeFilters.dateStart
     },
     {
-        name: "duedateend",
+        parameter: "duedateend",
         nameFilter: "dueDate",
         type: typeFilters.dateEnd
     },
     {
-        name: "status",
+        parameter: "status",
         nameFilter: "status",
         type: typeFilters.select
     },
     {
-        name: "type",
+        parameter: "type",
         nameFilter: "type",
         type: typeFilters.select
     },
     {
-        name: "paymentform",
+        parameter: "paymentform",
         nameFilter: "paymentForm",
         type: typeFilters.select
     },
     {
-        name: "isrepeat",
+        parameter: "isrepeat",
         nameFilter: "isRepeat",
         type: typeFilters.selectBool
     },
     {
-        name: "tags",
+        parameter: "tags",
         nameFilter: "tags",
         type: typeFilters.selectMultiple
     }

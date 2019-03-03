@@ -3,8 +3,8 @@ import enumerators from "../../utils/enumerators";
 import dictionary from "../../utils/dictionaries";
 import accountsUtil from "../../utils/modules/accounts";
 import search from "../../utils/functions/search";
-import AccountAllfilters from "./accountFilters";
-import api from "../../utils/functions/api";
+import AccountAllfilters from "./search-accounts/filters";
+import application from "../../utils/functions/application";
 
 const { accounts: accountEnum } = enumerators;
 
@@ -30,7 +30,7 @@ const findAccounts = async params => {
         .sort(search.sortBy(order, sort))
         .limit(Number(limit));
 
-    return api.createResult(accounts);
+    return application.result(accounts);
 };
 
 const saveAccount = async account => {
@@ -53,8 +53,7 @@ const makePayment = async accountsIds => {
             status: accountEnum.status.done
         };
 
-        // eslint-disable-next-line no-underscore-dangle
-        await Account.updateOne({ _id: account._id }, accountUpdate);
+        await Account.findByIdAndUpdate(account._id, accountUpdate);
     });
 
     return adjustedData;

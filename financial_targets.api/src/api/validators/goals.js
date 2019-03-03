@@ -1,12 +1,6 @@
 import dictionary from "../utils/dictionaries";
 import date from "../utils/functions/dates";
 
-const validCreate = (ctx, next) => {
-    const goal = ctx.request.body;
-    const errors = validDataSubmitted(goal);
-    return errors.length ? ctx.badRequest({ errors }) : next();
-};
-
 const validDataSubmitted = goal => {
     const errors = [];
     const currentDate = date.getCurrentDate();
@@ -23,6 +17,12 @@ const validDataSubmitted = goal => {
     if (!goal.userId) errors.push(dictionary.goals.userIdIsEmpty);
 
     return errors;
+};
+
+const validCreate = (ctx, next) => {
+    const goal = ctx.request.body;
+    const errors = validDataSubmitted(goal);
+    return errors.length ? ctx.badRequest({ errors }) : next();
 };
 
 export default {

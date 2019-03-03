@@ -11,6 +11,7 @@ const date = {
     }
 };
 
+// search-accounts
 const typeFilters = {
     inputText: "INPUT_TEXT",
     date: "DATE",

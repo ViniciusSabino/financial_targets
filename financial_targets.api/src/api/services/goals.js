@@ -1,6 +1,6 @@
 import goalsUtil from "../utils/modules/goals";
 import Goal from "../models/goal";
-import api from "../utils/functions/api";
+import application from "../utils/functions/application";
 import date from "../utils/functions/dates";
 
 const addGoal = async goal => {
@@ -15,7 +15,7 @@ const addGoal = async goal => {
 const listAllGoals = async userId => {
     const goals = await Goal.find({ userId });
 
-    return api.result(goals);
+    return application.result(goals);
 };
 
 const details = async params => {
@@ -28,7 +28,7 @@ const details = async params => {
 
     const missing = targetDate |> date.createMomentDate |> date.remainingPeriod;
 
-    return api.result({ ...goal, missing });
+    return application.result({ ...goal, missing });
 };
 
 export default {

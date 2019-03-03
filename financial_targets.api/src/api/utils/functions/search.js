@@ -8,7 +8,7 @@ const createFilterConditions = (params, allFilters) => {
     const conditions = {};
 
     keys.forEach((key, index) => {
-        const filter = allFilters.find(f => f.name === key);
+        const filter = allFilters.find(f => f.parameter === key);
         if (filter) {
             switch (filter.type) {
                 case application.typeFilters.inputText:

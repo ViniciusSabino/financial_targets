@@ -4,6 +4,38 @@ import enumerators from "../utils/enumerators";
 
 const accountStatus = enumerators.accounts.status;
 
+const validDataSubmitted = account => {
+    const errors = [];
+    const valueLimit = 5000;
+    const tagsLimit = 3;
+
+    if (!account.name) errors.push(dictionary.account.nameIsEmpty);
+
+    if (!account.value || account.value < 0)
+        errors.push(dictionary.account.valueIsEmpty);
+    else if (account.value > valueLimit)
+        errors.push(dictionary.account.valueExceeded);
+
+    if (!account.type) errors.push(dictionary.account.typeIsEmpty);
+
+    if (!account.paymentForm)
+        errors.push(dictionary.account.paymentFormIsEmpty);
+
+    if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
+
+    if (account.amountPaid > account.value)
+        errors.push(dictionary.account.amountPaidIsInvalid);
+    else if (account.amountPaid < 0)
+        errors.push(dictionary.account.amoountPaidIsNegative);
+
+    if (account.tags?.length > tagsLimit)
+        errors.push(dictionary.account.tagsIsExceeded);
+
+    if (!account.userId) errors.push(dictionary.account.userIdIsEmpty);
+
+    return errors;
+};
+
 const validFindAllAccounts = (ctx, next) => {
     const { userid } = ctx.request.header;
     return !userid
@@ -67,38 +99,6 @@ const validMakePartialPayment = (ctx, next) => {
     return !accountId
         ? ctx.badRequest({ errors: dictionary.account.accountIdIsEmpty })
         : next();
-};
-
-const validDataSubmitted = account => {
-    const errors = [];
-    const valueLimit = 5000;
-    const tagsLimit = 3;
-
-    if (!account.name) errors.push(dictionary.account.nameIsEmpty);
-
-    if (!account.value || account.value < 0)
-        errors.push(dictionary.account.valueIsEmpty);
-    else if (account.value > valueLimit)
-        errors.push(dictionary.account.valueExceeded);
-
-    if (!account.type) errors.push(dictionary.account.typeIsEmpty);
-
-    if (!account.paymentForm)
-        errors.push(dictionary.account.paymentFormIsEmpty);
-
-    if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
-
-    if (account.amountPaid > account.value)
-        errors.push(dictionary.account.amountPaidIsInvalid);
-    else if (account.amountPaid < 0)
-        errors.push(dictionary.account.amoountPaidIsNegative);
-
-    if (account.tags?.length > tagsLimit)
-        errors.push(dictionary.account.tagsIsExceeded);
-
-    if (!account.userId) errors.push(dictionary.account.userIdIsEmpty);
-
-    return errors;
 };
 
 export default {

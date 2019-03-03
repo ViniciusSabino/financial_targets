@@ -2,7 +2,7 @@ env:
     node: true
     es6: true
 extends: [airbnb-base, "plugin:prettier/recommended"]
-plugins: [import]
+plugins: [import, babel]
 parser: babel-eslint
 parserOptions:
     sourceType: module
@@ -13,6 +13,7 @@ parserOptions:
 # 0 = Desativa a Regra, 1 = Ativa a regra como um aviso, 2 = Ativa a regra como um erro
 
 rules:
+    babel/no-unused-expressions: 1
     arrow-body-style: [2, as-needed]
     arrow-spacing: 2
     complexity: [2, 50]
