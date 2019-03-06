@@ -11,23 +11,23 @@ router.route([
     {
         method: "GET",
         path: "/",
-        handler: []
+        handler: [],
     },
     {
         method: "POST",
         path: "/",
-        handler: [validator.validCreate, goals.addGoal]
+        handler: [validator.validCreate, goals.addGoal],
     },
     {
         method: "GET",
         path: "/all",
-        handler: [goals.listAllGoals]
+        handler: [goals.listAllGoals],
     },
     {
         method: "GET",
         path: "/details",
-        handler: [validator.validFindGoal, goals.details]
-    }
+        handler: [validator.validFindGoal, goals.details],
+    },
 ]);
 
 export default router;

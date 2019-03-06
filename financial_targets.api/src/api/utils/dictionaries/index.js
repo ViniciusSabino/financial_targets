@@ -5,5 +5,5 @@ import goals from "./goals";
 export default {
     account,
     goals,
-    configurations
+    configurations,
 };

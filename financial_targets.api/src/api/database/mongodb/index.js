@@ -8,11 +8,9 @@ const createConnection = () => {
     const db = mongoose.connection;
 
     db.on("error", console.error.bind(console, "connection error"));
-    db.once("open", () =>
-        console.log(` Connected to dabase: ${chalk.blue("Mongodb")} \n`)
-    );
+    db.once("open", () => console.log(` Connected to dabase: ${chalk.blue("Mongodb")} \n`));
 };
 
 export default {
-    createConnection
+    createConnection,
 };

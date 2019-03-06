@@ -11,46 +11,43 @@ router.route([
     {
         method: "POST",
         path: "/",
-        handler: [validator.validCreate, accounts.addAccount]
+        handler: [validator.validCreate, accounts.create],
     },
     {
         method: "GET",
         path: "/",
-        handler: [accounts.listAccounts]
+        handler: [validator.validList, accounts.find],
     },
     {
         method: "GET",
         path: "/all",
-        handler: [validator.validFindAllAccounts, accounts.listAllAccounts]
+        handler: [validator.validList, accounts.listAll],
     },
     {
         method: "PUT",
         path: "/",
-        handler: [validator.validEdit, accounts.editAccount]
+        handler: [validator.validEdit, accounts.edit],
     },
     {
         method: "DELETE",
         path: "/",
-        handler: [accounts.deleteAccounts]
+        handler: [accounts.deleteAccount],
     },
     {
         method: "PATCH",
         path: "/",
-        handler: [accounts.makePayment]
+        handler: [accounts.makePayment],
     },
     {
         method: "PATCH",
         path: "/makepartialpayment",
-        handler: [
-            validator.validMakePartialPayment,
-            accounts.makePartialPayment
-        ]
+        handler: [validator.validMakePartialPayment, accounts.makePartialPayment],
     },
     {
         method: "PATCH",
         path: "/sendnext",
-        handler: [accounts.sendNext]
-    }
+        handler: [accounts.sendNext],
+    },
 ]);
 
 export default router;

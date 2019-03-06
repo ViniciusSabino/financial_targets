@@ -12,6 +12,15 @@ const app = new Koa();
 
 mongoose.createConnection();
 
+app.use(async (ctx, next) => {
+    try {
+        await next();
+    } catch (err) {
+        ctx.status = err.status || 500;
+        ctx.body = { errors: [{ message: err.message }] };
+        ctx.app.emit("error", err, ctx);
+    }
+});
 app.use(bodyParser());
 app.use(logger());
 app.use(respond());

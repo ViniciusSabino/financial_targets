@@ -10,11 +10,11 @@ const goalSchema = new GoalSchema(
         action: { type: String },
         targetDate: { type: Date, required: true },
         goalType: { type: String, required: true },
-        userId: { type: Number, required: true }
+        userId: { type: Number, required: true },
     },
     {
         versionKey: false,
-        timestamps: true
+        timestamps: true,
     }
 );
 

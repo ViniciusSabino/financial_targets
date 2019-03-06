@@ -7,8 +7,8 @@ const date = {
         hours: "hours",
         minutes: "minutes",
         seconds: "seconds",
-        milliseconds: "milliseconds"
-    }
+        milliseconds: "milliseconds",
+    },
 };
 
 // search-accounts
@@ -19,6 +19,6 @@ const typeFilters = {
     selectMultiple: "SELECT_MULTIPLE",
     selectBool: "SELECT_BOOL",
     dateStart: "DATE_START",
-    dateEnd: "DATE_END"
+    dateEnd: "DATE_END",
 };
 export default { date, typeFilters };

@@ -8,7 +8,7 @@ const listDefaultTags = async () => {
     return application.result(defaultTags);
 };
 
-const saveConfiguration = async configuration => {
+const saveConfiguration = async (configuration) => {
     const configurationInput = new Configuration(configuration);
     const data = await configurationInput.save();
     return data;

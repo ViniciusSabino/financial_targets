@@ -9,7 +9,7 @@ router.prefix("/home");
 router.route({
     method: "GET",
     path: "/",
-    handler: [home]
+    handler: [home],
 });
 
 export default router;

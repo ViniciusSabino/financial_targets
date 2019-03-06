@@ -8,18 +8,18 @@ const createFilterConditions = (params, allFilters) => {
     const conditions = {};
 
     keys.forEach((key, index) => {
-        const filter = allFilters.find(f => f.parameter === key);
+        const filter = allFilters.find((f) => f.parameter === key);
         if (filter) {
             switch (filter.type) {
                 case application.typeFilters.inputText:
                     conditions[filter.nameFilter] = {
                         $regex: values[index],
-                        $options: "i"
+                        $options: "i",
                     };
                     break;
                 case application.typeFilters.select:
                     conditions[filter.nameFilter] = {
-                        $eq: values[index]
+                        $eq: values[index],
                     };
                     break;
                 case application.typeFilters.selectBool:
@@ -28,18 +28,18 @@ const createFilterConditions = (params, allFilters) => {
                 case application.typeFilters.dateStart:
                     conditions[filter.nameFilter] = {
                         $gte: values[index],
-                        ...conditions[filter.nameFilter]
+                        ...conditions[filter.nameFilter],
                     };
                     break;
                 case application.typeFilters.dateEnd:
                     conditions[filter.nameFilter] = {
                         $lte: values[index],
-                        ...conditions[filter.nameFilter]
+                        ...conditions[filter.nameFilter],
                     };
                     break;
                 case application.typeFilters.selectMultiple:
                     conditions[filter.nameFilter] = {
-                        $in: JSON.parse(values[index])
+                        $in: JSON.parse(values[index]),
                     };
                     break;
                 default:
@@ -58,5 +58,5 @@ const sortBy = (order, sort) => {
 
 export default {
     createFilterConditions,
-    sortBy
+    sortBy,
 };

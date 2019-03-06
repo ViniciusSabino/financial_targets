@@ -14,11 +14,11 @@ const accountSchema = new AccountSchema(
         paymentForm: { type: String, required: true },
         isRepeat: { type: Boolean, default: false },
         userId: { type: Number, required: true },
-        tags: [{ type: String, required: true }]
+        tags: [{ type: String, required: true }],
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
     }
 );
 

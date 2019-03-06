@@ -1,12 +1,12 @@
 import enumerators from "../enumerators";
 import date from "../functions/dates";
 
-const getGoalType = targetDate => {
+const getGoalType = (targetDate) => {
     const {
         goals: { type },
         application: {
-            date: { differences }
-        }
+            date: { differences },
+        },
     } = enumerators;
 
     const targetDateCompare = date.createMomentDate(targetDate);
@@ -27,5 +27,5 @@ const getGoalType = targetDate => {
 };
 
 export default {
-    getGoalType
+    getGoalType,
 };

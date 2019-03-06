@@ -7,5 +7,5 @@ export default {
     accounts,
     goals,
     configuration,
-    application
+    application,
 };

@@ -11,16 +11,13 @@ router.route([
     {
         method: "GET",
         path: "/tags",
-        handler: [configuration.listDefaultTags]
+        handler: [configuration.listDefaultTags],
     },
     {
         method: "POST",
         path: "/",
-        handler: [
-            validator.validSaveConfiguration,
-            configuration.saveConfiguration
-        ]
-    }
+        handler: [validator.validSaveConfiguration, configuration.saveConfiguration],
+    },
 ]);
 
 export default router;

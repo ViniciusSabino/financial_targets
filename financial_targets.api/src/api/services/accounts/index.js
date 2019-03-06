@@ -8,23 +8,13 @@ import application from "../../utils/functions/application";
 
 const { accounts: accountEnum } = enumerators;
 
-const listAllAccounts = async params => {
-    const { sort, limit, order } = params;
-    const accounts = await Account.find({ userId: params.userId })
-        .sort(search.sortBy(order, sort))
-        .limit(Number(limit));
-
-    return {
-        count: accounts.length,
-        data: accounts
-    };
+const create = async (account) => {
+    const accountObj = new Account(account);
+    await accountObj.save();
 };
 
-const findAccounts = async params => {
-    const accountFilter = search.createFilterConditions(
-        params,
-        AccountAllfilters
-    );
+const find = async (params) => {
+    const accountFilter = search.createFilterConditions(params, AccountAllfilters);
     const { limit, order, sort } = params;
     const accounts = await Account.find(accountFilter)
         .sort(search.sortBy(order, sort))
@@ -33,24 +23,43 @@ const findAccounts = async params => {
     return application.result(accounts);
 };
 
-const saveAccount = async account => {
-    const accountObj = new Account(account);
-    await accountObj.save();
+const listAll = async (params) => {
+    const { sort, limit, order } = params;
+    const accounts = await Account.find({ userId: params.userId })
+        .sort(search.sortBy(order, sort))
+        .limit(Number(limit));
+
+    return {
+        count: accounts.length,
+        data: accounts,
+    };
 };
 
-const makePayment = async accountsIds => {
+const edit = async (account) => {
+    const accountUpdated = await Account.findByIdAndUpdate({ _id: account._id }, account, {
+        new: true,
+    }).lean();
+
+    return accountUpdated;
+};
+
+const deleteAccount = async (accountsIds) => {
+    await Account.deleteMany({ _id: accountsIds });
+};
+
+const makePayment = async (accountsIds) => {
     const accounts = await Account.find({ _id: accountsIds });
-    const adjustedData = accounts.map(account => {
+    const adjustedData = accounts.map((account) => {
         const { value, type, _id, dueDate } = account;
         const ajustedDate = accountsUtil.setAccountDate(dueDate, type);
 
         return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
     });
-    adjustedData.forEach(async account => {
+    adjustedData.forEach(async (account) => {
         const accountUpdate = {
             amountPaid: account.amountPaid,
             dueDate: account.dueDate,
-            status: accountEnum.status.done
+            status: accountEnum.status.done,
         };
 
         await Account.findByIdAndUpdate(account._id, accountUpdate);
@@ -59,21 +68,7 @@ const makePayment = async accountsIds => {
     return adjustedData;
 };
 
-const deleteAccounts = async accountsIds => {
-    await Account.deleteMany({ _id: accountsIds });
-};
-
-const editAccount = async (accountId, account) => {
-    const accountUpdated = await Account.findOneAndUpdate(
-        { _id: accountId },
-        account,
-        { new: true }
-    );
-
-    return accountUpdated;
-};
-
-const makePartialPayment = async input => {
+const makePartialPayment = async (input) => {
     const { accountId, amountPaid } = input;
     const account = await Account.findById(accountId);
     const result =
@@ -87,10 +82,7 @@ const makePartialPayment = async input => {
         if (account.value === amountPaid)
             ({
                 status: accountEnum.status.done,
-                dueDate: accountsUtil.setAccountDate(
-                    account.dueDate,
-                    account.type
-                )
+                dueDate: accountsUtil.setAccountDate(account.dueDate, account.type),
             });
         else ({ status: account.status, dueDate: account.dueDate });
     };
@@ -104,7 +96,7 @@ const makePartialPayment = async input => {
     return { ...result, data: accountUpdated };
 };
 
-const sendNext = async accountId => {
+const sendNext = async (accountId) => {
     const { type, dueDate } = await Account.findById(accountId);
     const adjustedDate = accountsUtil.setAccountDate(dueDate, type);
     const adjustedStatus = accountEnum.status.pending;
@@ -117,12 +109,12 @@ const sendNext = async accountId => {
 };
 
 export default {
-    listAllAccounts,
-    findAccounts,
-    saveAccount,
+    create,
+    find,
+    listAll,
+    edit,
+    deleteAccount,
     makePayment,
-    deleteAccounts,
-    editAccount,
     makePartialPayment,
-    sendNext
+    sendNext,
 };

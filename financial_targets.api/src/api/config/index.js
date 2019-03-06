@@ -5,8 +5,6 @@ export default {
     environment: env.NODE_ENV,
 
     mongo: {
-        connection: `mongodb://${env.MONGODB_CONNECTION}/${
-            env.MONGODB_DATABASE
-        }`
-    }
+        connection: `mongodb://${env.MONGODB_CONNECTION}/${env.MONGODB_DATABASE}`,
+    },
 };

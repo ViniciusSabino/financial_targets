@@ -2,19 +2,19 @@ const account = {
     status: {
         done: "DONE",
         expired: "EXPIRED",
-        pending: "PENDING"
+        pending: "PENDING",
     },
 
     type: {
         monthly: "MONTHLY",
-        yearly: "YEARLY"
+        yearly: "YEARLY",
     },
 
     paymentForm: {
         credit: "CREDIT",
         debitCard: "DEBIT_CARD",
-        ticket: "TICKET"
-    }
+        ticket: "TICKET",
+    },
 };
 
 export default account;

@@ -1,17 +1,13 @@
 import enumerators from "../utils/enumerators";
 import dictionary from "../utils/dictionaries";
 
-const validDataSubmitted = configurations => {
+const validDataSubmitted = (configurations) => {
     const { config: baseConfigurations } = enumerators.configuration;
     const errors = [];
 
-    configurations.config.forEach(config => {
-        const baseConfig = baseConfigurations.find(
-            base => base.name === config.name
-        );
-        const errorMessage = dictionary.configuration.find(
-            c => c.name == config.name
-        );
+    configurations.config.forEach((config) => {
+        const baseConfig = baseConfigurations.find((base) => base.name === config.name);
+        const errorMessage = dictionary.configuration.find((c) => c.name == config.name);
 
         if (
             config.value > baseConfig.maxValue ||
@@ -28,9 +24,7 @@ const validSaveConfiguration = (ctx, next) => {
 
     if (!configurations.userId)
         return ctx.badRequest({
-            errors: [
-                dictionary.configuration.find(c => c.name === "USER_ID_EMPTY")
-            ]
+            errors: [dictionary.configuration.find((c) => c.name === "USER_ID_EMPTY")],
         });
 
     const errors = validDataSubmitted(configurations);
@@ -39,5 +33,5 @@ const validSaveConfiguration = (ctx, next) => {
 };
 
 export default {
-    validSaveConfiguration
+    validSaveConfiguration,
 };

@@ -12,5 +12,5 @@ const setAccountDate = (dueDate, type) => {
 };
 
 export default {
-    setAccountDate
+    setAccountDate,
 };

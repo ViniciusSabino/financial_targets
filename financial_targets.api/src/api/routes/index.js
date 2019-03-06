@@ -9,5 +9,5 @@ export default compose([
     homeRouter.middleware(),
     accountsRouter.middleware(),
     configurationRouter.middleware(),
-    goalsRouter.middleware()
+    goalsRouter.middleware(),
 ]);

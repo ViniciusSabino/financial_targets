@@ -6,11 +6,11 @@ const tagSchema = new TagSchema(
     {
         name: { type: String, required: true },
         color: { type: String, required: true },
-        default: { type: Boolean, required: true }
+        default: { type: Boolean, required: true },
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
     }
 );
 

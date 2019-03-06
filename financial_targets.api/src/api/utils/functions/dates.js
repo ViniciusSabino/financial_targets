@@ -7,7 +7,7 @@ const getCurrentDate = () => moment().format();
 
 const getDaysInCurrentMonth = () => moment().daysInMonth();
 
-const createMomentDate = date => moment(date);
+const createMomentDate = (date) => moment(date);
 
 const getDateDifference = (differenceType, dateA, dateB) => {
     switch (differenceType) {
@@ -29,7 +29,7 @@ const getDateDifference = (differenceType, dateA, dateB) => {
     }
 };
 
-const remainingPeriod = date => {
+const remainingPeriod = (date) => {
     const currentDate = getCurrentDate();
     return {
         inSeconds: date.diff(currentDate),
@@ -38,7 +38,7 @@ const remainingPeriod = date => {
         onDays: date.diff(currentDate, differences.days),
         inWeeks: date.diff(currentDate, differences.weeks),
         inMonths: date.diff(currentDate, differences.months),
-        inYears: date.diff(currentDate, differences.years, true)
+        inYears: date.diff(currentDate, differences.years, true),
     };
 };
 
@@ -47,5 +47,5 @@ export default {
     getDaysInCurrentMonth,
     createMomentDate,
     getDateDifference,
-    remainingPeriod
+    remainingPeriod,
 };
