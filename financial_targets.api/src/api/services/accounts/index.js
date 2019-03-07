@@ -49,7 +49,11 @@ const deleteAccount = async (accountsIds) => {
 
 const makePayment = async (accountsIds) => {
     const accounts = await Account.find({ _id: accountsIds });
+
     const adjustedData = accounts.map((account) => {
+        if (account.status === accountEnum.status.done)
+            throw new Error(dictionary.account.paymentDone.message);
+
         const { value, type, _id, dueDate } = account;
         const ajustedDate = accountsUtil.setAccountDate(dueDate, type);
 
@@ -71,10 +75,13 @@ const makePayment = async (accountsIds) => {
 const makePartialPayment = async (input) => {
     const { accountId, amountPaid } = input;
     const account = await Account.findById(accountId);
-    const result =
-        amountPaid > account.value
-            ? { errors: [dictionary.account.amountPaidIsInvalid] }
-            : { errors: [] };
+
+    const result = do {
+        if (amountPaid > account.value) ({ errors: [dictionary.account.amountPaidIsInvalid] });
+        else if (account.status === accountEnum.status.done)
+            ({ errors: [dictionary.account.paymentDone] });
+        else ({ errors: [] });
+    };
 
     if (result.errors.length) return result;
 

@@ -22,7 +22,7 @@ const account = {
     dataEditIsInvalid: {
         message: "A data da mensalidade não pode ser menor que a data atual.",
     },
-    accountIdIsEmpty: { message: "Informe o id da mensalidade." },
+    paymentDone: { message: "O pagamento já foi efetuado, não será possivel efetuar novamente" },
 };
 
 export default account;
