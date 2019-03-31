@@ -6,18 +6,12 @@ const create = async (ctx) => {
 };
 
 const find = async (ctx) => {
-    const data = await service.find(ctx.request.headers);
+    const data = await service.find(ctx.request.header);
     return ctx.ok(data);
 };
 
 const listAll = async (ctx) => {
-    const { userid, order, sort, limit } = ctx.request.header;
-    const data = await service.listAll({
-        userId: userid,
-        order,
-        sort,
-        limit,
-    });
+    const data = await service.listAll(ctx.request.header);
 
     return ctx.ok(data);
 };

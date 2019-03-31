@@ -1,4 +1,4 @@
-import { application } from "../enumerators";
+import { applicationEnum } from "../enumerators";
 
 const createFilterConditions = (params, allFilters) => {
     const keys = Object.keys(params);
@@ -9,33 +9,33 @@ const createFilterConditions = (params, allFilters) => {
         const filter = allFilters.find((f) => f.parameter === key);
         if (filter) {
             switch (filter.type) {
-                case application.typeFilters.inputText:
+                case applicationEnum.typeFilters.inputText:
                     conditions[filter.nameFilter] = {
                         $regex: values[index],
                         $options: "i",
                     };
                     break;
-                case application.typeFilters.select:
+                case applicationEnum.typeFilters.select:
                     conditions[filter.nameFilter] = {
                         $eq: values[index],
                     };
                     break;
-                case application.typeFilters.selectBool:
+                case applicationEnum.typeFilters.selectBool:
                     conditions[filter.nameFilter] = values[index];
                     break;
-                case application.typeFilters.dateStart:
+                case applicationEnum.typeFilters.dateStart:
                     conditions[filter.nameFilter] = {
                         $gte: values[index],
                         ...conditions[filter.nameFilter],
                     };
                     break;
-                case application.typeFilters.dateEnd:
+                case applicationEnum.typeFilters.dateEnd:
                     conditions[filter.nameFilter] = {
                         $lte: values[index],
                         ...conditions[filter.nameFilter],
                     };
                     break;
-                case application.typeFilters.selectMultiple:
+                case applicationEnum.typeFilters.selectMultiple:
                     conditions[filter.nameFilter] = {
                         $in: JSON.parse(values[index]),
                     };

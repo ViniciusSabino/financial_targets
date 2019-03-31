@@ -4,7 +4,7 @@ import home from "../controllers/home";
 
 const router = Router();
 
-router.prefix("/home");
+router.prefix("/");
 
 router.route({
     method: "GET",

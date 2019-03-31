@@ -1,5 +1,5 @@
-import accounts from "./accounts";
-import application from "./application";
+import accountEnum from "./accounts";
+import applicationEnum from "./application";
 
-export { accounts };
-export { application };
+export { accountEnum };
+export { applicationEnum };

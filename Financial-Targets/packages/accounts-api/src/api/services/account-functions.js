@@ -1,16 +1,18 @@
 import date from "../utils/functions/dates";
-import { accounts } from "../utils/enumerators";
 
-const enumAccount = accounts;
+import { accountEnum, applicationEnum } from "../utils/enumerators";
+
+const {
+    date: { differences },
+} = applicationEnum;
 
 const setAccountDate = (dueDate, type) => {
     const days = date.getDaysInCurrentMonth();
     const dueDateMoment = date.createMomentDate(dueDate);
-    const ajustedDate =
-        type === enumAccount.type.monthly
-            ? dueDateMoment.add(days, "days")
-            : dueDateMoment.add(12, "months");
-    return ajustedDate;
+
+    return type === accountEnum.type.monthly
+        ? dueDateMoment.add(days, differences.days)
+        : dueDateMoment.add(12, differences.months);
 };
 
 export default {

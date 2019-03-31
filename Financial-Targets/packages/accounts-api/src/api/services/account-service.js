@@ -5,18 +5,14 @@ import search from "../utils/functions/search";
 import AccountAllfilters from "./search/filters";
 import application from "../utils/functions/application";
 
-import { accounts } from "../utils/enumerators";
-
-const accountEnum = accounts;
+import { accountEnum } from "../utils/enumerators";
 
 const create = async (account) => {
-    const accountObj = new Account(account);
-    await accountObj.save();
+    await new Account(account).save();
 };
 
-const find = async (params) => {
+const find = async ({ sort, order, limit, ...params }) => {
     const accountFilter = search.createFilterConditions(params, AccountAllfilters);
-    const { limit, order, sort } = params;
     const accounts = await Account.find(accountFilter)
         .sort(search.sortBy(order, sort))
         .limit(Number(limit));
@@ -24,9 +20,8 @@ const find = async (params) => {
     return application.result(accounts);
 };
 
-const listAll = async (params) => {
-    const { sort, limit, order } = params;
-    const accounts = await Account.find({ userId: params.userId })
+const listAll = async ({ userid, sort, order, limit }) => {
+    const accounts = await Account.find({ userId: userid })
         .sort(search.sortBy(order, sort))
         .limit(Number(limit));
 
@@ -36,8 +31,8 @@ const listAll = async (params) => {
     };
 };
 
-const edit = async (account) => {
-    const accountUpdated = await Account.findByIdAndUpdate({ _id: account._id }, account, {
+const edit = async ({ _id, ...account }) => {
+    const accountUpdated = await Account.findByIdAndUpdate({ _id }, account, {
         new: true,
     }).lean();
 
@@ -51,40 +46,38 @@ const deleteAccount = async (accountsIds) => {
 const makePayment = async (accountsIds) => {
     const accounts = await Account.find({ _id: accountsIds });
 
-    const adjustedData = accounts.map((account) => {
+    const adjustedAccounts = accounts.map((account) => {
         if (account.status === accountEnum.status.done)
-            throw new Error(dictionary.account.paymentDone.message);
+            throw new Error(dictionary.paymentDone.message);
 
         const { value, type, _id, dueDate } = account;
+
         const ajustedDate = accountsFunctions.setAccountDate(dueDate, type);
 
         return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
     });
-    adjustedData.forEach(async (account) => {
-        const accountUpdate = {
-            amountPaid: account.amountPaid,
-            dueDate: account.dueDate,
-            status: accountEnum.status.done,
-        };
 
-        await Account.findByIdAndUpdate(account._id, accountUpdate);
-    });
-
-    return adjustedData;
+    return (
+        adjustedAccounts.map(({ _id, ...account }) =>
+            Account.findByIdAndUpdate(_id, {
+                amountPaid: account.amountPaid,
+                dueDate: account.dueDate,
+                status: accountEnum.status.done,
+            })
+        ) |> Promise.all
+    );
 };
 
-const makePartialPayment = async (input) => {
-    const { accountId, amountPaid } = input;
+const makePartialPayment = async ({ accountId, amountPaid }) => {
     const account = await Account.findById(accountId);
 
-    const result = do {
+    const validAccount = do {
         if (amountPaid > account.value) ({ errors: [dictionary.account.amountPaidIsInvalid] });
-        else if (account.status === accountEnum.status.done)
-            ({ errors: [dictionary.account.paymentDone] });
+        else if (account.status === accountEnum.status.done) ({ errors: [dictionary.paymentDone] });
         else ({ errors: [] });
     };
 
-    if (result.errors.length) return result;
+    if (validAccount.errors.length) return result;
 
     const changedData = do {
         if (account.value === amountPaid)
@@ -96,21 +89,22 @@ const makePartialPayment = async (input) => {
     };
 
     const accountUpdated = await Account.findOneAndUpdate(
-        { _id: input.accountId },
-        { ...changedData, amountPaid: input.amountPaid },
+        { _id: accountId },
+        { ...changedData, amountPaid },
         { new: true }
     );
 
-    return { ...result, data: accountUpdated };
+    return { ...validAccount, data: accountUpdated };
 };
 
 const sendNext = async (accountId) => {
     const { type, dueDate } = await Account.findById(accountId);
+
     const adjustedDate = accountsFunctions.setAccountDate(dueDate, type);
-    const adjustedStatus = accountEnum.status.pending;
+
     const accountUpdated = await Account.findOneAndUpdate(
         { _id: accountId },
-        { dueDate: adjustedDate, status: adjustedStatus },
+        { dueDate: adjustedDate, status: accountEnum.status.pending },
         { new: true }
     );
     return accountUpdated;
