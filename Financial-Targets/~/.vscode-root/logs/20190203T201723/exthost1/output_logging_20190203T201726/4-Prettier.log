@@ -1,0 +1,45 @@
+03/02/2019 20:34:24:
+--------------------
+Nested mappings are not allowed in compact mappings (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:14:16)
+  12 | rules:
+  13 |     arrow-body-style: [2, as-needed]
+> 14 | arrow-spacing: 2
+     |                ^
+> 15 |     complexity: [2, 50]
+     | ^^^^^^^^^^^^^^^^^^^^^^^
+> 16 |     indent: [2, 2, SwitchCase: 1]
+     | ^
+  17 |     max-depth: [2, 4]
+  18 |     max-params: [2, 3]
+  19 |     max-statements: [2, 25]
+
+03/02/2019 20:34:25:
+--------------------
+Nested mappings are not allowed in compact mappings (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:14:16)
+  12 | rules:
+  13 |     arrow-body-style: [2, as-needed]
+> 14 | arrow-spacing: 2
+     |                ^
+> 15 |     complexity: [2, 50]
+     | ^^^^^^^^^^^^^^^^^^^^^^^
+> 16 |     indent: [2, 2, SwitchCase: 1]
+     | ^
+  17 |     max-depth: [2, 4]
+  18 |     max-params: [2, 3]
+  19 |     max-statements: [2, 25]
+
+03/02/2019 20:34:25:
+--------------------
+Nested mappings are not allowed in compact mappings (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:14:16)
+  12 | rules:
+  13 |     arrow-body-style: [2, as-needed]
+> 14 | arrow-spacing: 2
+     |                ^
+> 15 |     complexity: [2, 50]
+     | ^^^^^^^^^^^^^^^^^^^^^^^
+> 16 |     indent: [2, 2, SwitchCase: 1]
+     | ^
+  17 |     max-depth: [2, 4]
+  18 |     max-params: [2, 3]
+  19 |     max-statements: [2, 25]
+

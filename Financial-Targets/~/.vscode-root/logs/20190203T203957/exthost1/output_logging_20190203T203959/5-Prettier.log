@@ -1,0 +1,76 @@
+03/02/2019 20:40:27:
+--------------------
+Unexpected token, expected "," (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:14:9)
+  12 |         method: "POST",
+  13 |         path: "/"
+> 14 |         handler: [validator.validCreate, accounts.addAccount]
+     |         ^
+  15 |     },
+  16 |     {
+  17 |         method: "GET",
+
+03/02/2019 20:40:28:
+--------------------
+Unexpected token, expected "," (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:14:9)
+  12 |         method: "POST",
+  13 |         path: "/"
+> 14 |         handler: [validator.validCreate, accounts.addAccount]
+     |         ^
+  15 |     },
+  16 |     {
+  17 |         method: "GET",
+
+03/02/2019 20:44:15:
+--------------------
+Unterminated string constant (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:1:20)
+> 1 | import Router from "koa-joi-router';
+    |                    ^
+  2 | 
+  3 | import accounts from "../controllers/accounts";
+  4 | import validator from "../validators/accounts";
+
+03/02/2019 20:44:15:
+--------------------
+Unterminated string constant (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:1:20)
+> 1 | import Router from "koa-joi-router';
+    |                    ^
+  2 | 
+  3 | import accounts from "../controllers/accounts";
+  4 | import validator from "../validators/accounts";
+
+03/02/2019 20:44:16:
+--------------------
+Unterminated string constant (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:1:20)
+> 1 | import Router from "koa-joi-router';
+    |                    ^
+  2 | 
+  3 | import accounts from "../controllers/accounts";
+  4 | import validator from "../validators/accounts";
+
+03/02/2019 20:44:17:
+--------------------
+Unterminated string constant (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:1:20)
+> 1 | import Router from "koa-joi-router';
+    |                    ^
+  2 | 
+  3 | import accounts from "../controllers/accounts";
+  4 | import validator from "../validators/accounts";
+
+03/02/2019 20:44:17:
+--------------------
+Unterminated string constant (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:1:20)
+> 1 | import Router from "koa-joi-router';
+    |                    ^
+  2 | 
+  3 | import accounts from "../controllers/accounts";
+  4 | import validator from "../validators/accounts";
+
+03/02/2019 20:44:17:
+--------------------
+Unterminated string constant (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js:1:20)
+> 1 | import Router from "koa-joi-router';
+    |                    ^
+  2 | 
+  3 | import accounts from "../controllers/accounts";
+  4 | import validator from "../validators/accounts";
+

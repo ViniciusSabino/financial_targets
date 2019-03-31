@@ -1,0 +1,2 @@
+[2019-02-03 22:12:39:748] Warning(/usr/bin/git -c core.quotepath=false -c color.ui=false show 60069e3ff8ddb7c39e7bb9710ab9bf9afe80fc72^:./financial_targets.api/src/api/controllers/accounts.js --): 
+[2019-02-03 22:12:39:750] Warning(/usr/bin/git -c core.quotepath=false -c color.ui=false show 60069e3ff8ddb7c39e7bb9710ab9bf9afe80fc72:./financial_targets.api/src/api/controllers/accounts.js --): 

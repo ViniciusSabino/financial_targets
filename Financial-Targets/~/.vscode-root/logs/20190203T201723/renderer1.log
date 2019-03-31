@@ -1,0 +1,46 @@
+[2019-02-03 20:17:26.759] [renderer1] [info] no standard startup: panel is active
+[2019-02-03 20:19:59.488] [renderer1] [error] Tree element not found: [object Object]: Error: Tree element not found: [object Object]
+    at e.getElementLocation (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:214:266)
+    at e.isCollapsed (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:213:757)
+    at i.e.isCollapsed (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:962:723)
+    at i.e.isExpanded (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:962:786)
+    at t.revealMarkersForCurrentActiveEditor (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4709:827)
+    at t.autoReveal (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4709:647)
+    at t.onActiveEditorChanged (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4706:826)
+    at e.fire (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:189:532)
+    at t.doEmitActiveEditorChangeEvent (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4719:942)
+    at t.handleActiveEditorChange (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4719:718)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4720:55
+    at e.fire (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:189:512)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:5169:861
+    at Object.g [as _notify] (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:167:807)
+    at Object.enter (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:171:85)
+    at n.Class.derive._creator._run (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:172:932)
+    at n.Class.derive._creator._completed (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:172:373)
+    at <anonymous>
+[2019-02-03 20:20:59.401] [renderer1] [error] Tree element not found: [object Object]: Error: Tree element not found: [object Object]
+    at e.getElementLocation (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:214:266)
+    at e.isCollapsed (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:213:757)
+    at i.e.isCollapsed (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:962:723)
+    at i.e.isExpanded (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:962:786)
+    at t.revealMarkersForCurrentActiveEditor (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4709:827)
+    at t.autoReveal (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4709:647)
+    at t.onActiveEditorChanged (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4706:826)
+    at e.fire (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:189:532)
+    at t.doEmitActiveEditorChangeEvent (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4719:942)
+    at t.handleActiveEditorChange (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4719:718)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:4720:55
+    at e.fire (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:189:512)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:5169:861
+    at Object.g [as _notify] (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:167:807)
+    at Object.enter (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:171:85)
+    at n.Class.derive._creator._run (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:172:932)
+    at n.Class.derive._creator._completed (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:172:373)
+    at <anonymous>
+[2019-02-03 20:21:01.579] [renderer1] [warning] Aborted format on save after 750ms
+[2019-02-03 20:21:07.356] [renderer1] [warning] Aborted format on save after 750ms
+[2019-02-03 20:24:20.150] [renderer1] [warning] Aborted format on save after 750ms
+[2019-02-03 20:29:43.560] [renderer1] [warning] Aborted format on save after 750ms
+[2019-02-03 20:32:01.076] [renderer1] [warning] Aborted format on save after 750ms
+[2019-02-03 20:35:07.313] [renderer1] [warning] Aborted format on save after 750ms
+[2019-02-03 20:35:08.195] [renderer1] [warning] Aborted format on save after 750ms

@@ -1,0 +1,6 @@
+[Info  - 19:56:19] ESLint server stopped.
+[Info  - 19:56:20] ESLint server running in node v8.9.3
+[Info  - 19:56:20] ESLint server is running.
+[Info  - 19:56:23] ESLint library loaded from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/api.js
+[Error - 19:56:23] Cannot find module 'eslint-config-prettier' Referenced from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint-plugin-prettier/eslint-plugin-prettier.js Referenced from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml
+[Info  - 19:59:39] ESLint server stopped.

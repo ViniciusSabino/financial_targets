@@ -1,0 +1,6 @@
+{
+    "workbench.colorTheme": "Noctis Minimus",
+    "workbench.iconTheme": "city-lights-icons-vsc",
+    "editor.formatOnSave": true,
+    "prettier.eslintIntegration": true
+}

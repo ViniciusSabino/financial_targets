@@ -1,0 +1,107 @@
+[Info  - 20:17:48] ESLint server stopped.
+[Info  - 20:17:48] ESLint server running in node v8.9.3
+[Info  - 20:17:48] ESLint server is running.
+[Info  - 20:17:51] ESLint library loaded from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/api.js
+[Error - 20:34:25] Cannot read config file: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml Error: bad indentation of a mapping entry at line 15, column 15:         complexity: [2, 50]                   ^
+[Error - 20:37:56] 
+Failed to load plugin jest: Cannot find module 'eslint-plugin-jest'
+Happened while validating /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js
+This can happen for a couple of reasons:
+1. The plugin name is spelled incorrectly in an ESLint configuration file (e.g. .eslintrc).
+2. If ESLint is installed globally, then make sure 'eslint-plugin-jest' is installed globally as well.
+3. If ESLint is installed locally, then 'eslint-plugin-jest' isn't installed correctly.
+
+Consider running eslint --debug /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js from a terminal to obtain a trace about the configuration files used.
+[Error - 20:37:58] 
+Failed to load plugin jest: Cannot find module 'eslint-plugin-jest'
+Happened while validating /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js
+This can happen for a couple of reasons:
+1. The plugin name is spelled incorrectly in an ESLint configuration file (e.g. .eslintrc).
+2. If ESLint is installed globally, then make sure 'eslint-plugin-jest' is installed globally as well.
+3. If ESLint is installed locally, then 'eslint-plugin-jest' isn't installed correctly.
+
+Consider running eslint --debug /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js from a terminal to obtain a trace about the configuration files used.
+[Error - 20:38:09] ESLint stack trace:
+[Error - 20:38:09] Error: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:
+	Environment key "jest/globals" is unknown
+
+    at Object.keys.forEach.env (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:158:19)
+    at Array.forEach (<anonymous>)
+    at validateEnvironment (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:154:30)
+    at Object.validate (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:263:5)
+    at loadFromDisk (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:521:19)
+    at Object.load (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:564:20)
+    at Config.getLocalConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:240:44)
+    at Config.getConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:192:43)
+    at Config.getConfigVector (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:299:21)
+    at Config.getConfig (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:342:29)
+[Error - 20:38:10] ESLint stack trace:
+[Error - 20:38:10] Error: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:
+	Environment key "jest/globals" is unknown
+
+    at Object.keys.forEach.env (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:158:19)
+    at Array.forEach (<anonymous>)
+    at validateEnvironment (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:154:30)
+    at Object.validate (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:263:5)
+    at loadFromDisk (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:521:19)
+    at Object.load (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:564:20)
+    at Config.getLocalConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:240:44)
+    at Config.getConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:192:43)
+    at Config.getConfigVector (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:299:21)
+    at Config.getConfig (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:342:29)
+[Error - 20:38:18] 
+Failed to load plugin jest: Cannot find module 'eslint-plugin-jest'
+Happened while validating /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js
+This can happen for a couple of reasons:
+1. The plugin name is spelled incorrectly in an ESLint configuration file (e.g. .eslintrc).
+2. If ESLint is installed globally, then make sure 'eslint-plugin-jest' is installed globally as well.
+3. If ESLint is installed locally, then 'eslint-plugin-jest' isn't installed correctly.
+
+Consider running eslint --debug /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js from a terminal to obtain a trace about the configuration files used.
+[Error - 20:38:18] 
+Failed to load plugin jest: Cannot find module 'eslint-plugin-jest'
+Happened while validating /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js
+This can happen for a couple of reasons:
+1. The plugin name is spelled incorrectly in an ESLint configuration file (e.g. .eslintrc).
+2. If ESLint is installed globally, then make sure 'eslint-plugin-jest' is installed globally as well.
+3. If ESLint is installed locally, then 'eslint-plugin-jest' isn't installed correctly.
+
+Consider running eslint --debug /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js from a terminal to obtain a trace about the configuration files used.
+[Error - 20:38:23] 
+Failed to load plugin jest: Cannot find module 'eslint-plugin-jest'
+Happened while validating /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js
+This can happen for a couple of reasons:
+1. The plugin name is spelled incorrectly in an ESLint configuration file (e.g. .eslintrc).
+2. If ESLint is installed globally, then make sure 'eslint-plugin-jest' is installed globally as well.
+3. If ESLint is installed locally, then 'eslint-plugin-jest' isn't installed correctly.
+
+Consider running eslint --debug /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/src/api/routes/accounts.js from a terminal to obtain a trace about the configuration files used.
+[Error - 20:38:25] ESLint stack trace:
+[Error - 20:38:25] Error: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:
+	Environment key "jest/globals" is unknown
+
+    at Object.keys.forEach.env (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:158:19)
+    at Array.forEach (<anonymous>)
+    at validateEnvironment (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:154:30)
+    at Object.validate (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:263:5)
+    at loadFromDisk (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:521:19)
+    at Object.load (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:564:20)
+    at Config.getLocalConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:240:44)
+    at Config.getConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:192:43)
+    at Config.getConfigVector (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:299:21)
+    at Config.getConfig (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:342:29)
+[Error - 20:38:27] ESLint stack trace:
+[Error - 20:38:27] Error: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml:
+	Environment key "jest/globals" is unknown
+
+    at Object.keys.forEach.env (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:158:19)
+    at Array.forEach (<anonymous>)
+    at validateEnvironment (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:154:30)
+    at Object.validate (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-validator.js:263:5)
+    at loadFromDisk (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:521:19)
+    at Object.load (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config/config-file.js:564:20)
+    at Config.getLocalConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:240:44)
+    at Config.getConfigHierarchy (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:192:43)
+    at Config.getConfigVector (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:299:21)
+    at Config.getConfig (/home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/config.js:342:29)
+[Info  - 20:39:50] ESLint server stopped.

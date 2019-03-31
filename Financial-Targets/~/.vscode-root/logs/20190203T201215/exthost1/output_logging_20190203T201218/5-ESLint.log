@@ -1,0 +1,7 @@
+[Info  - 20:12:20] ESLint server stopped.
+[Info  - 20:12:21] ESLint server running in node v8.9.3
+[Info  - 20:12:21] ESLint server is running.
+[Info  - 20:12:24] ESLint library loaded from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint/lib/api.js
+[Error - 20:12:24] Failed to load plugin import: Cannot find module 'eslint-plugin-import' Referenced from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/node_modules/eslint-config-airbnb-base/index.js Referenced from: /home/vinnerocha/Documentos/Projetos/projects_node/financial_targets.api/.eslintrc.yml
+[Error - 20:14:24] Cannot read config file: /home/.eslintrc.yml Error: bad indentation of a mapping entry at line 14, column 3:       arrow-spacing: 2       ^
+[Info  - 20:14:41] ESLint server stopped.
