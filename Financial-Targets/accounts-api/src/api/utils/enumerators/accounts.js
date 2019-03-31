@@ -1,4 +1,4 @@
-const account = {
+export default {
     status: {
         done: "DONE",
         expired: "EXPIRED",
@@ -16,5 +16,3 @@ const account = {
         ticket: "TICKET",
     },
 };
-
-export default account;

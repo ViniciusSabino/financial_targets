@@ -1,12 +1,13 @@
-import Account from "../../models/account";
-import enumerators from "../../utils/enumerators";
-import dictionary from "../../utils/dictionaries";
-import accountsUtil from "../../utils/modules/accounts";
-import search from "../../utils/functions/search";
-import AccountAllfilters from "./search-accounts/filters";
-import application from "../../utils/functions/application";
+import Account from "../models/account";
+import dictionary from "../utils/dictionaries/accounts";
+import accountsFunctions from "./account-functions";
+import search from "../utils/functions/search";
+import AccountAllfilters from "./search/filters";
+import application from "../utils/functions/application";
 
-const { accounts: accountEnum } = enumerators;
+import { accounts } from "../utils/enumerators";
+
+const accountEnum = accounts;
 
 const create = async (account) => {
     const accountObj = new Account(account);
@@ -55,7 +56,7 @@ const makePayment = async (accountsIds) => {
             throw new Error(dictionary.account.paymentDone.message);
 
         const { value, type, _id, dueDate } = account;
-        const ajustedDate = accountsUtil.setAccountDate(dueDate, type);
+        const ajustedDate = accountsFunctions.setAccountDate(dueDate, type);
 
         return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
     });
@@ -89,7 +90,7 @@ const makePartialPayment = async (input) => {
         if (account.value === amountPaid)
             ({
                 status: accountEnum.status.done,
-                dueDate: accountsUtil.setAccountDate(account.dueDate, account.type),
+                dueDate: accountsFunctions.setAccountDate(account.dueDate, account.type),
             });
         else ({ status: account.status, dueDate: account.dueDate });
     };
@@ -105,7 +106,7 @@ const makePartialPayment = async (input) => {
 
 const sendNext = async (accountId) => {
     const { type, dueDate } = await Account.findById(accountId);
-    const adjustedDate = accountsUtil.setAccountDate(dueDate, type);
+    const adjustedDate = accountsFunctions.setAccountDate(dueDate, type);
     const adjustedStatus = accountEnum.status.pending;
     const accountUpdated = await Account.findOneAndUpdate(
         { _id: accountId },

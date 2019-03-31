@@ -2,7 +2,7 @@ import config from "../config";
 
 const home = (ctx) =>
     ctx.ok({
-        title: "API Information",
+        title: "(Financal Targets) - Accounts API",
         environment: config.environment,
         port: config.port,
     });

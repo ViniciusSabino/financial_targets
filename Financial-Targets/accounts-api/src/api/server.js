@@ -27,7 +27,7 @@ app.use(respond());
 app.use(routes);
 
 app.listen(config.port, () =>
-    console.log(`\n API: ${chalk.blue("financial_targets.api")}
+    console.log(`\n API: ${chalk.blue("(Financial Targets) - Accounts API")}
  Running on port: ${chalk.blue(config.port)} 
  Environment: ${chalk.blue(config.environment)}`)
 );

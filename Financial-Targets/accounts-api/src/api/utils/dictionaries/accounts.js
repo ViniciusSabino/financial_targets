@@ -1,4 +1,4 @@
-const account = {
+export default {
     nameIsEmpty: { message: "Informe o nome da mensalidade." },
     valueIsEmpty: { message: "Informe o valor da mensalidade." },
     valueExceeded: {
@@ -24,5 +24,3 @@ const account = {
     },
     paymentDone: { message: "O pagamento já foi efetuado, não será possivel efetuar novamente" },
 };
-
-export default account;

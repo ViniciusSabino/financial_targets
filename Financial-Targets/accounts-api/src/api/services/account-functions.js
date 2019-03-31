@@ -1,5 +1,7 @@
-import date from "../functions/dates";
-import enumAccount from "../enumerators/accounts";
+import date from "../utils/functions/dates";
+import { accounts } from "../utils/enumerators";
+
+const enumAccount = accounts;
 
 const setAccountDate = (dueDate, type) => {
     const days = date.getDaysInCurrentMonth();

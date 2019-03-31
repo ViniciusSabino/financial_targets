@@ -1,4 +1,4 @@
-import service from "../services/accounts";
+import service from "../services/account-service";
 
 const create = async (ctx) => {
     await service.create(ctx.request.body);

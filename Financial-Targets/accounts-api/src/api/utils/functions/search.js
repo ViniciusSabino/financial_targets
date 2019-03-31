@@ -1,6 +1,4 @@
-import enumerators from "../enumerators";
-
-const { application } = enumerators;
+import { application } from "../enumerators";
 
 const createFilterConditions = (params, allFilters) => {
     const keys = Object.keys(params);

@@ -1,8 +1,8 @@
 import date from "../utils/functions/dates";
-import dictionary from "../utils/dictionaries";
-import enumerators from "../utils/enumerators";
+import dictionary from "../utils/dictionaries/accounts";
+import { accounts } from "../utils/enumerators";
 
-const accountStatus = enumerators.accounts.status;
+const accountStatus = accounts.status;
 
 const validDataSubmitted = (account) => {
     const errors = [];
