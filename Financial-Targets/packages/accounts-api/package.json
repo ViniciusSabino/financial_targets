@@ -7,7 +7,8 @@
         "start": "nodenv ./dist/api/server.js",
         "dev": "nodenv -e nodemon -- --exec",
         "build": "babel ./src -d ./dist --source-maps",
-        "lint": "eslint src/** --fix"
+        "test": "jest",
+        "watch": "jest --watch --verbose=true"
     },
     "nodemonConfig": {
         "exec": "babel-node ./src/api/server.js"
