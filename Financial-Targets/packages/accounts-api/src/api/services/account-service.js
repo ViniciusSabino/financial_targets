@@ -58,10 +58,10 @@ const makePayment = async (accountsIds) => {
     });
 
     return (
-        adjustedAccounts.map(({ _id, ...account }) =>
+        adjustedAccounts.map(({ _id, amountPaid, dueDate }) =>
             Account.findByIdAndUpdate(_id, {
-                amountPaid: account.amountPaid,
-                dueDate: account.dueDate,
+                amountPaid,
+                dueDate,
                 status: accountEnum.status.done,
             })
         ) |> Promise.all
