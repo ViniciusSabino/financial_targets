@@ -1,10 +1,6 @@
-Configurações de organização da API
-
 - Criar o Readme.md 
 
-Tarefas pendendes
-
-- (Account) - Criar uma solução para verificar automáticamente se a mensalidade está marcada para se repetir, 
+- Criar uma solução para verificar automáticamente se a mensalidade está marcada para se repetir, 
 se estiver, então verificar se ela já foi paga corretamente para trocar a data de vencimento e zerar o valor pago se não manter como 
 atrasada.
 

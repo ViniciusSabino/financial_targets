@@ -1,4 +1,4 @@
-# Financial Targets API
+# Financial Targets (Account API)
 
 One Paragraph of project description goes here
 
