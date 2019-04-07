@@ -31,8 +31,6 @@ e auxiliar nas minhas tarefas e planejamentos.
 
 ## Projetos
 
-## Diagrama
-
 | Nome              | Descrição                                  |
 | ----------------- | ------------------------------------------ |
 | Financial Targets | Aplicação para controle financeiro pessoal |
