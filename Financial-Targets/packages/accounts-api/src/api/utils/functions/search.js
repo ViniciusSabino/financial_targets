@@ -37,7 +37,7 @@ const createFilterConditions = (params, allFilters) => {
                     break;
                 case applicationEnum.typeFilters.selectMultiple:
                     conditions[filter.nameFilter] = {
-                        $in: JSON.parse(values[index]),
+                        $in: values[index].split(","),
                     };
                     break;
                 default:

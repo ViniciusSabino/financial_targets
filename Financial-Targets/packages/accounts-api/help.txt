@@ -12,7 +12,7 @@ TIPOS DE PAGAMENTO
     1 - 'MONTHLY' - Mensal
     2 - 'YEARLY' - Anual
 
-TIPOS DE MENSALIDADES
+STATUS DO PAGAMENTO
 
     1 - 'EXPIRED' - Expirado
     2 - 'PENDING' - Pendente

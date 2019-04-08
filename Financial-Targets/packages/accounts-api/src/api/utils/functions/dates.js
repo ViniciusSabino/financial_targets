@@ -9,23 +9,22 @@ const getDaysInCurrentMonth = () => moment().daysInMonth();
 
 const createMomentDate = (date) => moment(date);
 
-const getDateDifference = (differenceType, dateA, dateB) => {
+const getDateDifference = (differenceType, largeDate, minorDate) => {
     switch (differenceType) {
-        case differences.milliseconds:
-            return dateA.diff(dateB);
         case differences.minutes:
-            return dateA.diff(dateB, differences.minutes);
+            return largeDate.diff(minorDate, differences.minutes);
         case differences.hours:
-            return dateA.diff(dateB, differences.hours);
+            return largeDate.diff(minorDate, differences.hours);
         case differences.days:
-            return dateA.diff(dateB, differences.days);
+            return largeDate.diff(minorDate, differences.days);
         case differences.weeks:
-            return dateA.diff(dateB, differences.weeks);
+            return largeDate.diff(minorDate, differences.weeks);
         case differences.months:
-            return dateA.diff(dateB, differences.months);
+            return largeDate.diff(minorDate, differences.months);
         case differences.years:
-            return dateA.diff(dateA, differences.years, true);
+            return largeDate.diff(minorDate, differences.years, false);
         default:
+            return largeDate.diff(minorDate, differences.years);
     }
 };
 
