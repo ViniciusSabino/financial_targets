@@ -42,10 +42,5 @@
         "prettier": "^1.16.4",
         "pretty-quick": "^1.10.0",
         "supertest": "^4.0.2"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged ---ignore-path=packages/accounts-api/__tests__/coverage --verbose"
-        }
     }
 }
