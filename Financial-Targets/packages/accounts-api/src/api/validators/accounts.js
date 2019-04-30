@@ -7,20 +7,20 @@ const accountStatus = accountEnum.status;
 const validDataSubmitted = (account) => {
     const errors = [];
 
-    if (!account.name) errors.push(dictionary.account.nameIsEmpty);
+    if (!account?.name) errors.push(dictionary.nameIsEmpty);
 
-    if (!account.value || account.value < 0) errors.push(dictionary.account.valueIsEmpty);
+    if (!account?.value || account.value < 0) errors.push(dictionary.valueIsEmpty);
 
-    if (!account.type) errors.push(dictionary.account.typeIsEmpty);
+    if (!account?.type) errors.push(dictionary.typeIsEmpty);
 
-    if (!account.paymentForm) errors.push(dictionary.account.paymentFormIsEmpty);
+    if (!account?.paymentForm) errors.push(dictionary.paymentFormIsEmpty);
 
-    if (!account.dueDate) errors.push(dictionary.account.dueDateIsEmpty);
+    if (!account?.dueDate) errors.push(dictionary.dueDateIsEmpty);
 
-    if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
-    else if (account.amountPaid < 0) errors.push(dictionary.account.amoountPaidIsNegative);
+    if (account?.amountPaid > account?.value) errors.push(dictionary.amountPaidIsInvalid);
+    else if (account?.amountPaid < 0) errors.push(dictionary.amoountPaidIsNegative);
 
-    if (!account.userId) errors.push(dictionary.account.userIdIsEmpty);
+    if (!account?.userId) errors.push(dictionary.userIdIsEmpty);
 
     return errors;
 };
@@ -93,4 +93,5 @@ export default {
     validList,
     validEdit,
     validMakePartialPayment,
+    validDataSubmitted,
 };

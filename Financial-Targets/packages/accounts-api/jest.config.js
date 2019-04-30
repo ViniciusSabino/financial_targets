@@ -11,4 +11,13 @@ module.exports = {
     coverageDirectory: "__tests__/coverage",
     testEnvironment: "node",
     testMatch: ["**/__tests__/**/*+(spec|test).[jt]s?(x)"],
+    coveragePathIgnorePatterns: ["/node_modules"],
+    coverageThreshold: {
+        global: {
+            statements: 70,
+            branches: 70,
+            functions: 70,
+            lines: 70,
+        },
+    },
 };
