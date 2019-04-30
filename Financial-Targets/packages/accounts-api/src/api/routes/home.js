@@ -4,11 +4,11 @@ import home from "../controllers/home";
 
 const router = Router();
 
-router.prefix("/");
+router.prefix("/home");
 
 router.route({
     method: "GET",
-    path: "/",
+    path: "/accounts",
     handler: [home],
 });
 

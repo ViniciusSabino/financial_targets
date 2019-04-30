@@ -6,16 +6,10 @@ const accountStatus = accountEnum.status;
 
 const validDataSubmitted = (account) => {
     const errors = [];
-    const defaultLimits = {
-        valueLimit: 5000,
-        tagsLimit: 3,
-    };
 
     if (!account.name) errors.push(dictionary.account.nameIsEmpty);
 
     if (!account.value || account.value < 0) errors.push(dictionary.account.valueIsEmpty);
-    else if (account.value > defaultLimits.valueLimit)
-        errors.push(dictionary.account.valueExceeded);
 
     if (!account.type) errors.push(dictionary.account.typeIsEmpty);
 
@@ -26,9 +20,6 @@ const validDataSubmitted = (account) => {
     if (account.amountPaid > account.value) errors.push(dictionary.account.amountPaidIsInvalid);
     else if (account.amountPaid < 0) errors.push(dictionary.account.amoountPaidIsNegative);
 
-    if (account.tags?.length > defaultLimits.tagsLimit)
-        errors.push(dictionary.account.tagsIsExceeded);
-
     if (!account.userId) errors.push(dictionary.account.userIdIsEmpty);
 
     return errors;
@@ -36,7 +27,9 @@ const validDataSubmitted = (account) => {
 
 const validCreate = (ctx, next) => {
     const account = ctx.request.body;
+
     const errors = validDataSubmitted(account);
+
     const currentDate = date.getCurrentDate();
 
     if (!errors.length) {
