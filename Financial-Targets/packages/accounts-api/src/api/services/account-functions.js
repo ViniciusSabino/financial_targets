@@ -1,4 +1,4 @@
-import date from "../utils/functions/dates";
+import { getDaysInCurrentMonth, createMomentDate } from "../utils/functions/dates";
 
 import { accountEnum, applicationEnum } from "../utils/enumerators";
 
@@ -7,12 +7,12 @@ const {
 } = applicationEnum;
 
 const setAccountDate = (dueDate, type) => {
-    const days = date.getDaysInCurrentMonth();
-    const dueDateMoment = date.createMomentDate(dueDate);
+    const days = getDaysInCurrentMonth();
+    const dueDateMoment = createMomentDate(dueDate);
 
     return type === accountEnum.type.monthly
         ? dueDateMoment.add(days, differences.days)
-        : dueDateMoment.add(12, differences.months);
+        : dueDateMoment.add(1, differences.years);
 };
 
 export default {

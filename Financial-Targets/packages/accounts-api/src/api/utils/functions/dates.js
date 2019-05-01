@@ -41,7 +41,7 @@ const remainingPeriod = (date) => {
     };
 };
 
-export default {
+export {
     getCurrentDate,
     getDaysInCurrentMonth,
     createMomentDate,

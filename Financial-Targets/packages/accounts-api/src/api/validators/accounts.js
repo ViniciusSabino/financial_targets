@@ -1,4 +1,4 @@
-import date from "../utils/functions/dates";
+import { getCurrentDate } from "../utils/functions/dates";
 import dictionary from "../utils/dictionaries/accounts";
 import { accountEnum } from "../utils/enumerators";
 
@@ -30,7 +30,7 @@ const validCreate = (ctx, next) => {
 
     const errors = validDataSubmitted(account);
 
-    const currentDate = date.getCurrentDate();
+    const currentDate = getCurrentDate();
 
     if (!errors.length) {
         account.status = do {
@@ -47,20 +47,20 @@ const validCreate = (ctx, next) => {
 
 const validList = (ctx, next) => {
     const { userid } = ctx.request.header;
-    return !userid ? ctx.badRequest({ errors: [dictionary.account.userIdIsEmpty] }) : next();
+    return !userid ? ctx.badRequest({ errors: [dictionary.userIdIsEmpty] }) : next();
 };
 
 const validEdit = (ctx, next) => {
     const account = ctx.request.body;
     const errors = validDataSubmitted(account);
-    const currentDate = date.getCurrentDate();
+    const currentDate = getCurrentDate();
 
-    if (!account._id) errors.push(dictionary.account.accountIdIsEmpty);
+    if (!account._id) errors.push(dictionary.accountIdIsEmpty);
 
     if (!errors.length) {
         if (account.dueDate < currentDate)
             return ctx.badRequest({
-                errors: [dictionary.account.dataEditIsInvalid],
+                errors: [dictionary.dataEditIsInvalid],
             });
         account.status = do {
             if (
@@ -85,7 +85,7 @@ const validEdit = (ctx, next) => {
 const validMakePartialPayment = (ctx, next) => {
     const { accountId } = ctx.request.body;
 
-    return !accountId ? ctx.badRequest({ errors: dictionary.account.accountIdIsEmpty }) : next();
+    return !accountId ? ctx.badRequest({ errors: [dictionary.accountIdIsEmpty] }) : next();
 };
 
 export default {

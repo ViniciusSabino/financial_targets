@@ -2,7 +2,7 @@ env:
     node: true
     es6: true
     jest: true
-extends: [airbnb-base, "plugin:prettier/recommended"]
+extends: [airbnb-base, "plugin:prettier/recommended", "plugin:jest/recommended"]
 plugins: [import, babel, jest]
 parser: babel-eslint
 parserOptions:
