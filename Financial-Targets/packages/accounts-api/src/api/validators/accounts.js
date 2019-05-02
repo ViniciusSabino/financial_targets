@@ -58,22 +58,10 @@ const validEdit = (ctx, next) => {
     if (!account._id) errors.push(dictionary.accountIdIsEmpty);
 
     if (!errors.length) {
-        if (account.dueDate < currentDate)
-            return ctx.badRequest({
-                errors: [dictionary.dataEditIsInvalid],
-            });
         account.status = do {
-            if (
-                (account.status === accountStatus.expired && account.dueDate > currentDate) ||
-                (account.status === accountStatus.done && account.amountPaid < account.value)
-            )
-                accountStatus.pending;
-            else if (
-                account.status === accountStatus.pending &&
-                account.amountPaid === account.value
-            )
-                accountStatus.done;
-            else account.status;
+            if (account.amountPaid === account.value) accountEnum.status.done;
+            else if (account.dueDate > currentDate) accountEnum.status.pending;
+            else accountEnum.status.expired;
         };
     } else return ctx.badRequest({ errors });
 

@@ -9,8 +9,13 @@ jest.mock("../../../src/api/utils/functions/dates", () => ({
     getCurrentDate: jest.fn(),
 }));
 
+beforeEach(() => {
+    context.response.status = 200;
+    context.response.message = "Ok";
+});
+
 describe("Validator", () => {
-    describe("POST -> /account", () => {
+    describe("POST -> /account, Create Account", () => {
         it("should return status 400 and an array of errors when an invalid account is registered", async () => {
             const ctx = {
                 ...context,
@@ -19,9 +24,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             ctx.badRequest = (payload) => {
                 ctx.response.message = payload;
@@ -42,26 +45,14 @@ describe("Validator", () => {
                 },
             };
 
-            ctx.response.status = 200;
-            ctx.response.message = "Ok";
-
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot({
-                    ...ctx,
-                    response: {
-                        ...ctx.response,
-                        status: 200,
-                        message: "Ok",
-                    },
-                });
-            });
+            const next = jest.fn(() => ctx);
 
             await validator.validCreate(ctx, next);
 
             expect(ctx.response.status).not.toEqual(400);
         });
 
-        it("should return the done status when the amount paid is equal to the value of the account", async () => {
+        it("should return the 'done' status when the amount paid is equal to the value of the account", async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -73,16 +64,14 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             await validator.validCreate(ctx, next);
 
             expect(ctx.request.body.status).toEqual("DONE");
         });
 
-        it("should return expired status when the payment date is less than the current date", async () => {
+        it("should return 'expired' status when the payment date is less than the current date", async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -92,9 +81,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
                 moment(new Date("2019-05-09T03:24:00.000")).format()
@@ -106,7 +93,7 @@ describe("Validator", () => {
         });
     });
 
-    describe("GET -> /accounts and /account/all", () => {
+    describe("GET -> /accounts, Filter and List Accounts", () => {
         it("should have the user id before listing accounts", async () => {
             const ctx = {
                 ...context,
@@ -117,9 +104,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             await validator.validList(ctx, next);
 
@@ -136,9 +121,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             ctx.badRequest = (payload) => {
                 ctx.response.message = payload;
@@ -161,9 +144,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             ctx.badRequest = (payload) => {
                 ctx.response.message = payload;
@@ -177,6 +158,8 @@ describe("Validator", () => {
         });
 
         it("should return a bad request if the account date is changed to less than current date", async () => {
+            // dueDate Mock = 2019-05-06T16:54:37-02:00
+
             const ctx = {
                 ...context,
                 request: {
@@ -184,9 +167,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
                 moment(new Date("2019-05-09T03:24:00.000")).format()
@@ -202,6 +183,48 @@ describe("Validator", () => {
             expect(ctx.response.status).toEqual(400);
             expect(ctx.response.message.errors.length).toEqual(1);
         });
+
+        it("should update status to pendind in edit", async () => {
+            // dueDate Mock = 2019-05-06T16:54:37-02:00
+
+            const ctx = {
+                ...context,
+                request: {
+                    body: { ...account, _id: 1, amountPaid: 399, value: 400 },
+                },
+            };
+
+            const next = jest.fn(() => ctx);
+
+            getCurrentDate.mockImplementation(() =>
+                moment(new Date("2019-05-01T03:24:00.000")).format()
+            );
+
+            await validator.validEdit(ctx, next);
+
+            // CONDITION 1: dueDate > currentDate AND amountPaid < value
+            expect(ctx.request.body.status).toEqual("PENDING");
+        });
+
+        it("should update status to expired in edit", async () => {
+            const ctx = {
+                ...context,
+                request: {
+                    body: { ...account, _id: 1, amountPaid: 399, value: 400 },
+                },
+            };
+
+            const next = jest.fn(() => ctx);
+
+            getCurrentDate.mockImplementation(() =>
+                moment(new Date("2019-05-10T03:24:00.000")).format()
+            );
+
+            await validator.validEdit(ctx, next);
+
+            // CONDITION 2: dueDate < currentDate AND amountPaid < value
+            expect(ctx.request.body.status).toEqual("EXPIRED");
+        });
     });
 
     describe("PATCH -> /accounts/makepartialpayment", () => {
@@ -215,9 +238,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             await validator.validMakePartialPayment(ctx, next);
 
@@ -234,9 +255,7 @@ describe("Validator", () => {
                 },
             };
 
-            const next = jest.fn(() => {
-                expect(ctx).toMatchSnapshot();
-            });
+            const next = jest.fn(() => ctx);
 
             ctx.badRequest = (payload) => {
                 ctx.response.message = payload;

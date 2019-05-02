@@ -8,10 +8,10 @@ import {
 
 import { applicationEnum } from "../../../src/api/utils/enumerators/index";
 
+const minorDate = moment(new Date("2019-04-07T00:00:00.000"));
+
 describe("Utils", () => {
     describe("Dates", () => {
-        const minorDate = moment(new Date("2019-04-07T00:00:00.000"));
-
         it("should receive a current data correctly", () => {
             expect(getCurrentDate()).toEqual(moment().format());
         });
@@ -82,7 +82,7 @@ describe("Utils", () => {
         });
 
         it("should receive the difference in years between two dates", () => {
-            const largeDate = moment(new Date("2019-04-08T00:00:00.000"));
+            const largeDate = moment(new Date("2049-04-08T00:00:00.000"));
 
             const diffYears = getDateDifference(
                 applicationEnum.date.differences.years,
@@ -90,7 +90,7 @@ describe("Utils", () => {
                 minorDate
             );
 
-            expect(diffYears).toEqual(0);
+            expect(diffYears).toEqual(30);
         });
     });
 });
