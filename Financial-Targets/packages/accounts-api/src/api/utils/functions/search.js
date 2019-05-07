@@ -3,47 +3,56 @@ import { applicationEnum } from "../enumerators";
 const createFilterConditions = (params, allFilters) => {
     const keys = Object.keys(params);
     const values = Object.values(params);
-    const conditions = {};
 
-    keys.forEach((key, index) => {
+    const conditions = keys.reduce((acc, key, index) => {
         const filter = allFilters.find((f) => f.parameter === key);
-        if (filter) {
-            switch (filter.type) {
-                case applicationEnum.typeFilters.inputText:
-                    conditions[filter.nameFilter] = {
+        switch (filter.type) {
+            case applicationEnum.typeFilters.inputText:
+                return {
+                    ...acc,
+                    [filter.nameFilter]: {
                         $regex: values[index],
                         $options: "i",
-                    };
-                    break;
-                case applicationEnum.typeFilters.select:
-                    conditions[filter.nameFilter] = {
+                    },
+                };
+            case applicationEnum.typeFilters.select:
+                return {
+                    ...acc,
+                    [filter.nameFilter]: {
                         $eq: values[index],
-                    };
-                    break;
-                case applicationEnum.typeFilters.selectBool:
-                    conditions[filter.nameFilter] = values[index];
-                    break;
-                case applicationEnum.typeFilters.dateStart:
-                    conditions[filter.nameFilter] = {
+                    },
+                };
+            case applicationEnum.typeFilters.selectBool:
+                return {
+                    ...acc,
+                    [filter.nameFilter]: values[index],
+                };
+            case applicationEnum.typeFilters.dateStart:
+                return {
+                    ...acc,
+                    [filter.nameFilter]: {
                         $gte: values[index],
-                        ...conditions[filter.nameFilter],
-                    };
-                    break;
-                case applicationEnum.typeFilters.dateEnd:
-                    conditions[filter.nameFilter] = {
+                    },
+                };
+            case applicationEnum.typeFilters.dateEnd:
+                return {
+                    ...acc,
+                    [filter.nameFilter]: {
                         $lte: values[index],
-                        ...conditions[filter.nameFilter],
-                    };
-                    break;
-                case applicationEnum.typeFilters.selectMultiple:
-                    conditions[filter.nameFilter] = {
+                        ...acc[filter.nameFilter],
+                    },
+                };
+            case applicationEnum.typeFilters.selectMultiple:
+                return {
+                    ...acc,
+                    [filter.nameFilter]: {
                         $in: values[index].split(","),
-                    };
-                    break;
-                default:
-            }
+                    },
+                };
+            default:
+                return { ...acc };
         }
-    });
+    }, {});
 
     return conditions;
 };
