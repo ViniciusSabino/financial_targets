@@ -33,8 +33,11 @@ describe("Validator", () => {
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.response.status).toEqual(400);
-            expect(ctx.response.message.errors.length).toEqual(6);
+            const NUMBER_OF_FIELDS = 6; // register acccount
+            const ERROR_STATUS_CODE = 400;
+
+            expect(ctx.response.status).toEqual(ERROR_STATUS_CODE);
+            expect(ctx.response.message.errors.length).toEqual(NUMBER_OF_FIELDS);
         });
 
         it("should return an account without a request body", async () => {
@@ -49,10 +52,15 @@ describe("Validator", () => {
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.response.status).not.toEqual(400);
+            const OK_STATUS_CODE = 200;
+            const NUMBER_OF_FIELDS = 11; // validated account
+
+            expect(ctx.response.status).toEqual(OK_STATUS_CODE);
+            expect(ctx.state).toHaveProperty("name", "Spotify");
+            expect(Object.keys(ctx.state).length).toEqual(NUMBER_OF_FIELDS);
         });
 
-        it("should return the 'done' status when the amount paid is equal to the value of the account", async () => {
+        it("should return the 'DONE' status when the amount paid is equal to the value of the account", async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -68,16 +76,14 @@ describe("Validator", () => {
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.request.body.status).toEqual("DONE");
+            expect(ctx.state.status).toEqual("DONE");
         });
 
-        it("should return 'expired' status when the payment date is less than the current date", async () => {
+        it("should return 'EXPIRED' status when the payment date is less than the current date", async () => {
             const ctx = {
                 ...context,
                 request: {
-                    body: {
-                        ...account,
-                    },
+                    body: account,
                 },
             };
 
@@ -89,7 +95,26 @@ describe("Validator", () => {
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.request.body.status).toEqual("EXPIRED");
+            expect(ctx.state.status).toEqual("EXPIRED");
+        });
+
+        it("should return 'PENDING' status when registering a monthly fee and it is not yet paid", async () => {
+            const ctx = {
+                ...context,
+                request: {
+                    body: account,
+                },
+            };
+
+            const next = jest.fn(() => ctx);
+
+            getCurrentDate.mockImplementation(() =>
+                moment(new Date("2019-05-01T03:24:00.000")).format()
+            );
+
+            await validator.validCreate(ctx, next);
+
+            expect(ctx.state.status).toEqual("PENDING");
         });
     });
 

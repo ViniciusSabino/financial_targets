@@ -2,7 +2,7 @@ import { getCurrentDate } from "../utils/functions/dates";
 import dictionary from "../utils/dictionaries/accounts";
 import { accountEnum } from "../utils/enumerators";
 
-const accountStatus = accountEnum.status;
+const { status: ACCOUNT_STATUS } = accountEnum;
 
 const validDataSubmitted = (account) => {
     const errors = [];
@@ -32,15 +32,18 @@ const validCreate = (ctx, next) => {
 
     const currentDate = getCurrentDate();
 
-    if (!errors.length) {
-        account.status = do {
-            if (account.amountPaid === account.value) accountStatus.done;
-            else if (account.dueDate < currentDate) accountStatus.expired;
-            else accountStatus.pending;
-        };
-    } else return ctx.badRequest({ errors });
+    if (errors.length) return ctx.badRequest({ errors });
 
-    ctx.request.body = account;
+    const accountStatus = do {
+        if (account.amountPaid === account.value) ACCOUNT_STATUS.done;
+        else if (currentDate > account.dueDate) ACCOUNT_STATUS.expired;
+        else ACCOUNT_STATUS.pending;
+    };
+
+    ctx.state = {
+        ...account,
+        status: accountStatus,
+    };
 
     return next();
 };
