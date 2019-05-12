@@ -10,7 +10,7 @@ module.exports = {
     collectCoverage: true,
     coverageDirectory: "__tests__/coverage",
     testEnvironment: "node",
-    testMatch: ["**/__tests__/**/*+(spec|test).[jt]s?(x)"],
+    testMatch: ["**/api/**/*+(spec|test).[jt]s?(x)"],
     coveragePathIgnorePatterns: ["/node_modules"],
     coverageThreshold: {
         global: {

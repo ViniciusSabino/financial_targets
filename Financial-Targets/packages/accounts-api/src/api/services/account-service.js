@@ -1,8 +1,8 @@
-import Account from "../models/account";
+import Account from "../database/mongodb/models/account";
 import dictionary from "../utils/dictionaries/accounts";
-import accountsFunctions from "./account-functions";
+import accountsFunctions from "./functions/account-functions";
 import search from "../utils/functions/search";
-import AccountAllfilters from "./search/filters";
+import AccountAllfilters from "../utils/constants/filters";
 import application from "../utils/functions/application";
 
 import { accountEnum } from "../utils/enumerators";
@@ -23,7 +23,8 @@ const find = async ({ sort, order, limit, ...params }) => {
 const listAll = async ({ userid, sort, order, limit }) => {
     const accounts = await Account.find({ userId: userid })
         .sort(search.sortBy(order, sort))
-        .limit(Number(limit));
+        .limit(Number(limit))
+        .lean();
 
     return {
         count: accounts.length,

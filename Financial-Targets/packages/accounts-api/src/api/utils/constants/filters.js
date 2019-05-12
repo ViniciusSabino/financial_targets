@@ -1,4 +1,4 @@
-import { applicationEnum } from "../../utils/enumerators";
+import { applicationEnum } from "../enumerators";
 
 const { typeFilters } = applicationEnum;
 

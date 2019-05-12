@@ -1,12 +1,8 @@
 import moment from "moment";
 
-import {
-    getDaysInCurrentMonth,
-    getDateDifference,
-    getCurrentDate,
-} from "../../../src/api/utils/functions/dates";
+import { getDaysInCurrentMonth, getDateDifference, getCurrentDate } from "./dates";
 
-import { applicationEnum } from "../../../src/api/utils/enumerators/index";
+import { applicationEnum } from "../enumerators/index";
 
 const minorDate = moment(new Date("2019-04-07T00:00:00.000"));
 

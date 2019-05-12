@@ -1,10 +1,10 @@
 import moment from "moment";
 
-import { accountEnum } from "../../../src/api/utils/enumerators";
-import accountFunctions from "../../../src/api/services/account-functions";
-import { getDaysInCurrentMonth, createMomentDate } from "../../../src/api/utils/functions/dates";
+import { accountEnum } from "../../utils/enumerators";
+import accountFunctions from "./account-functions";
+import { getDaysInCurrentMonth, createMomentDate } from "../../utils/functions/dates";
 
-jest.mock("../../../src/api/utils/functions/dates", () => ({
+jest.mock("../../utils/functions/dates", () => ({
     getDaysInCurrentMonth: jest.fn(),
     createMomentDate: jest.fn(),
 }));

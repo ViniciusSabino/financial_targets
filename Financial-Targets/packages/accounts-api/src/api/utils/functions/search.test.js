@@ -1,5 +1,5 @@
-import search from "../../../src/api/utils/functions/search";
-import accountFilters from "../../../src/api/services/search/filters";
+import search from "./search";
+import accountFilters from "../../services/search/filters";
 
 describe("Utils", () => {
     describe("Search", () => {

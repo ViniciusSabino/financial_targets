@@ -1,9 +1,9 @@
 import moment from "moment";
 
-import context from "../../../src/api/__mocks__/context";
-import validator from "../../../src/api/validators/accounts";
-import { account, accountEmpty } from "../../../src/api/utils/test/get-account";
-import { getCurrentDate } from "../../../src/api/utils/functions/dates";
+import context from "../__mocks__/context";
+import validator from "./accounts";
+import { account, accountEmpty } from "../utils/test/get-account";
+import { getCurrentDate } from "../utils/functions/dates";
 
 jest.mock("../../../src/api/utils/functions/dates", () => ({
     getCurrentDate: jest.fn(),
@@ -118,7 +118,7 @@ describe("Validator", () => {
         });
     });
 
-    describe("GET -> /accounts, Filter and List Accounts", () => {
+    describe("GET -> /accounts, Filter", () => {
         it("should have the user id before listing accounts", async () => {
             const ctx = {
                 ...context,
@@ -183,8 +183,6 @@ describe("Validator", () => {
         });
 
         it("should return a bad request if the account date is changed to less than current date", async () => {
-            // dueDate Mock = 2019-05-06T16:54:37-02:00
-
             const ctx = {
                 ...context,
                 request: {
@@ -209,13 +207,11 @@ describe("Validator", () => {
             expect(ctx.response.message.errors.length).toEqual(1);
         });
 
-        it("should update status to pendind in edit", async () => {
-            // dueDate Mock = 2019-05-06T16:54:37-02:00
-
+        it("should update status to 'PENDING' in edit", async () => {
             const ctx = {
                 ...context,
                 request: {
-                    body: { ...account, _id: 1, amountPaid: 399, value: 400 },
+                    body: { ...account, _id: 1, amountPaid: 300, value: 400 },
                 },
             };
 
@@ -231,7 +227,7 @@ describe("Validator", () => {
             expect(ctx.request.body.status).toEqual("PENDING");
         });
 
-        it("should update status to expired in edit", async () => {
+        it("should update status to 'EXPIRED' in edit", async () => {
             const ctx = {
                 ...context,
                 request: {
