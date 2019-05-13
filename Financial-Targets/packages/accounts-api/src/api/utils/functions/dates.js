@@ -41,10 +41,16 @@ const remainingPeriod = (date) => {
     };
 };
 
+const getCurrentMonth = (date = moment().format()) => moment(date).month() + 1;
+
+const getCurrentYear = (date = moment().format()) => moment(date).year();
+
 export {
     getCurrentDate,
     getDaysInCurrentMonth,
     createMomentDate,
     getDateDifference,
     remainingPeriod,
+    getCurrentMonth,
+    getCurrentYear,
 };

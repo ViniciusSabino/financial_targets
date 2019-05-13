@@ -1,7 +1,7 @@
 import moment from "moment";
 
 import { accountEnum } from "../../utils/enumerators";
-import accountFunctions from "./account-functions";
+import { setAccountDate } from "./account-functions";
 import { getDaysInCurrentMonth, createMomentDate } from "../../utils/functions/dates";
 
 jest.mock("../../utils/functions/dates", () => ({
@@ -18,16 +18,16 @@ describe("Account Functions", () => {
     it("should calculate the new payment date based on the type (monthly) and the amount date", () => {
         const { monthly } = accountEnum.type;
 
-        const ajustedDate = accountFunctions.setAccountDate(amountPaid(), monthly);
+        const ajustedDate = setAccountDate(amountPaid(), monthly);
 
-        expect(ajustedDate.format()).toEqual("2019-05-07T03:24:00-03:00");
+        expect(ajustedDate).toEqual("2019-05-07T03:24:00-03:00");
     });
 
     it("should calculate the new payment date based on the type (yearly) and the amount date", () => {
         const { yearly } = accountEnum.type;
 
-        const ajustedDate = accountFunctions.setAccountDate(amountPaid(), yearly);
+        const ajustedDate = setAccountDate(amountPaid(), yearly);
 
-        expect(ajustedDate.format()).toEqual("2020-04-07T03:24:00-03:00");
+        expect(ajustedDate).toEqual("2020-04-07T03:24:00-03:00");
     });
 });

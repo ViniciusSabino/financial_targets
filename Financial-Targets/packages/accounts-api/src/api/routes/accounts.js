@@ -1,7 +1,7 @@
 import Router from "koa-joi-router";
 
-import accounts from "../controllers/accounts";
-import validator from "../validators/accounts";
+import accounts from "../controllers/accounts-controller";
+import validator from "../validators/accounts-validator";
 
 const router = Router();
 
@@ -31,7 +31,7 @@ router.route([
     {
         method: "DELETE",
         path: "/",
-        handler: [accounts.deleteAccount],
+        handler: [accounts.deleteAccounts],
     },
     {
         method: "PATCH",

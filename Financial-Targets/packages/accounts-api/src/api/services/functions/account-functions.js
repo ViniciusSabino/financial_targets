@@ -11,10 +11,8 @@ const setAccountDate = (dueDate, type) => {
     const dueDateMoment = createMomentDate(dueDate);
 
     return type === accountEnum.type.monthly
-        ? dueDateMoment.add(days, differences.days)
-        : dueDateMoment.add(1, differences.years);
+        ? dueDateMoment.add(days, differences.days).format()
+        : dueDateMoment.add(1, differences.years).format();
 };
 
-export default {
-    setAccountDate,
-};
+export { setAccountDate };

@@ -1,5 +1,5 @@
 import search from "./search";
-import accountFilters from "../../services/search/filters";
+import accountFilters from "../constants/filters";
 
 describe("Utils", () => {
     describe("Search", () => {

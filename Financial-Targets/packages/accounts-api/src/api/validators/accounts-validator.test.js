@@ -1,8 +1,8 @@
 import moment from "moment";
 
 import context from "../__mocks__/context";
-import validator from "./accounts";
-import { account, accountEmpty } from "../utils/test/get-account";
+import validator from "./accounts-validator";
+import { account, accountEmpty } from "../utils/__mocks__/get-account";
 import { getCurrentDate } from "../utils/functions/dates";
 
 jest.mock("../../../src/api/utils/functions/dates", () => ({

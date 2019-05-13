@@ -1,10 +1,13 @@
+import moment from "moment";
+
 import Account from "../database/mongodb/models/account";
 import dictionary from "../utils/dictionaries/accounts";
-import accountsFunctions from "./functions/account-functions";
+import { setAccountDate } from "./functions/account-functions";
 import search from "../utils/functions/search";
 import AccountAllfilters from "../utils/constants/filters";
-import application from "../utils/functions/application";
-
+import { buildTheResult } from "../utils/functions/application";
+import { findAccounts } from "../database/mongodb/queries";
+import { getCurrentDate, getCurrentMonth, getCurrentYear } from "../utils/functions/dates";
 import { accountEnum } from "../utils/enumerators";
 
 const create = async (account) => {
@@ -13,22 +16,90 @@ const create = async (account) => {
 
 const find = async ({ sort, order, limit, ...params }) => {
     const accountFilter = search.createFilterConditions(params, AccountAllfilters);
-    const accounts = await Account.find(accountFilter)
-        .sort(search.sortBy(order, sort))
-        .limit(Number(limit));
 
-    return application.result(accounts);
+    const accounts = await findAccounts({ filter: accountFilter, sort, order, limit });
+
+    return buildTheResult(accounts);
 };
 
 const listAll = async ({ userid, sort, order, limit }) => {
-    const accounts = await Account.find({ userId: userid })
-        .sort(search.sortBy(order, sort))
-        .limit(Number(limit))
-        .lean();
+    const filter = { userId: userid };
+
+    const accounts = await findAccounts({ filter, sort, order, limit });
+
+    const [currentDate, currentMonth, currentYear] = [
+        getCurrentDate(),
+        getCurrentMonth(),
+        getCurrentYear(),
+    ];
+
+    const recalculatedAccounts = accounts.map((account) => {
+        const dueDateAccount = moment(account.dueDate).format();
+
+        if (dueDateAccount < currentDate) {
+            const [accountMonth, accountYear] = [
+                moment(dueDateAccount).month() + 1,
+                moment(dueDateAccount).month() + 1,
+            ];
+            switch (account.type) {
+                case accountEnum.type.monthly: {
+                    if (accountMonth === currentMonth)
+                        return {
+                            ...account,
+                            status:
+                                account.status === accountEnum.status.pending
+                                    ? accountEnum.status.expired
+                                    : account.status,
+                        };
+
+                    const adjustedMonthAccount = setAccountDate(dueDateAccount, account.type);
+
+                    if (adjustedMonthAccount < currentDate)
+                        return {
+                            ...account,
+                            status: accountEnum.status.expired,
+                            dueDate: adjustedMonthAccount,
+                            amountPaid: 0,
+                        };
+
+                    return {
+                        ...account,
+                        status: accountEnum.status.pending,
+                        amountPaid: 0,
+                        dueDate: adjustedMonthAccount,
+                    };
+                }
+
+                case accountEnum.type.yearly: {
+                    if (accountYear === currentYear) return account;
+
+                    const adjustedYearAccount = setAccountDate(dueDateAccount, account.type);
+
+                    if (adjustedYearAccount < currentDate)
+                        return {
+                            ...account,
+                            status: accountEnum.status.expired,
+                            dueDate: adjustedYearAccount,
+                            amountPaid: 0,
+                        };
+
+                    return {
+                        ...account,
+                        status: accountEnum.status.pending,
+                        amountPaid: 0,
+                        dueDate: adjustedYearAccount,
+                    };
+                }
+
+                default:
+                    break;
+            }
+        } else return account;
+    });
 
     return {
         count: accounts.length,
-        data: accounts,
+        data: recalculatedAccounts,
     };
 };
 
@@ -53,7 +124,7 @@ const makePayment = async (accountsIds) => {
 
         const { value, type, _id, dueDate } = account;
 
-        const ajustedDate = accountsFunctions.setAccountDate(dueDate, type);
+        const ajustedDate = setAccountDate(dueDate, type);
 
         return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
     });
@@ -78,13 +149,13 @@ const makePartialPayment = async ({ accountId, amountPaid }) => {
         else ({ errors: [] });
     };
 
-    if (validAccount.errors.length) return result;
+    if (validAccount.errors.length) return validAccount;
 
     const changedData = do {
         if (account.value === amountPaid)
             ({
                 status: accountEnum.status.done,
-                dueDate: accountsFunctions.setAccountDate(account.dueDate, account.type),
+                dueDate: setAccountDate(account.dueDate, account.type),
             });
         else ({ status: account.status, dueDate: account.dueDate });
     };
@@ -101,7 +172,7 @@ const makePartialPayment = async ({ accountId, amountPaid }) => {
 const sendNext = async (accountId) => {
     const { type, dueDate } = await Account.findById(accountId);
 
-    const adjustedDate = accountsFunctions.setAccountDate(dueDate, type);
+    const adjustedDate = setAccountDate(dueDate, type);
 
     const accountUpdated = await Account.findOneAndUpdate(
         { _id: accountId },
