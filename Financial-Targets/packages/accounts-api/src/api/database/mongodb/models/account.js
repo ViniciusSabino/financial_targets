@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const AccountSchema = mongoose.Schema;
 
@@ -22,4 +22,4 @@ const accountSchema = new AccountSchema(
     }
 );
 
-export default mongoose.model("accounts", accountSchema);
+export default mongoose.model('accounts', accountSchema);

@@ -1,22 +1,22 @@
-import moment from "moment";
+import moment from 'moment';
 
-import context from "../__mocks__/context";
-import validator from "./accounts-validator";
-import { account, accountEmpty } from "../utils/__mocks__/get-account";
-import { getCurrentDate } from "../utils/functions/dates";
+import context from '../__mocks__/context';
+import validator from './accounts-validator';
+import { account, accountEmpty } from '../utils/__mocks__/get-account';
+import { getCurrentDate } from '../utils/functions/dates';
 
-jest.mock("../../../src/api/utils/functions/dates", () => ({
+jest.mock('../../../src/api/utils/functions/dates', () => ({
     getCurrentDate: jest.fn(),
 }));
 
 beforeEach(() => {
     context.response.status = 200;
-    context.response.message = "Ok";
+    context.response.message = 'Ok';
 });
 
-describe("Validator", () => {
-    describe("POST -> /account, Create Account", () => {
-        it("should return status 400 and an array of errors when an invalid account is registered", async () => {
+describe('Validator', () => {
+    describe('POST -> /account, Create Account', () => {
+        it('should return status 400 and an array of errors when an invalid account is registered', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -40,7 +40,7 @@ describe("Validator", () => {
             expect(ctx.response.message.errors.length).toEqual(NUMBER_OF_FIELDS);
         });
 
-        it("should return an account without a request body", async () => {
+        it('should return an account without a request body', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -56,11 +56,11 @@ describe("Validator", () => {
             const NUMBER_OF_FIELDS = 11; // validated account
 
             expect(ctx.response.status).toEqual(OK_STATUS_CODE);
-            expect(ctx.state).toHaveProperty("name", "Spotify");
+            expect(ctx.state).toHaveProperty('name', 'Spotify');
             expect(Object.keys(ctx.state).length).toEqual(NUMBER_OF_FIELDS);
         });
 
-        it("should return the 'DONE' status when the amount paid is equal to the value of the account", async () => {
+        it('should return the "DONE" status when the amount paid is equal to the value of the account', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -76,10 +76,10 @@ describe("Validator", () => {
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.state.status).toEqual("DONE");
+            expect(ctx.state.status).toEqual('DONE');
         });
 
-        it("should return 'EXPIRED' status when the payment date is less than the current date", async () => {
+        it('should return "EXPIRED" status when the payment date is less than the current date', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -90,15 +90,15 @@ describe("Validator", () => {
             const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
-                moment(new Date("2019-05-09T03:24:00.000")).format()
+                moment(new Date('2019-05-09T03:24:00.000')).format()
             );
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.state.status).toEqual("EXPIRED");
+            expect(ctx.state.status).toEqual('EXPIRED');
         });
 
-        it("should return 'PENDING' status when registering a monthly fee and it is not yet paid", async () => {
+        it('should return "PENDING" status when registering a monthly fee and it is not yet paid', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -109,17 +109,17 @@ describe("Validator", () => {
             const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
-                moment(new Date("2019-05-01T03:24:00.000")).format()
+                moment(new Date('2019-05-01T03:24:00.000')).format()
             );
 
             await validator.validCreate(ctx, next);
 
-            expect(ctx.state.status).toEqual("PENDING");
+            expect(ctx.state.status).toEqual('PENDING');
         });
     });
 
-    describe("GET -> /accounts, Filter", () => {
-        it("should have the user id before listing accounts", async () => {
+    describe('GET -> /accounts, Filter', () => {
+        it('should have the user id before listing accounts', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -136,7 +136,7 @@ describe("Validator", () => {
             expect(ctx.request.header.userid).toEqual(1);
         });
 
-        it("should return a bad request otherwise have the id of the user before listing", async () => {
+        it('should return a bad request otherwise have the id of the user before listing', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -160,8 +160,8 @@ describe("Validator", () => {
         });
     });
 
-    describe("PUT -> /accounts", () => {
-        it("should return status 400 and an array of errors when an invalid account is edit", async () => {
+    describe('PUT -> /accounts', () => {
+        it('should return status 400 and an array of errors when an invalid account is edit', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -182,7 +182,7 @@ describe("Validator", () => {
             expect(ctx.response.message.errors.length).toEqual(7);
         });
 
-        it("should return a bad request if the account date is changed to less than current date", async () => {
+        it('should return a bad request if the account date is changed to less than current date', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -193,7 +193,7 @@ describe("Validator", () => {
             const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
-                moment(new Date("2019-05-09T03:24:00.000")).format()
+                moment(new Date('2019-05-09T03:24:00.000')).format()
             );
 
             ctx.badRequest = (payload) => {
@@ -207,7 +207,7 @@ describe("Validator", () => {
             expect(ctx.response.message.errors.length).toEqual(1);
         });
 
-        it("should update status to 'PENDING' in edit", async () => {
+        it('should update status to "PENDING" in edit', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -218,16 +218,16 @@ describe("Validator", () => {
             const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
-                moment(new Date("2019-05-01T03:24:00.000")).format()
+                moment(new Date('2019-05-01T03:24:00.000')).format()
             );
 
             await validator.validEdit(ctx, next);
 
             // CONDITION 1: dueDate > currentDate AND amountPaid < value
-            expect(ctx.request.body.status).toEqual("PENDING");
+            expect(ctx.request.body.status).toEqual('PENDING');
         });
 
-        it("should update status to 'EXPIRED' in edit", async () => {
+        it('should update status to "EXPIRED" in edit', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -238,18 +238,18 @@ describe("Validator", () => {
             const next = jest.fn(() => ctx);
 
             getCurrentDate.mockImplementation(() =>
-                moment(new Date("2019-05-10T03:24:00.000")).format()
+                moment(new Date('2019-05-10T03:24:00.000')).format()
             );
 
             await validator.validEdit(ctx, next);
 
             // CONDITION 2: dueDate < currentDate AND amountPaid < value
-            expect(ctx.request.body.status).toEqual("EXPIRED");
+            expect(ctx.request.body.status).toEqual('EXPIRED');
         });
     });
 
-    describe("PATCH -> /accounts/makepartialpayment", () => {
-        it("should have the acount id before make partial payments", async () => {
+    describe('PATCH -> /accounts/makepartialpayment', () => {
+        it('should have the acount id before make partial payments', async () => {
             const ctx = {
                 ...context,
                 request: {
@@ -266,7 +266,7 @@ describe("Validator", () => {
             expect(ctx.request.body.accountId).toEqual(1);
         });
 
-        it("should return a bad request otherwise have the id of the account before make partial payments", async () => {
+        it('should return a bad request otherwise have the id of the account before make partial payments', async () => {
             const ctx = {
                 ...context,
                 request: {

@@ -1,4 +1,4 @@
-import { applicationEnum } from "../enumerators";
+import { applicationEnum } from '../enumerators';
 
 const createFilterConditions = (params, allFilters) => {
     const keys = Object.keys(params);
@@ -12,7 +12,7 @@ const createFilterConditions = (params, allFilters) => {
                     ...acc,
                     [filter.nameFilter]: {
                         $regex: values[index],
-                        $options: "i",
+                        $options: 'i',
                     },
                 };
             case applicationEnum.typeFilters.select:
@@ -46,7 +46,7 @@ const createFilterConditions = (params, allFilters) => {
                 return {
                     ...acc,
                     [filter.nameFilter]: {
-                        $in: values[index].split(","),
+                        $in: values[index].split(','),
                     },
                 };
             default:
@@ -59,7 +59,7 @@ const createFilterConditions = (params, allFilters) => {
 
 const sortBy = (order, sort) => {
     const orderObject = {};
-    orderObject[sort] = order === "desc" ? -1 : 1;
+    orderObject[sort] = order === 'desc' ? -1 : 1;
     return orderObject;
 };
 

@@ -1,6 +1,6 @@
-import { getCurrentDate } from "../utils/functions/dates";
-import dictionary from "../utils/dictionaries/accounts";
-import { accountEnum } from "../utils/enumerators";
+import { getCurrentDate } from '../utils/functions/dates';
+import dictionary from '../utils/dictionaries/accounts';
+import { accountEnum } from '../utils/enumerators';
 
 const { status: ACCOUNT_STATUS } = accountEnum;
 

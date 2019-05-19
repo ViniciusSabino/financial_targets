@@ -1,51 +1,51 @@
-import Router from "koa-joi-router";
+import Router from 'koa-joi-router';
 
-import accounts from "../controllers/accounts-controller";
-import validator from "../validators/accounts-validator";
+import accounts from '../controllers/accounts-controller';
+import validator from '../validators/accounts-validator';
 
 const router = Router();
 
-router.prefix("/accounts");
+router.prefix('/accounts');
 
 router.route([
     {
-        method: "POST",
-        path: "/",
+        method: 'POST',
+        path: '/',
         handler: [validator.validCreate, accounts.create],
     },
     {
-        method: "GET",
-        path: "/",
+        method: 'GET',
+        path: '/',
         handler: [validator.validList, accounts.find],
     },
     {
-        method: "GET",
-        path: "/all",
+        method: 'GET',
+        path: '/all',
         handler: [validator.validList, accounts.listAll],
     },
     {
-        method: "PUT",
-        path: "/",
+        method: 'PUT',
+        path: '/',
         handler: [validator.validEdit, accounts.edit],
     },
     {
-        method: "DELETE",
-        path: "/",
+        method: 'DELETE',
+        path: '/',
         handler: [accounts.deleteAccounts],
     },
     {
-        method: "PATCH",
-        path: "/",
+        method: 'PATCH',
+        path: '/',
         handler: [accounts.makePayment],
     },
     {
-        method: "PATCH",
-        path: "/makepartialpayment",
+        method: 'PATCH',
+        path: '/makepartialpayment',
         handler: [validator.validMakePartialPayment, accounts.makePartialPayment],
     },
     {
-        method: "PATCH",
-        path: "/sendnext",
+        method: 'PATCH',
+        path: '/sendnext',
         handler: [accounts.sendNext],
     },
 ]);

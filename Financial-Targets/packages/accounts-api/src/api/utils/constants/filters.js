@@ -1,46 +1,46 @@
-import { applicationEnum } from "../enumerators";
+import { applicationEnum } from '../enumerators';
 
 const { typeFilters } = applicationEnum;
 
 const accountFilters = [
     {
-        parameter: "name",
-        nameFilter: "name",
+        parameter: 'name',
+        nameFilter: 'name',
         type: typeFilters.inputText,
     },
     {
-        parameter: "duedatestart",
-        nameFilter: "dueDate",
+        parameter: 'duedatestart',
+        nameFilter: 'dueDate',
         type: typeFilters.dateStart,
     },
     {
-        parameter: "duedateend",
-        nameFilter: "dueDate",
+        parameter: 'duedateend',
+        nameFilter: 'dueDate',
         type: typeFilters.dateEnd,
     },
     {
-        parameter: "status",
-        nameFilter: "status",
+        parameter: 'status',
+        nameFilter: 'status',
         type: typeFilters.select,
     },
     {
-        parameter: "type",
-        nameFilter: "type",
+        parameter: 'type',
+        nameFilter: 'type',
         type: typeFilters.select,
     },
     {
-        parameter: "paymentform",
-        nameFilter: "paymentForm",
+        parameter: 'paymentform',
+        nameFilter: 'paymentForm',
         type: typeFilters.select,
     },
     {
-        parameter: "isrepeat",
-        nameFilter: "isRepeat",
+        parameter: 'isrepeat',
+        nameFilter: 'isRepeat',
         type: typeFilters.selectBool,
     },
     {
-        parameter: "tags",
-        nameFilter: "tags",
+        parameter: 'tags',
+        nameFilter: 'tags',
         type: typeFilters.selectMultiple,
     },
 ];

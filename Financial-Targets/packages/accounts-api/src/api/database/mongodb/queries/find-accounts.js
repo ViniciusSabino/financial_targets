@@ -1,5 +1,5 @@
-import Account from "../models/account";
-import search from "../../../utils/functions/search";
+import Account from '../models/account';
+import search from '../../../utils/functions/search';
 
 const findAccounts = async ({ filter, sort, order, limit }) => {
     const accounts = await Account.find(filter)

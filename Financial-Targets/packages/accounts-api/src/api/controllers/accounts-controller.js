@@ -1,8 +1,10 @@
-import service from "../services/account-service";
+import service from '../services/account-service';
 
 const create = async (context) => {
     const { body: account } = context.request;
+
     await service.create(account);
+
     return context.created();
 };
 

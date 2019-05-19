@@ -1,5 +1,6 @@
-import moment from "moment";
-import { applicationEnum } from "../enumerators";
+import moment from 'moment';
+
+import { applicationEnum } from '../enumerators';
 
 const { differences } = applicationEnum.date;
 
@@ -13,16 +14,22 @@ const getDateDifference = (differenceType, largeDate, minorDate) => {
     switch (differenceType) {
         case differences.minutes:
             return largeDate.diff(minorDate, differences.minutes);
+
         case differences.hours:
             return largeDate.diff(minorDate, differences.hours);
+
         case differences.days:
             return largeDate.diff(minorDate, differences.days);
+
         case differences.weeks:
             return largeDate.diff(minorDate, differences.weeks);
+
         case differences.months:
             return largeDate.diff(minorDate, differences.months);
+
         case differences.years:
             return largeDate.diff(minorDate, differences.years, false);
+
         default:
             return largeDate.diff(minorDate, differences.years);
     }
@@ -30,6 +37,7 @@ const getDateDifference = (differenceType, largeDate, minorDate) => {
 
 const remainingPeriod = (date) => {
     const currentDate = getCurrentDate();
+
     return {
         inSeconds: date.diff(currentDate),
         inMinutes: date.diff(currentDate, differences.minutes),

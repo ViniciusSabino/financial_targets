@@ -1,6 +1,6 @@
-import { getDaysInCurrentMonth, createMomentDate } from "../../utils/functions/dates";
+import { getDaysInCurrentMonth, createMomentDate } from '../../utils/functions/dates';
 
-import { accountEnum, applicationEnum } from "../../utils/enumerators";
+import { accountEnum, applicationEnum } from '../../utils/enumerators';
 
 const {
     date: { differences },
@@ -8,6 +8,7 @@ const {
 
 const setAccountDate = (dueDate, type) => {
     const days = getDaysInCurrentMonth();
+
     const dueDateMoment = createMomentDate(dueDate);
 
     return type === accountEnum.type.monthly

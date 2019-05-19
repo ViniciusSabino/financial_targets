@@ -1,8 +1,8 @@
-import config from "../config";
+import config from '../config';
 
 const home = (context) =>
     context.ok({
-        title: "(Financal Targets) - Accounts API",
+        title: '(Financal Targets) - Accounts API',
         environment: config.environment,
         port: config.port,
     });

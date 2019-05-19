@@ -1,24 +1,24 @@
 const account = {
-    name: "Spotify",
-    description: "Música",
+    name: 'Spotify',
+    description: 'Música',
     value: 16.9,
-    dueDate: "2019-05-06T16:54:37-02:00",
+    dueDate: '2019-05-06T16:54:37-02:00',
     amountPaid: 0.0,
-    type: "MONTHLY",
-    paymentForm: "CREDIT",
+    type: 'MONTHLY',
+    paymentForm: 'CREDIT',
     isRepeat: true,
     userId: 1,
-    tags: ["Música"],
+    tags: ['Música'],
 };
 
 const accountEmpty = {
-    name: "",
-    description: "",
+    name: '',
+    description: '',
     value: 0,
-    dueDate: "",
+    dueDate: '',
     amountPaid: 0,
-    type: "",
-    paymentForm: "",
+    type: '',
+    paymentForm: '',
     userId: 0,
 };
 

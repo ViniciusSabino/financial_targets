@@ -2,7 +2,7 @@ env:
     node: true
     es6: true
     jest: true
-extends: [airbnb-base, "plugin:prettier/recommended", "plugin:jest/recommended"]
+extends: [airbnb-base, 'plugin:prettier/recommended', 'plugin:jest/recommended']
 plugins: [import, babel, jest]
 parser: babel-eslint
 parserOptions:
@@ -44,7 +44,7 @@ rules:
     no-new-object: 0
     prefer-promise-reject-errors: 2
     prefer-rest-params: 2
-    quotes: [2, double]
+    quotes: [2, single]
     require-await: 2
     semi: [2, always]
     linebreak-style: 0

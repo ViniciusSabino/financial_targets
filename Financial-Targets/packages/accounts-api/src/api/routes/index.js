@@ -1,6 +1,6 @@
-import compose from "koa-compose";
+import compose from 'koa-compose';
 
-import homeRouter from "./home";
-import accountsRouter from "./accounts";
+import homeRouter from './home-routes';
+import accountsRouter from './accounts-routes';
 
 export default compose([homeRouter.middleware(), accountsRouter.middleware()]);

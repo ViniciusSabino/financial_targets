@@ -1,17 +1,22 @@
-import moment from "moment";
+import moment from 'moment';
 
-import Account from "../database/mongodb/models/account";
-import dictionary from "../utils/dictionaries/accounts";
-import { setAccountDate } from "./functions/account-functions";
-import search from "../utils/functions/search";
-import AccountAllfilters from "../utils/constants/filters";
-import { buildTheResult } from "../utils/functions/application";
-import { findAccounts } from "../database/mongodb/queries";
-import { getCurrentDate, getCurrentMonth, getCurrentYear } from "../utils/functions/dates";
-import { accountEnum } from "../utils/enumerators";
+import dictionary from '../utils/dictionaries/accounts';
+import search from '../utils/functions/search';
+import AccountAllfilters from '../utils/constants/filters';
+import { setAccountDate } from './functions/account-functions';
+import { buildTheResult } from '../utils/functions/application';
+import { getCurrentDate, getCurrentMonth, getCurrentYear } from '../utils/functions/dates';
+import { accountEnum } from '../utils/enumerators';
+import {
+    findAccounts,
+    createAccount,
+    findByIdAndUpdate,
+    findAccountById,
+    deleteAccounts,
+} from '../database/mongodb/queries';
 
 const create = async (account) => {
-    await new Account(account).save();
+    await createAccount(account);
 };
 
 const find = async ({ sort, order, limit, ...params }) => {
@@ -92,7 +97,7 @@ const listAll = async ({ userid, sort, order, limit }) => {
                 }
 
                 default:
-                    break;
+                    return null;
             }
         } else return account;
     });
@@ -104,23 +109,22 @@ const listAll = async ({ userid, sort, order, limit }) => {
 };
 
 const edit = async ({ _id, ...account }) => {
-    const accountUpdated = await Account.findByIdAndUpdate({ _id }, account, {
-        new: true,
-    }).lean();
+    const accountUpdated = await findByIdAndUpdate(_id, account);
 
     return accountUpdated;
 };
 
 const deleteAccount = async (accountsIds) => {
-    await Account.deleteMany({ _id: accountsIds });
+    await deleteAccounts(accountsIds);
 };
 
 const makePayment = async (accountsIds) => {
-    const accounts = await Account.find({ _id: accountsIds });
+    const accounts = await findAccounts({ filter: { _id: accountsIds } });
 
     const adjustedAccounts = accounts.map((account) => {
-        if (account.status === accountEnum.status.done)
+        if (account.status === accountEnum.status.done) {
             throw new Error(dictionary.paymentDone.message);
+        }
 
         const { value, type, _id, dueDate } = account;
 
@@ -131,7 +135,7 @@ const makePayment = async (accountsIds) => {
 
     return (
         adjustedAccounts.map(({ _id, amountPaid, dueDate }) =>
-            Account.findByIdAndUpdate(_id, {
+            findByIdAndUpdate(_id, {
                 amountPaid,
                 dueDate,
                 status: accountEnum.status.done,
@@ -141,44 +145,37 @@ const makePayment = async (accountsIds) => {
 };
 
 const makePartialPayment = async ({ accountId, amountPaid }) => {
-    const account = await Account.findById(accountId);
+    const account = await findAccountById(accountId);
 
-    const validAccount = do {
-        if (amountPaid > account.value) ({ errors: [dictionary.account.amountPaidIsInvalid] });
-        else if (account.status === accountEnum.status.done) ({ errors: [dictionary.paymentDone] });
-        else ({ errors: [] });
-    };
+    if (amountPaid > account.value) return { errors: [dictionary.amountPaidIsInvalid] };
 
-    if (validAccount.errors.length) return validAccount;
+    if (account.status === accountEnum.status.done) return { errors: [dictionary.paymentDone] };
 
-    const changedData = do {
-        if (account.value === amountPaid)
-            ({
+    const changedData = (() => {
+        if (account.value === amountPaid) {
+            return {
                 status: accountEnum.status.done,
                 dueDate: setAccountDate(account.dueDate, account.type),
-            });
-        else ({ status: account.status, dueDate: account.dueDate });
-    };
+            };
+        }
+        return { status: account.status, dueDate: account.dueDate };
+    })();
 
-    const accountUpdated = await Account.findOneAndUpdate(
-        { _id: accountId },
-        { ...changedData, amountPaid },
-        { new: true }
-    );
+    const accountUpdated = await findByIdAndUpdate(accountId, { ...changedData, amountPaid });
 
-    return { ...validAccount, data: accountUpdated };
+    return { errors: [], data: accountUpdated };
 };
 
 const sendNext = async (accountId) => {
-    const { type, dueDate } = await Account.findById(accountId);
+    const { type, dueDate } = await findAccountById(accountId);
 
     const adjustedDate = setAccountDate(dueDate, type);
 
-    const accountUpdated = await Account.findOneAndUpdate(
-        { _id: accountId },
-        { dueDate: adjustedDate, status: accountEnum.status.pending },
-        { new: true }
-    );
+    const accountUpdated = await findByIdAndUpdate(accountId, {
+        dueDate: adjustedDate,
+        status: accountEnum.status.pending,
+    });
+
     return accountUpdated;
 };
 
