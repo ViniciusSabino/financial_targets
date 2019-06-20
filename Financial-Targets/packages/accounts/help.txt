@@ -1,0 +1,20 @@
+---- ACCOUNTS
+
+FORMAS DE PAGAMENTO 
+
+    1 - 'CREDIT' - Crédito
+    2 - 'DEBIT_CARD' - Cartão de Débito
+    3 - 'TICKET' - Boleto Bancário
+  }
+
+TIPOS DE CONTA - type
+
+    1 - 'MONTHLY' - Mensal
+    2 - 'YEARLY' - Anual
+
+STATUS DO PAGAMENTO
+
+    1 - 'EXPIRED' - Expirado
+    2 - 'PENDING' - Pendente
+    3 - 'DONE' - Pagamento Realizado
+
