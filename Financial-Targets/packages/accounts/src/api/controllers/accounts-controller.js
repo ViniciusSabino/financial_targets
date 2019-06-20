@@ -1,9 +1,12 @@
 import service from '../services/account-service';
+import * as adapters from '../services/adapters';
 
 const create = async (context) => {
     const { body: account } = context.request;
 
-    await service.create(account);
+    const adaptedAccount = adapters.createAccountAdapter(account);
+
+    await service.create(adaptedAccount);
 
     return context.created();
 };

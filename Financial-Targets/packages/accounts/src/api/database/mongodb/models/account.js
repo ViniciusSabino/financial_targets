@@ -4,6 +4,7 @@ const AccountSchema = mongoose.Schema;
 
 const accountSchema = new AccountSchema(
     {
+        userId: { type: Number, required: true },
         name: { type: String, required: true },
         description: { type: String },
         value: { type: Number, required: true },
@@ -13,7 +14,6 @@ const accountSchema = new AccountSchema(
         type: { type: String, required: true },
         paymentForm: { type: String, required: true },
         isRepeat: { type: Boolean, default: false },
-        userId: { type: Number, required: true },
         tags: [{ type: String, required: true }],
     },
     {

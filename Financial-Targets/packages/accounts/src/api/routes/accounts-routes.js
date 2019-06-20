@@ -1,6 +1,6 @@
 import Router from 'koa-joi-router';
 
-import accounts from '../controllers/accounts-controller';
+import controller from '../controllers/accounts-controller';
 import * as validator from '../validators';
 
 const router = Router();
@@ -11,42 +11,42 @@ router.route([
     {
         method: 'POST',
         path: '/',
-        handler: [validator.validCreate, accounts.create],
+        handler: [validator.validCreate, controller.create],
     },
     {
         method: 'GET',
         path: '/',
-        handler: [accounts.find],
+        handler: [controller.find],
     },
     {
         method: 'GET',
         path: '/all',
-        handler: [accounts.listAll],
+        handler: [controller.listAll],
     },
     {
         method: 'PUT',
         path: '/',
-        handler: [accounts.edit],
+        handler: [controller.edit],
     },
     {
         method: 'DELETE',
         path: '/',
-        handler: [accounts.deleteAccounts],
+        handler: [controller.deleteAccounts],
     },
     {
         method: 'PATCH',
         path: '/',
-        handler: [accounts.makePayment],
+        handler: [controller.makePayment],
     },
     {
         method: 'PATCH',
         path: '/makepartialpayment',
-        handler: [accounts.makePartialPayment],
+        handler: [controller.makePartialPayment],
     },
     {
         method: 'PATCH',
         path: '/sendnext',
-        handler: [accounts.sendNext],
+        handler: [controller.sendNext],
     },
 ]);
 

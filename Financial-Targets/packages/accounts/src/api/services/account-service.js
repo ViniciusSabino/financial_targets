@@ -7,16 +7,10 @@ import { setAccountDate } from './functions/account-functions';
 import { buildTheResult } from '../utils/functions/application';
 import { getCurrentDate, getCurrentMonth, getCurrentYear } from '../utils/functions/dates';
 import { accountEnum } from '../utils/enumerators';
-import {
-    findAccounts,
-    createAccount,
-    findByIdAndUpdate,
-    findAccountById,
-    deleteAccounts,
-} from '../database/mongodb/queries';
+import * as queries from '../database/mongodb/queries';
 
 const create = async (account) => {
-    await createAccount(account);
+    await queries.createAccount(account);
 };
 
 const find = async ({ sort, order, limit, ...params }) => {
