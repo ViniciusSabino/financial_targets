@@ -1,106 +1,12 @@
 import moment from 'moment';
 
-import dictionary from '../utils/dictionaries/accountDictionary';
+import dictionary from '../utils/dictionaries/account-dictionary';
 import search from '../utils/functions/search';
 import AccountAllfilters from '../utils/constants/filters';
 import { setAccountDate } from './functions/account-functions';
 import { buildTheResult } from '../utils/functions/application';
 import { getCurrentDate, getCurrentMonth, getCurrentYear } from '../utils/functions/dates';
 import { accountEnum } from '../utils/enumerators';
-import * as queries from '../database/mongodb/queries';
-
-const create = async (account) => {
-    await queries.createAccount(account);
-};
-
-const find = async ({ sort, order, limit, ...params }) => {
-    const accountFilter = search.createFilterConditions(params, AccountAllfilters);
-
-    const accounts = await findAccounts({ filter: accountFilter, sort, order, limit });
-
-    return buildTheResult(accounts);
-};
-
-const listAll = async ({ userid, sort, order, limit }) => {
-    const filter = { userId: userid };
-
-    const accounts = await findAccounts({ filter, sort, order, limit });
-
-    const [currentDate, currentMonth, currentYear] = [
-        getCurrentDate(),
-        getCurrentMonth(),
-        getCurrentYear(),
-    ];
-
-    const recalculatedAccounts = accounts.map((account) => {
-        const dueDateAccount = moment(account.dueDate).format();
-
-        if (dueDateAccount < currentDate) {
-            const [accountMonth, accountYear] = [
-                moment(dueDateAccount).month() + 1,
-                moment(dueDateAccount).month() + 1,
-            ];
-            switch (account.type) {
-                case accountEnum.type.monthly: {
-                    if (accountMonth === currentMonth)
-                        return {
-                            ...account,
-                            status:
-                                account.status === accountEnum.status.pending
-                                    ? accountEnum.status.expired
-                                    : account.status,
-                        };
-
-                    const adjustedMonthAccount = setAccountDate(dueDateAccount, account.type);
-
-                    if (adjustedMonthAccount < currentDate)
-                        return {
-                            ...account,
-                            status: accountEnum.status.expired,
-                            dueDate: adjustedMonthAccount,
-                            amountPaid: 0,
-                        };
-
-                    return {
-                        ...account,
-                        status: accountEnum.status.pending,
-                        amountPaid: 0,
-                        dueDate: adjustedMonthAccount,
-                    };
-                }
-
-                case accountEnum.type.yearly: {
-                    if (accountYear === currentYear) return account;
-
-                    const adjustedYearAccount = setAccountDate(dueDateAccount, account.type);
-
-                    if (adjustedYearAccount < currentDate)
-                        return {
-                            ...account,
-                            status: accountEnum.status.expired,
-                            dueDate: adjustedYearAccount,
-                            amountPaid: 0,
-                        };
-
-                    return {
-                        ...account,
-                        status: accountEnum.status.pending,
-                        amountPaid: 0,
-                        dueDate: adjustedYearAccount,
-                    };
-                }
-
-                default:
-                    return null;
-            }
-        } else return account;
-    });
-
-    return {
-        count: accounts.length,
-        data: recalculatedAccounts,
-    };
-};
 
 const edit = async ({ _id, ...account }) => {
     const accountUpdated = await findByIdAndUpdate(_id, account);
@@ -174,9 +80,6 @@ const sendNext = async (accountId) => {
 };
 
 export default {
-    create,
-    find,
-    listAll,
     edit,
     deleteAccount,
     makePayment,

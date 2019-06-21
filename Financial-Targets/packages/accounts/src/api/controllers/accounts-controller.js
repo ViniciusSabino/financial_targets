@@ -1,4 +1,4 @@
-import service from '../services/account-service';
+import * as services from '../services';
 import * as adapters from '../services/adapters';
 
 const create = async (context) => {
@@ -6,7 +6,7 @@ const create = async (context) => {
 
     const adaptedAccount = adapters.createAccountAdapter(account);
 
-    await service.create(adaptedAccount);
+    await services.createAccount(adaptedAccount);
 
     return context.created();
 };
@@ -14,17 +14,9 @@ const create = async (context) => {
 const find = async (context) => {
     const { header: filters } = context.request;
 
-    const accounts = await service.find(filters);
+    const accounts = await services.findAccounts(filters);
 
     return context.ok(accounts);
-};
-
-const listAll = async (context) => {
-    const { header: filters } = context.request;
-
-    const data = await service.listAll(filters);
-
-    return context.ok(data);
 };
 
 const edit = async (context) => {

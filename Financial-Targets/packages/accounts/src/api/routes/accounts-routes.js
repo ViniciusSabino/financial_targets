@@ -19,14 +19,9 @@ router.route([
         handler: [controller.find],
     },
     {
-        method: 'GET',
-        path: '/all',
-        handler: [controller.listAll],
-    },
-    {
         method: 'PUT',
         path: '/',
-        handler: [controller.edit],
+        handler: [validator.validEdit, controller.edit],
     },
     {
         method: 'DELETE',

@@ -1,9 +1,16 @@
 import Account from '../models/account';
-import search from '../../../utils/functions/search';
 
-const findAccounts = async ({ filter, sort, order, limit }) => {
-    const accounts = await Account.find(filter)
-        .sort(search.sortBy(order, sort))
+const constructorSort = (sort, order) => {
+    const mongoOrder = {};
+
+    mongoOrder[sort] = order === 'desc' ? -1 : 1;
+
+    return mongoOrder;
+};
+
+const findAccounts = async ({ mongoFilter, sort, order, limit }) => {
+    const accounts = await Account.find(mongoFilter)
+        .sort(constructorSort(sort, order))
         .limit(Number(limit))
         .lean();
 

@@ -1,46 +1,51 @@
-import { applicationEnum } from '../enumerators';
+import { mongoFiltersEnum } from '../enumerators';
 
-const { typeFilters } = applicationEnum;
+const { typeFilters } = mongoFiltersEnum;
 
 const accountFilters = [
     {
+        parameter: 'userid',
+        name: 'userId',
+        type: typeFilters.number,
+    },
+    {
         parameter: 'name',
-        nameFilter: 'name',
+        name: 'name',
         type: typeFilters.inputText,
     },
     {
         parameter: 'duedatestart',
-        nameFilter: 'dueDate',
+        name: 'dueDate',
         type: typeFilters.dateStart,
     },
     {
         parameter: 'duedateend',
-        nameFilter: 'dueDate',
+        name: 'dueDate',
         type: typeFilters.dateEnd,
     },
     {
         parameter: 'status',
-        nameFilter: 'status',
+        name: 'status',
         type: typeFilters.select,
     },
     {
         parameter: 'type',
-        nameFilter: 'type',
+        name: 'type',
         type: typeFilters.select,
     },
     {
         parameter: 'paymentform',
-        nameFilter: 'paymentForm',
+        name: 'paymentForm',
         type: typeFilters.select,
     },
     {
         parameter: 'isrepeat',
-        nameFilter: 'isRepeat',
-        type: typeFilters.selectBool,
+        name: 'isRepeat',
+        type: typeFilters.boolean,
     },
     {
         parameter: 'tags',
-        nameFilter: 'tags',
+        name: 'tags',
         type: typeFilters.selectMultiple,
     },
 ];

@@ -1,8 +1,8 @@
 import moment from 'moment';
 
-import { applicationEnum } from '../enumerators';
+import { datesEnum } from '../enumerators';
 
-const { differences } = applicationEnum.date;
+const { differences } = datesEnum;
 
 const getCurrentDate = () => moment();
 
