@@ -22,15 +22,17 @@ const find = async (context) => {
 const edit = async (context) => {
     const { body: account } = context.request;
 
-    const editedAccount = await service.edit(account);
+    const adptedAccount = await adapters.editAccountAdapter(account);
 
-    return context.ok({ editedAccount });
+    const editedAccount = await services.editAccount(adptedAccount);
+
+    return context.ok(editedAccount);
 };
 
 const deleteAccounts = async (context) => {
     const { accountsIds } = context.request.body;
 
-    await service.deleteAccounts(accountsIds);
+    await services.deleteAccounts(accountsIds);
 
     return context.ok();
 };
@@ -62,7 +64,6 @@ const sendNext = async (context) => {
 export default {
     create,
     find,
-    listAll,
     edit,
     deleteAccounts,
     makePayment,

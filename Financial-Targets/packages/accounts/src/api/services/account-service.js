@@ -1,22 +1,6 @@
-import moment from 'moment';
-
 import dictionary from '../utils/dictionaries/account-dictionary';
-import search from '../utils/functions/search';
-import AccountAllfilters from '../utils/constants/filters';
 import { setAccountDate } from './functions/account-functions';
-import { buildTheResult } from '../utils/functions/application';
-import { getCurrentDate, getCurrentMonth, getCurrentYear } from '../utils/functions/dates';
 import { accountEnum } from '../utils/enumerators';
-
-const edit = async ({ _id, ...account }) => {
-    const accountUpdated = await findByIdAndUpdate(_id, account);
-
-    return accountUpdated;
-};
-
-const deleteAccount = async (accountsIds) => {
-    await deleteAccounts(accountsIds);
-};
 
 const makePayment = async (accountsIds) => {
     const accounts = await findAccounts({ filter: { _id: accountsIds } });
@@ -80,7 +64,6 @@ const sendNext = async (accountId) => {
 };
 
 export default {
-    edit,
     deleteAccount,
     makePayment,
     makePartialPayment,

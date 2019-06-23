@@ -26,7 +26,7 @@ router.route([
     {
         method: 'DELETE',
         path: '/',
-        handler: [controller.deleteAccounts],
+        handler: [validator.validDelete, controller.deleteAccounts],
     },
     {
         method: 'PATCH',
