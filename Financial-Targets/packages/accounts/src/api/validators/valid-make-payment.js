@@ -1,6 +1,6 @@
 import dictionary from '../utils/dictionaries';
 
-const validDelete = (context, next) => {
+const validMakePayment = (context, next) => {
     const {
         headers: { userid },
     } = context.request;
@@ -12,4 +12,4 @@ const validDelete = (context, next) => {
     return errors.length ? context.badRequest(errors) : next();
 };
 
-export default validDelete;
+export default validMakePayment;

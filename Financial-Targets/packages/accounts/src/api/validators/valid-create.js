@@ -1,6 +1,6 @@
 import validSchema from './schemas/account-schema';
 import { getCurrentDate, createMomentDate } from '../utils/functions/dates';
-import dictionary from '../utils/dictionaries/account-dictionary';
+import dictionary from '../utils/dictionaries';
 
 const validDataSubmitted = (account) => {
     const validatedAccount = validSchema(account);

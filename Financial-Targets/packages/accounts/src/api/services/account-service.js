@@ -1,32 +1,6 @@
-import dictionary from '../utils/dictionaries/account-dictionary';
+import dictionary from '../utils/dictionaries';
 import { setAccountDate } from './functions/account-functions';
 import { accountEnum } from '../utils/enumerators';
-
-const makePayment = async (accountsIds) => {
-    const accounts = await findAccounts({ filter: { _id: accountsIds } });
-
-    const adjustedAccounts = accounts.map((account) => {
-        if (account.status === accountEnum.status.done) {
-            throw new Error(dictionary.paymentDone.message);
-        }
-
-        const { value, type, _id, dueDate } = account;
-
-        const ajustedDate = setAccountDate(dueDate, type);
-
-        return { _id, value, dueDate: ajustedDate, amountPaid: value, type };
-    });
-
-    return (
-        adjustedAccounts.map(({ _id, amountPaid, dueDate }) =>
-            findByIdAndUpdate(_id, {
-                amountPaid,
-                dueDate,
-                status: accountEnum.status.done,
-            })
-        ) |> Promise.all
-    );
-};
 
 const makePartialPayment = async ({ accountId, amountPaid }) => {
     const account = await findAccountById(accountId);
@@ -64,8 +38,6 @@ const sendNext = async (accountId) => {
 };
 
 export default {
-    deleteAccount,
-    makePayment,
     makePartialPayment,
     sendNext,
 };

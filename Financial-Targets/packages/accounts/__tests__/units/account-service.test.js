@@ -3,7 +3,7 @@ import moment from 'moment';
 import { findAccounts, findAccountById } from '../database/mongodb/queries';
 import { getCurrentDate, getCurrentMonth, getCurrentYear } from '../utils/functions/dates';
 import { setAccountDate } from './functions/account-functions';
-import dictionary from '../utils/dictionaries/accounts';
+import dictionary from '../utils/dictionaries';
 import service from './account-service';
 
 jest.mock('../database/mongodb/queries', () => ({

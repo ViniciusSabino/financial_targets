@@ -31,7 +31,7 @@ router.route([
     {
         method: 'PATCH',
         path: '/',
-        handler: [controller.makePayment],
+        handler: [validator.validMakePayment, controller.makePayment],
     },
     {
         method: 'PATCH',

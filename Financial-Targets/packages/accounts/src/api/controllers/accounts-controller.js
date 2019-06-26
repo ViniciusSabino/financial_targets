@@ -22,9 +22,9 @@ const find = async (context) => {
 const edit = async (context) => {
     const { body: account } = context.request;
 
-    const adptedAccount = await adapters.editAccountAdapter(account);
+    const adaptedAccount = await adapters.editAccountAdapter(account);
 
-    const editedAccount = await services.editAccount(adptedAccount);
+    const editedAccount = await services.editAccount(adaptedAccount);
 
     return context.ok(editedAccount);
 };
@@ -40,9 +40,11 @@ const deleteAccounts = async (context) => {
 const makePayment = async (context) => {
     const { accountsIds } = context.request.body;
 
-    const paidBills = await service.makePayment(accountsIds);
+    const adaptedAccounts = await adapters.makePaymentAccountAdapter(accountsIds);
 
-    return context.ok({ paidBills });
+    await services.makePaymentAccounts(adaptedAccounts);
+
+    return context.ok();
 };
 
 const makePartialPayment = async (context) => {
