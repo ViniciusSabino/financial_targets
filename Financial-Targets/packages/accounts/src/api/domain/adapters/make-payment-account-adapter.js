@@ -5,12 +5,12 @@ const makePaymentAccountAdapter = async (accountsIds) => {
 
     const accounts = await findAccounts(filter);
 
-    return accounts.map((account) => ({
-        id: account._id,
-        status: account.status,
-        value: account.value,
-        type: account.type,
-        dueDate: account.dueDate,
+    return accounts.map(({ _id, status, value, type, dueDate }) => ({
+        id: _id,
+        status,
+        value,
+        type,
+        dueDate,
     }));
 };
 

@@ -1,5 +1,5 @@
-import * as services from '../services';
-import * as adapters from '../services/adapters';
+import * as services from '../domain/services';
+import * as adapters from '../domain/adapters';
 
 const create = async (context) => {
     const { body: account } = context.request;
@@ -50,9 +50,11 @@ const makePayment = async (context) => {
 const makePartialPayment = async (context) => {
     const { body: paymentMade } = context.request;
 
-    const accounts = await service.makePartialPayment(paymentMade);
+    const adaptedAccounts = await adapters.makePartialPaymentAccountAdapter(paymentMade);
 
-    return accounts.errors.length ? context.badRequest(accounts) : context.ok(accounts);
+    const account = await services.makePartialPaymentAccount(adaptedAccounts);
+
+    return context.ok(account);
 };
 
 const sendNext = async (context) => {

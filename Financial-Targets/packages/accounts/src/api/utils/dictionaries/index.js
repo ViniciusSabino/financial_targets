@@ -14,4 +14,7 @@ export default {
     userIdIsEmpty: {
         message: 'O Id do usuário não foi informado!',
     },
+    amountPaidIsEmpty: {
+        message: 'O valor pago precisa ser preenchido!',
+    },
 };

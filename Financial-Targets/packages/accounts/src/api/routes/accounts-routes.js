@@ -36,7 +36,7 @@ router.route([
     {
         method: 'PATCH',
         path: '/makepartialpayment',
-        handler: [controller.makePartialPayment],
+        handler: [validator.validMakePartialPayment, controller.makePartialPayment],
     },
     {
         method: 'PATCH',

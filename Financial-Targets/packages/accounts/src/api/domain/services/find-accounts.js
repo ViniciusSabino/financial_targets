@@ -1,6 +1,6 @@
-import findAccountsFilters from '../utils/constants/find-accounts-filters';
-import { mongoFiltersEnum } from '../utils/enumerators';
-import { findAccounts } from '../database/mongodb/queries';
+import findAccountsFilters from '../../utils/constants/find-accounts-filters';
+import { mongoFiltersEnum } from '../../utils/enumerators';
+import { findAccounts } from '../../database/mongodb/queries';
 
 const { typeFilters } = mongoFiltersEnum;
 

@@ -1,4 +1,4 @@
-import { createAccount } from '../database/mongodb/queries';
+import { createAccount } from '../../database/mongodb/queries';
 
 export default async (account) => {
     await createAccount(account);
