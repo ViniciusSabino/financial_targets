@@ -17,4 +17,12 @@ export default {
     amountPaidIsEmpty: {
         message: 'O valor pago precisa ser preenchido!',
     },
+    sendToNextMonthInvalid: {
+        message:
+            'Não será possível enviar para o próximo mês, pois a conta já não se encontra no mês atual',
+    },
+    sendToNextYearInvalid: {
+        message:
+            'Não será possível enviar para o próximo ano, pois a conta já não se encontra no ano atual',
+    },
 };

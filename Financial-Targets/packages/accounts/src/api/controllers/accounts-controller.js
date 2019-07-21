@@ -6,9 +6,9 @@ const create = async (context) => {
 
     const adaptedAccount = adapters.createAccountAdapter(account);
 
-    await services.createAccount(adaptedAccount);
+    const accountCreated = await services.createAccount(adaptedAccount);
 
-    return context.created();
+    return context.created(accountCreated);
 };
 
 const find = async (context) => {
@@ -50,19 +50,19 @@ const makePayment = async (context) => {
 const makePartialPayment = async (context) => {
     const { body: paymentMade } = context.request;
 
-    const adaptedAccounts = await adapters.makePartialPaymentAccountAdapter(paymentMade);
+    const adaptedAccount = await adapters.makePartialPaymentAccountAdapter(paymentMade);
 
-    const account = await services.makePartialPaymentAccount(adaptedAccounts);
+    const updatedAccount = await services.makePartialPaymentAccount(adaptedAccount);
 
-    return context.ok(account);
+    return context.ok(updatedAccount);
 };
 
 const sendNext = async (context) => {
-    const { accountid } = context.request.header;
+    const { body: account } = context.request;
 
-    const account = await service.sendNext(accountid);
+    const updatedAccount = await services.sendNextAccounts(account);
 
-    return context.ok({ account });
+    return context.ok(updatedAccount);
 };
 
 export default {

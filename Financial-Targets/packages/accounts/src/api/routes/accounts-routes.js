@@ -41,7 +41,7 @@ router.route([
     {
         method: 'PATCH',
         path: '/sendnext',
-        handler: [controller.sendNext],
+        handler: [validator.validSendNext, controller.sendNext],
     },
 ]);
 

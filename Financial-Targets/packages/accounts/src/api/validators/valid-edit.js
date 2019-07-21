@@ -2,12 +2,6 @@ import validSchema from './schemas/account-schema';
 import { getCurrentDate, createMomentDate } from '../utils/functions/dates';
 import dictionary from '../utils/dictionaries';
 
-const validDataSubmitted = (account) => {
-    const validatedAccount = validSchema(account);
-
-    return validatedAccount;
-};
-
 const validAccount = (account) => {
     const currentDate = getCurrentDate();
 
@@ -25,7 +19,7 @@ const validAccount = (account) => {
 const validEdit = (context, next) => {
     const { body: account } = context.request;
 
-    const validatedAccount = validDataSubmitted(account);
+    const validatedAccount = validSchema(account);
 
     if (Array.isArray(validatedAccount)) return context.badRequest(validatedAccount);
 
