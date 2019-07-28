@@ -1,6 +1,6 @@
 import { accountEnum } from '../../utils/enumerators';
 import { setAccountDate } from '../common';
-import { findByIdAndUpdate } from '../../database/mongodb/queries';
+import Account from '../../database/mongodb/models/account';
 
 // account dueDate
 const setDueDate = ({ newStatus, type, dueDate }) =>
@@ -34,7 +34,10 @@ const makePartialPaymentAccount = async (unpaidAccount) => {
 
     const accountPartiallyPaid = mountAccountPartiallyPaid(unpaidAccount);
 
-    const account = await findByIdAndUpdate(unpaidAccount.id, accountPartiallyPaid);
+    const account = await Account.findOneAndUpdate(
+        { _id: unpaidAccount.id },
+        accountPartiallyPaid
+    ).lean();
 
     return account;
 };

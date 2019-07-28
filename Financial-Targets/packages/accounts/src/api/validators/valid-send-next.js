@@ -1,4 +1,4 @@
-import { findAccountById } from '../database/mongodb/queries';
+import Account from '../database/mongodb/models/account';
 import dictionary from '../utils/dictionaries';
 import { accountEnum } from '../utils/enumerators';
 import { getCurrentMonthOrADate, getCurrentYearOrADate } from '../utils/functions/dates';
@@ -14,7 +14,7 @@ const validSendNext = async (context, next) => {
         return context.badRequest(errors);
     }
 
-    const account = await findAccountById(accountId);
+    const account = await Account.findById(accountId).lean();
 
     const { type, dueDate } = account;
 

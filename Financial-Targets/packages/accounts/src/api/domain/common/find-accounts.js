@@ -1,12 +1,5 @@
-import Account from '../models/account';
-
-const constructorSort = (sort, order) => {
-    const mongoOrder = {};
-
-    mongoOrder[sort] = order === 'desc' ? -1 : 1;
-
-    return mongoOrder;
-};
+import Account from '../../database/mongodb/models/account';
+import { constructorSort } from '.';
 
 const findAccounts = async ({ mongoFilter, sort, order, limit }) => {
     const accounts = await Account.find(mongoFilter)

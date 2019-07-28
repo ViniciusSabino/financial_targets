@@ -1,3 +1,3 @@
-import { deleteAccounts } from '../../database/mongodb/queries';
+import Account from '../../database/mongodb/models/account';
 
-export default async (accountsIds) => await deleteAccounts(accountsIds);
+export default async (accountsIds) => await Account.deleteMany({ _id: accountsIds });

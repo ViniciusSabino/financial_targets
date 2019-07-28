@@ -1,15 +1,16 @@
-import { accountEnum } from '../../utils/enumerators';
-import { getDaysInCurrentMonth, addDaysAtTime, addYearsAtTime } from '../../utils/functions/dates';
+import moment from 'moment';
+
+import { accountEnum, datesEnum } from '../../utils/enumerators';
 
 const setAccountDate = (type, dueDate) => {
-    const days = getDaysInCurrentMonth();
+    const days = moment().daysInMonth();
 
     switch (type) {
         case accountEnum.type.monthly:
-            return addDaysAtTime(dueDate, days);
+            return moment(dueDate).add(days, datesEnum.differences.days);
         case accountEnum.type.yearly:
         default:
-            return addYearsAtTime(dueDate, 1);
+            return moment(dueDate).add(1, datesEnum.differences.years);
     }
 };
 

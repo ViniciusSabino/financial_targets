@@ -1,11 +1,5 @@
-import createAccountAdapter from './create-account-adapter';
-import editAccountAdapter from './edit-account-adapter';
-import makePaymentAccountAdapter from './make-payment-account-adapter';
-import makePartialPaymentAccountAdapter from './make-partial-payment-adapter';
+import createAndEditAdapter from './create-and-edit-adapter';
+import makePaymentAdapter from './make-payment-adapter';
+import makePartialPaymentAdapter from './make-partial-payment-adapter';
 
-export {
-    createAccountAdapter,
-    editAccountAdapter,
-    makePaymentAccountAdapter,
-    makePartialPaymentAccountAdapter,
-};
+export { createAndEditAdapter, makePaymentAdapter, makePartialPaymentAdapter };

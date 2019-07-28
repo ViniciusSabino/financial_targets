@@ -1,3 +1,3 @@
-import { createAccount } from '../../database/mongodb/queries';
+import Account from '../../database/mongodb/models/account';
 
-export default async (account) => await createAccount(account);
+export default async (account) => await new Account(account).save();

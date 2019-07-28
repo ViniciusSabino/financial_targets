@@ -1,6 +1,6 @@
-import { findAccounts } from '../../database/mongodb/queries';
+import { findAccounts } from '../common';
 
-const makePaymentAccountAdapter = async (accountsIds) => {
+const makePaymentAdapter = async (accountsIds) => {
     const filter = { mongoFilter: { _id: accountsIds } };
 
     const accounts = await findAccounts(filter);
@@ -14,4 +14,4 @@ const makePaymentAccountAdapter = async (accountsIds) => {
     }));
 };
 
-export default makePaymentAccountAdapter;
+export default makePaymentAdapter;

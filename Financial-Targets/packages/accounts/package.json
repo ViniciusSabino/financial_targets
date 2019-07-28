@@ -34,6 +34,8 @@
     },
     "devDependencies": {
         "@babel/node": "^7.4.5",
-        "jest": "^24.7.1"
+        "jest": "^24.7.1",
+        "mockingoose": "^2.13.1",
+        "mongodb-memory-server": "^5.1.9"
     }
 }

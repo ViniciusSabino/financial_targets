@@ -4,7 +4,7 @@ import * as adapters from '../domain/adapters';
 const create = async (context) => {
     const { body: account } = context.request;
 
-    const adaptedAccount = adapters.createAccountAdapter(account);
+    const adaptedAccount = adapters.createAndEditAdapter(account);
 
     const accountCreated = await services.createAccount(adaptedAccount);
 
@@ -22,7 +22,7 @@ const find = async (context) => {
 const edit = async (context) => {
     const { body: account } = context.request;
 
-    const adaptedAccount = await adapters.editAccountAdapter(account);
+    const adaptedAccount = await adapters.createAndEditAdapter(account);
 
     const editedAccount = await services.editAccount(adaptedAccount);
 

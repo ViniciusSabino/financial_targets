@@ -1,15 +1,16 @@
+import moment from 'moment';
+
 import validSchema from './schemas/account-schema';
-import { getCurrentDate, createMomentDate } from '../utils/functions/dates';
 import dictionary from '../utils/dictionaries';
 
 const validAccount = (account) => {
-    const currentDate = getCurrentDate();
+    const currentDate = moment();
 
     const errors = [];
 
     if (!account.id) errors.push(dictionary.accountIdIsEmpty);
 
-    if (createMomentDate(account.dueDate) < currentDate) errors.push(dictionary.accountExpired);
+    if (moment(account.dueDate) < currentDate) errors.push(dictionary.accountExpired);
 
     if (account.amountPaid > account.value) errors.push(dictionary.amountPaidIsInvalid);
 
