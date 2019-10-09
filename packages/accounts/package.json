@@ -7,7 +7,7 @@
         "start": "nodenv ./dist/api/server.js",
         "dev": "nodenv -e nodemon -- --exec",
         "build": "babel ./src -d ./dist --source-maps",
-        "test": "jest --coverage",
+        "test": "jest --coverage --verbose=true",
         "watch": "jest  --watchAll"
     },
     "nodemonConfig": {

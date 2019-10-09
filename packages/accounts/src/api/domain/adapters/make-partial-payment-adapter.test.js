@@ -1,6 +1,6 @@
 import mockingoose from 'mockingoose';
 
-import Account from '../../database/mongodb/models/account';
+import Account from '../../database/mongodb/accounts-model';
 import { makePartialPaymentAdapter } from '.';
 import mock from '../../__mocks__/adapters';
 

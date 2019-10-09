@@ -1,6 +1,6 @@
 import { setAccountDate } from '../common';
 import { accountEnum } from '../../utils/enumerators';
-import Account from '../../database/mongodb/models/account';
+import AccountMongoService from '../../database/mongodb/accounts-mongo-service';
 
 const mountPayloadUpdate = ({ type, dueDate }) => ({
     amountPaid: 0,
@@ -13,7 +13,7 @@ const sendNextAccounts = async (account) => {
 
     const { _id } = account;
 
-    const updatedAccount = await Account.findOneAndUpdate(_id, payloadUpdate, { new: true }).lean();
+    const updatedAccount = await AccountMongoService.findByIdAndUpdate(_id, payloadUpdate);
 
     return updatedAccount;
 };

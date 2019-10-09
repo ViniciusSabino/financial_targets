@@ -1,6 +1,6 @@
 import findAccountsFilters from '../../utils/constants/find-accounts-filters';
 import { mongoFiltersEnum } from '../../utils/enumerators';
-import { findAccounts } from '../../database/mongodb/queries';
+import AccountMongoService from '../../database/mongodb/accounts-mongo-service';
 
 const { typeFilters } = mongoFiltersEnum;
 
@@ -72,7 +72,7 @@ const buildMongoFilter = (fields) => {
 export default async ({ sort, order, limit, ...fields }) => {
     const mongoFilter = buildMongoFilter(fields);
 
-    const accounts = await findAccounts({ mongoFilter, sort, order, limit });
+    const accounts = await AccountMongoService.find({ mongoFilter, sort, order, limit });
 
     return accounts;
 };

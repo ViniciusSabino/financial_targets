@@ -1,7 +1,7 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
-import Account from '../../database/mongodb/models/account';
+import Account from '../../database/mongodb/accounts-model';
 import mock from '../../__mocks__/common';
 
 import { findAccounts } from '.';

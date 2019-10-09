@@ -1,5 +1,5 @@
 import { accountEnum } from '../../utils/enumerators';
-import Account from '../../database/mongodb/models/account';
+import AccountMongoService from '../../database/mongodb/accounts-mongo-service';
 import { setAccountDate } from '../common';
 
 const mountsPaidAccounts = (unpaidAccounts) => {
@@ -18,7 +18,7 @@ const makePaymentAccounts = async (accounts) => {
     const payloadPaidBills = mountsPaidAccounts(unpaidAccounts);
 
     const tasks = payloadPaidBills.map((payload, index) =>
-        Account.findOneAndUpdate({ _id: unpaidAccounts[index].id }, payload)
+        AccountMongoService.findByIdAndUpdate(unpaidAccounts[index].id, payload)
     );
 
     await Promise.all(tasks);

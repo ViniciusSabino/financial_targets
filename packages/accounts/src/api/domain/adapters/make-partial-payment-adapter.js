@@ -1,4 +1,4 @@
-import Account from '../../database/mongodb/models/account';
+import Account from '../../database/mongodb/accounts-model';
 
 const makePartialPaymentAdapter = async ({ accountId, amountPaid }) => {
     const account = await Account.findOne({ _id: accountId }).lean();
