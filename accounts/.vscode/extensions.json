@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "ngryman.codesandbox-theme",
+    "alefragnani.bookmarks",
+    "coenraads.bracket-pair-colorizer",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "oderwat.indent-rainbow",
+    "pkief.material-icon-theme",
+    "lkytal.pomodoro",
+    "wayou.vscode-todo-highlight",
+    "minhthai.vscode-todo-parser",
+    "ansenhuang.vscode-view-readme",
+    "naumovs.color-highlight",
+    "rocketseat.rocketseatreactnative",
+    "rocketseat.rocketseatreactjs",
+    "vscode-icons-team.vscode-icons",
+    "wakatime.vscode-wakatime"
+  ]
+}

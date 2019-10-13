@@ -7,7 +7,6 @@ import chalk from 'chalk';
 import config from './config';
 import routes from './routes';
 import mongoose from './database/mongodb';
-
 const app = new Koa();
 
 mongoose.createConnection();
