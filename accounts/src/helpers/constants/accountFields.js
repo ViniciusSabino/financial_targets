@@ -1,4 +1,4 @@
-import { fieldTypes } from '.';
+import { fieldTypes, accountStatus, accountTypes, accountPaymentForms } from '.';
 
 // fastest validator - restrictions
 export default [
@@ -60,7 +60,7 @@ export default [
         name: 'type',
         restrictions: {
             type: fieldTypes.enum,
-            values: ['MONTHLY', 'YEARLY'],
+            values: [accountTypes.monthly, accountTypes.yearly],
         },
     },
     {
@@ -68,7 +68,11 @@ export default [
         name: 'paymentForm',
         restrictions: {
             type: fieldTypes.enum,
-            values: ['CREDIT', 'DEBIT_CARD', 'TICKET'],
+            values: [
+                accountPaymentForms.credit,
+                accountPaymentForms.debitCard,
+                accountPaymentForms.ticket,
+            ],
         },
     },
     {
@@ -76,7 +80,7 @@ export default [
         name: 'status',
         restrictions: {
             type: fieldTypes.enum,
-            values: ['DONE', 'EXPIRED', 'PENDING'],
+            values: [accountStatus.done, accountStatus.expired, accountStatus.pending],
         },
     },
     {

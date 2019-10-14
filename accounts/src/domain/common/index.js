@@ -1,6 +1,5 @@
-import setAccountDate from './set-account-date';
-import setTheStatus from './set-the-status';
-import findAccounts from './find-accounts';
-import constructorSort from './constructor-sort';
+import setAccountDate from './setAccountDate';
+import setAccountStatus from './setAccountStatus';
+import setAccountDueDate from './setAccountDueDate';
 
-export { setAccountDate, setTheStatus, findAccounts, constructorSort };
+export { setAccountDate, setAccountStatus, setAccountDueDate };

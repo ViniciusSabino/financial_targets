@@ -6,7 +6,7 @@ import chalk from 'chalk';
 
 import config from './config';
 import routes from './routes';
-import mongo from './database/mongodb';
+import mongo from './databases/mongodb';
 import errorHandling from './middlewares/errorHandling';
 
 const app = new Koa();
