@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import adaptPartialPayment from './adaptPartialPayment';
+import adaptPartialPayment from './adapt-partial-payment';
 import Account from '../../../models/Account';
 
 export default async (amountPaid, unpaidAccount) => {

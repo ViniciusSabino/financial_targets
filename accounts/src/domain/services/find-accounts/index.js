@@ -1,5 +1,5 @@
-import createFilter from './createMongoFilter';
-import constructorSort from './constructorMongoSort';
+import createFilter from './create-mongo-filter';
+import constructorSort from './constructor-mongo-sort';
 import Account from '../../../models/Account';
 
 export default async ({ sort, order, limit, ...fields }) => {

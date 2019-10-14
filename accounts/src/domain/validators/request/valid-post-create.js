@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import validSchema from '../schemas/Account';
+import validSchema from '../schemas/account';
 import dictionary from '../../../helpers/dictionaries';
 
 export default (ctx, next) => {

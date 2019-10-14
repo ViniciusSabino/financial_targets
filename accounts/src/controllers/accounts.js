@@ -1,4 +1,4 @@
-import * as service from '../domain/services';
+import service from '../domain/services';
 
 const create = async (ctx) => {
     const { account } = ctx;
