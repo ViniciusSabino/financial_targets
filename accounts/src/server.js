@@ -6,20 +6,14 @@ import chalk from 'chalk';
 
 import config from './config';
 import routes from './routes';
-import mongoose from './database/mongodb';
+import mongo from './database/mongodb';
+import errorHandling from './middlewares/errorHandling';
+
 const app = new Koa();
 
-mongoose.createConnection();
+mongo.createConnection();
 
-app.use(async (ctx, next) => {
-    try {
-        await next();
-    } catch (err) {
-        ctx.status = err.status || 500;
-        ctx.body = { errors: [{ message: err.message }] };
-        ctx.app.emit('error', err, ctx);
-    }
-});
+app.use(errorHandling);
 app.use(bodyParser());
 app.use(logger());
 app.use(respond());

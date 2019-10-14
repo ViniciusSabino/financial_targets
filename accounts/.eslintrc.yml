@@ -16,10 +16,10 @@ rules:
   camelcase: 1
   capitalized-comments: 2
   complexity: [2, 30]
-  max-lines: [2, 50]
+  max-lines: [2, 110]
   max-depth: [2, 2]
-  max-params: [2, 2]
-  max-statements: [2, 7]
+  max-params: [1, 3]
+  max-statements: [2, 20]
   max-statements-per-line: 2
   max-nested-callbacks: [2, 2]
   max-len: [1, code: 100]
