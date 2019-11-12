@@ -1,174 +1,90 @@
-import { accountFields, fieldTypes } from '../../../helpers/constants';
+import accountFields from '../../../helpers/constants/account-fields';
+import accountFieldTypes from '../../../helpers/constants/account-field-types';
 
-
-
-export default (fields) => {
-
+const createMongoFilter = (fields) => {
     const keys = Object.keys(fields);
-
-
 
     const values = Object.values(fields);
 
-
-
     const mongodbFilter = keys.reduce((condition, key, index) => {
-
         const filter = accountFields.find((f) => f.parameter === key);
 
-
-
-        if (filter.restrictions.type === fieldTypes.number) {
-
+        if (filter.restrictions.type === accountFieldTypes.number) {
             return {
-
                 ...condition,
 
-
-
                 [filter.name]: {
-
                     $eq: values[index],
-
                 },
-
             };
-
         }
 
-
-
-        if (filter.restrictions.type === fieldTypes.string) {
-
+        if (filter.restrictions.type === accountFieldTypes.string) {
             return {
-
                 ...condition,
 
-
-
                 [filter.name]: {
-
                     $regex: values[index],
 
-
-
                     $options: 'i',
-
                 },
-
             };
-
         }
 
-
-
-        if (filter.restrictions.type === fieldTypes.enum) {
-
+        if (filter.restrictions.type === accountFieldTypes.enum) {
             return {
-
                 ...condition,
-
-
 
                 [filter.name]: {
-
                     $eq: values[index],
-
                 },
-
             };
-
         }
 
-
-
-        if (filter.restrictions.type === fieldTypes.boolean) {
-
+        if (filter.restrictions.type === accountFieldTypes.boolean) {
             return {
-
                 ...condition,
-
-
 
                 [filter.name]: values[index],
-
             };
-
         }
 
-
-
-        if (filter.restrictions.type === fieldTypes.date) {
-
-            if (filter.dateType === fieldTypes.dateStart) {
-
+        if (filter.restrictions.type === accountFieldTypes.date) {
+            if (filter.dateType === accountFieldTypes.dateStart) {
                 return {
-
                     ...condition,
 
-
-
                     [filter.name]: {
-
                         $gte: values[index],
-
                     },
-
                 };
-
             }
 
-
-
             return {
-
                 ...condition,
 
-
-
                 [filter.name]: {
-
                     $lte: values[index],
 
-
-
                     ...condition[filter.name],
-
                 },
-
             };
-
         }
 
-
-
-        if (filter.restrictions.type === fieldTypes.array) {
-
+        if (filter.restrictions.type === accountFieldTypes.array) {
             return {
-
                 ...condition,
 
-
-
                 [filter.name]: {
-
                     $in: values[index].split(','),
-
                 },
-
             };
-
         }
 
-
-
         return { ...condition };
-
     }, {});
 
-
-
     return mongodbFilter;
-
 };
 
+export default createMongoFilter;

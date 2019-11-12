@@ -9,9 +9,9 @@ const create = async (ctx) => {
 };
 
 const find = async (ctx) => {
-    const { header: filters } = ctx.request;
+    const { header } = ctx.request;
 
-    const accounts = await service.findAccounts(filters);
+    const accounts = await service.findAccounts(header);
 
     return ctx.ok(accounts);
 };

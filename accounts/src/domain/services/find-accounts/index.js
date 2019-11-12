@@ -1,14 +1,16 @@
-import createFilter from './create-mongo-filter';
-import constructorSort from './constructor-mongo-sort';
+import createFilter from './create-mongodb-filter';
+import createSort from './create-mongodb-sort';
 import Account from '../../../models/Account';
 
-export default async ({ sort, order, limit, ...fields }) => {
+const findAccounts = async ({ sort, order, limit, ...fields }) => {
     const filter = createFilter(fields);
 
     const accounts = await Account.find(filter)
-        .sort(constructorSort(sort, order))
+        .sort(createSort(sort, order))
         .limit(Number(limit))
         .lean();
 
     return accounts;
 };
+
+export default findAccounts;
