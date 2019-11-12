@@ -1,3 +1,3 @@
-import validPartialPayment from './valid-partial-payment';
+import validCreate from './valid-create';
 
-export { validPartialPayment };
+export { validCreate };

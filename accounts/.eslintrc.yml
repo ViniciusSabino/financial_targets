@@ -51,5 +51,5 @@ rules:
   quotes: [2, single]
   require-await: 2
   semi: [2, always]
-  linebreak-style: [1, windows]
+  linebreak-style: [1, unix]
   no-plusplus: 2

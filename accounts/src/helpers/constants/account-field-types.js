@@ -1,4 +1,4 @@
-export default {
+const fieldTypes = {
     number: 'number',
     string: 'string',
     date: 'date',
@@ -8,3 +8,5 @@ export default {
     dateStart: 'dateStart',
     dateEnd: 'dateEnd',
 };
+
+export default fieldTypes;

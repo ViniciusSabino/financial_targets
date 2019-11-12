@@ -1,12 +1,16 @@
 import Account from '../../models/Account';
-import { setAccountStatus, setAccountDueDate } from '../common';
+import { getNewAccountDate, setAccountStatus } from '../helpers/accounts';
+import accountConstants from '../../helpers/constants/account';
 
 export default async (account) => {
     const status = setAccountStatus(account.amountPaid, account);
 
-    const dueDate = setAccountDueDate(status, account);
+    const dueDate =
+        status === accountConstants.status.done
+            ? getNewAccountDate(status, account)
+            : account.dueDate;
 
-    const accountSaved = await new Account({ ...account, status, dueDate }).save();
+    const accountCreate = new Account({ ...account, status, dueDate });
 
-    return accountSaved;
+    await accountCreate.save();
 };

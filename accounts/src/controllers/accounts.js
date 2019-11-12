@@ -1,9 +1,9 @@
 import service from '../domain/services';
 
 const create = async (ctx) => {
-    const { account } = ctx;
+    const { body } = ctx;
 
-    const accountCreated = await service.createAccount(account);
+    const accountCreated = await service.createAccount(body);
 
     return ctx.created(accountCreated);
 };
