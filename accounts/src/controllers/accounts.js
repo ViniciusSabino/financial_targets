@@ -16,10 +16,13 @@ const find = async (ctx) => {
     return ctx.ok(accounts);
 };
 
-const partialPayment = async (ctx) => {
-    const { unpaidAccount, amountPaid } = ctx;
+const partiallyPayment = async (ctx) => {
+    const {
+        unpaidAccount,
+        body: { amountPaid },
+    } = ctx;
 
-    const updatedAccount = await service.partialPayment(amountPaid, unpaidAccount);
+    const updatedAccount = await service.partiallyPayment(amountPaid, unpaidAccount);
 
     return ctx.ok(updatedAccount);
 };
@@ -27,5 +30,5 @@ const partialPayment = async (ctx) => {
 export default {
     create,
     find,
-    partialPayment,
+    partiallyPayment,
 };

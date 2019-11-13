@@ -1,6 +1,6 @@
 import Router from 'koa-joi-router';
 
-import home from '../controllers/home-controller';
+import home from '../controllers/home';
 
 const router = Router();
 

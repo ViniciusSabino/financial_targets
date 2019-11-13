@@ -22,7 +22,7 @@ router.route([
         method: 'PATCH',
         path: '/partiallypayment',
         handler: [
-            validator.validRequestPartiallyPayment,
+            validator.validPatchPartiallyPayment,
             validator.validPartiallyPayment,
             controller.partiallyPayment,
         ],

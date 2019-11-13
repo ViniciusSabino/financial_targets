@@ -12,12 +12,26 @@ const getNewAccountDate = (type, dueDate) => {
     return moment(dueDate).add(1, 'years');
 };
 
-const setAccountStatus = (updatedAmountPaid, { value, status }) => {
-    if (updatedAmountPaid === value) {
+const setAccountStatus = (amountPaid, unpaidAccount) => {
+    const { value, status } = unpaidAccount;
+
+    if (amountPaid === value) {
         return accountConstants.status.done;
     }
 
     return status;
 };
 
-export { getNewAccountDate, setAccountStatus };
+const setAccountAmountPaid = (currentAmountPaid, unpaidAccount) => {
+    const { amountPaid, value } = unpaidAccount;
+
+    const updatedAmountPaid = currentAmountPaid + amountPaid;
+
+    if (updatedAmountPaid <= value) {
+        return updatedAmountPaid;
+    }
+
+    return value;
+};
+
+export { getNewAccountDate, setAccountStatus, setAccountAmountPaid };
