@@ -1,6 +1,6 @@
 import Account from '../../../models/Account';
-import accountConstants from '../../../helpers/constants/account';
-import dictionary from '../../../helpers/dictionaries/account';
+import accountConstants from '../../../utils/constants/account';
+import dictionary from '../../../utils/dictionaries/account';
 
 const { status } = accountConstants;
 

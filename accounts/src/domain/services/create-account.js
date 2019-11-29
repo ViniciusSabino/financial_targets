@@ -1,10 +1,11 @@
 import Account from '../../models/Account';
 import { getNewAccountDate, setAccountStatus } from '../helpers/accounts';
-import accountConstants from '../../helpers/constants/account';
+import accountConstants from '../../utils/constants/account';
 
 export default async (account) => {
     const status = setAccountStatus(account.amountPaid, account);
 
+    // recalculate the date if already registered 'DONE'
     const dueDate =
         status === accountConstants.status.done
             ? getNewAccountDate(status, account)

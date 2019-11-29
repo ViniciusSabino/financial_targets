@@ -1,4 +1,4 @@
-import dictionary from '../../../helpers/dictionaries/account';
+import dictionary from '../../../utils/dictionaries/account';
 
 const validPatchPartiallyPayment = (ctx, next) => {
     const { amountPaid, id } = ctx.request.body;

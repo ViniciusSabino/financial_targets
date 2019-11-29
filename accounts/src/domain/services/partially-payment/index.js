@@ -1,7 +1,7 @@
 import adapterPartiallyPayment from './adapter-partially-payment';
 import Account from '../../../models/Account';
 
-export default async (amountPaid, unpaidAccount) => {
+const updatePartiallyPayment = async (amountPaid, unpaidAccount) => {
     const accountUpdate = adapterPartiallyPayment(amountPaid, unpaidAccount);
 
     const { _id } = unpaidAccount;
@@ -12,3 +12,5 @@ export default async (amountPaid, unpaidAccount) => {
 
     return updatedAccount;
 };
+
+export default updatePartiallyPayment;

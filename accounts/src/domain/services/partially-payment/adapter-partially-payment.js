@@ -1,5 +1,12 @@
 import { setAccountAmountPaid, setAccountStatus, getNewAccountDate } from '../../helpers/accounts';
 
+/**
+ * Return all the fields that will be required to partially update the
+ * amount paid
+ *
+ * @param {int} amountPaid
+ * @param {Account} unpaidAccount
+ */
 const adapterPartiallyPayment = (amountPaid, unpaidAccount) => {
     const updatedAmountPaid = setAccountAmountPaid(amountPaid, unpaidAccount);
 

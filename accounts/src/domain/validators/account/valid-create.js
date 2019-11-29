@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import validateSchema from '../schemas/account';
-import dictionary from '../../../helpers/dictionaries/account';
+import dictionary from '../../../utils/dictionaries/account';
 
 const validCreate = (ctx, next) => {
     const { body } = ctx.request;

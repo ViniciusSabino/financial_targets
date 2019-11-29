@@ -1,5 +1,5 @@
-import accountFields from '../../../helpers/constants/account-fields';
-import accountFieldTypes from '../../../helpers/constants/account-field-types';
+import accountFields from '../../../utils/constants/account-fields';
+import accountFieldTypes from '../../../utils/constants/account-field-types';
 
 const createMongoFilter = (fields) => {
     const keys = Object.keys(fields);

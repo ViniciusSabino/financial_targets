@@ -4,6 +4,8 @@ import fieldTypes from './account-field-types';
 
 const { paymentForm, status, type } = accountConstants;
 
+// fastest validator restrictions
+
 const accountFields = [
     {
         parameter: 'userid',
