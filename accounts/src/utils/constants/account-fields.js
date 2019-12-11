@@ -46,7 +46,7 @@ const accountFields = [
         },
     },
     {
-        parameter: 'duedate',
+        parameter: 'duedatestart',
         name: 'dueDate',
         description: 'Date the bill payment needs to be made',
         dateType: fieldTypes.dateStart,
@@ -56,10 +56,21 @@ const accountFields = [
         },
     },
     {
+        parameter: 'duedateend',
+        name: 'dueDate',
+        description: 'Date the bill payment needs to be made',
+        dateType: fieldTypes.dateEnd,
+        isNotSchema: true,
+        restrictions: {
+            type: fieldTypes.date,
+            convert: true,
+        },
+    },
+    {
         parameter: 'amountpaid',
         name: 'amountPaid',
         description: 'Amount paid from account',
-        dateType: fieldTypes.dateEnd,
+        dateType: fieldTypes.number,
         restrictions: {
             type: fieldTypes.number,
             optional: true,

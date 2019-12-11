@@ -4,17 +4,17 @@ import accountFieldTypes from '../../../utils/constants/account-field-types';
 const createMongoFilter = (fields) => {
     const keys = Object.keys(fields);
 
-    const values = Object.values(fields);
-
-    const mongodbFilter = keys.reduce((condition, key, index) => {
+    const mongodbFilter = keys.reduce((condition, key) => {
         const filter = accountFields.find((f) => f.parameter === key);
+
+        if (!filter) return { ...condition };
 
         if (filter.restrictions.type === accountFieldTypes.number) {
             return {
                 ...condition,
 
                 [filter.name]: {
-                    $eq: values[index],
+                    $eq: fields[filter.parameter],
                 },
             };
         }
@@ -24,7 +24,7 @@ const createMongoFilter = (fields) => {
                 ...condition,
 
                 [filter.name]: {
-                    $regex: values[index],
+                    $regex: fields[filter.parameter],
 
                     $options: 'i',
                 },
@@ -36,7 +36,7 @@ const createMongoFilter = (fields) => {
                 ...condition,
 
                 [filter.name]: {
-                    $eq: values[index],
+                    $eq: fields[filter.parameter],
                 },
             };
         }
@@ -45,7 +45,7 @@ const createMongoFilter = (fields) => {
             return {
                 ...condition,
 
-                [filter.name]: values[index],
+                [filter.name]: fields[filter.parameter],
             };
         }
 
@@ -55,7 +55,7 @@ const createMongoFilter = (fields) => {
                     ...condition,
 
                     [filter.name]: {
-                        $gte: values[index],
+                        $gte: fields[filter.parameter],
                     },
                 };
             }
@@ -64,7 +64,7 @@ const createMongoFilter = (fields) => {
                 ...condition,
 
                 [filter.name]: {
-                    $lte: values[index],
+                    $lte: fields[filter.parameter],
 
                     ...condition[filter.name],
                 },
@@ -76,7 +76,7 @@ const createMongoFilter = (fields) => {
                 ...condition,
 
                 [filter.name]: {
-                    $in: values[index].split(','),
+                    $in: fields[filter.parameter].split(','),
                 },
             };
         }
