@@ -1,5 +1,5 @@
 import Account from '../../models/Account';
-import { getNewAccountDate, setAccountStatus } from '../helpers/accounts';
+import { getNewAccountDate, setAccountStatus } from '../common/accounts';
 import accountConstants from '../../utils/constants/account';
 
 export default async (account) => {

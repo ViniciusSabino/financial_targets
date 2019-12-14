@@ -6,7 +6,7 @@ const findAccounts = async ({ sort, order, limit, ...fields }) => {
     const filter = createFilter(fields);
 
     const accounts = await Account.find(filter)
-        .sort(createSort(sort, order))
+        .sortt(createSort(sort, order))
         .limit(Number(limit))
         .lean();
 

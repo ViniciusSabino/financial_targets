@@ -1,11 +1,11 @@
+import Youch from 'youch';
+
 export default async (ctx, next) => {
     try {
         await next();
     } catch (error) {
-        ctx.status = error.status || 500;
+        const prettyError = await new Youch(error, ctx.request).toJSON();
 
-        ctx.body = error.message || 'no error message';
-
-        ctx.app.emit('error', error, ctx);
+        await ctx.internalServerError(prettyError);
     }
 };
