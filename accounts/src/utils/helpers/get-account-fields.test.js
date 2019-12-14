@@ -1,11 +1,11 @@
 /* eslint-disable max-nested-callbacks */
-import accountFields from './account-fields';
+import getAccountFields from './get-account-fields';
 
 describe('Helpers', () => {
     describe('Constants', () => {
         describe('Account field types', () => {
             it('should return the correct structure of a field for account schema', () => {
-                accountFields
+                getAccountFields()
                     .filter((field) => !field.isNotSchema)
                     .forEach((field) => {
                         expect(field).toHaveProperty('parameter');
@@ -17,7 +17,7 @@ describe('Helpers', () => {
             });
 
             it('should return the correct structure of a field that is not part of the schema', () => {
-                accountFields
+                getAccountFields()
                     .filter((field) => field.isNotSchema)
                     .forEach((field) => {
                         expect(field).toHaveProperty('parameter');

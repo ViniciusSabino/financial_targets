@@ -1,8 +1,8 @@
 import Validator from 'fastest-validator';
 
-import fields from '../../../utils/constants/account-fields';
+import getAccountFields from '../../../utils/helpers/get-account-fields';
 
-const accountSchema = fields
+const accountSchema = getAccountFields()
     .filter((field) => !field.isNotSchema)
     .reduce((acc, field) => {
         acc[field.name] = field.restrictions;

@@ -1,11 +1,11 @@
-import accountFields from '../../../utils/constants/account-fields';
+import getAccountFields from '../../../utils/helpers/get-account-fields';
 import accountFieldTypes from '../../../utils/constants/account-field-types';
 
 const createMongoFilter = (fields) => {
     const keys = Object.keys(fields);
 
     const mongodbFilter = keys.reduce((condition, key) => {
-        const filter = accountFields.find((f) => f.parameter === key);
+        const filter = getAccountFields().find((f) => f.parameter === key);
 
         if (!filter) return { ...condition };
 
