@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import validateSchema from '../schemas/account';
+import validateSchema from '../schemas';
 import dictionary from '../../../utils/dictionaries/account';
 
 const validCreate = (ctx, next) => {
