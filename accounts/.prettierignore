@@ -1,2 +1,3 @@
 .prettierrc.yml
 .eslintrc.yml
+jest.config.js

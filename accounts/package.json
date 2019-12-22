@@ -20,6 +20,11 @@
         "payments",
         "financial"
     ],
+    "husky": {
+        "hooks": {
+            "pre-push": "npm test"
+        }
+    },
     "author": "Vinícius Rocha <vnc.chelsea@gmail.com>",
     "license": "ISC",
     "dependencies": {
