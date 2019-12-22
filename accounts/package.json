@@ -12,21 +12,37 @@
         "build": "babel ./src -out-dir ./dist --source-maps --ignore ./src/**/*.test.js --no-babelrc",
         "lint": "eslint ."
     },
-    "nodemonConfig": {
-        "exec": "babel-node ./src/server.js"
-    },
-    "keywords": [
-        "accounts",
-        "payments",
-        "financial"
-    ],
     "husky": {
         "hooks": {
             "pre-push": "npm test && npm run lint"
         }
     },
-    "author": "Vinícius Rocha <vnc.chelsea@gmail.com>",
+    "nodemonConfig": {
+        "exec": "babel-node ./src/server.js"
+    },
+    "author": {
+        "name": "Vinícius Rocha",
+        "email": "vnc.chelsea@gmail.com",
+        "url": "https://github.com/ViniciusSabino"
+    },
+    "contributors": [
+        {
+            "name": "Vinícius Rocha",
+            "email": "vnc.chelsea@gmail.com",
+            "url": "https://github.com/ViniciusSabino"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:ViniciusSabino/Financial_Targets.git"
+    },
+    "bugs": "https://github.com/ViniciusSabino/Financial_Targets/issues",
+    "homepage": "https://github.com/ViniciusSabino/Financial_Targets/blob/master/README.md",
     "license": "ISC",
+    "engines": {
+        "node": "&gt;= 6.0.0",
+        "npm": "&gt;= 3.0.0"
+    },
     "dependencies": {
         "chalk": "^2.4.2",
         "fastest-validator": "^0.6.17",
