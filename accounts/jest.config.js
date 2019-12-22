@@ -1,23 +1,27 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
-
 module.exports = {
-    name: 'Financial Targets - Accounts API',
-    displayName: 'financial-accounts-api',
-    verbose: true,
     bail: true,
     clearMocks: true,
     collectCoverage: true,
+    collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!**/node_modules/**', '!**/vendor/**'],
     coverageDirectory: '__tests__/coverage',
-    testEnvironment: 'node',
-    testMatch: ['**/src/**/*+(spec|test).[jt]s?(x)'],
-    coveragePathIgnorePatterns: ['/node_modules'],
+    coveragePathIgnorePatterns: ['/node_modules', '/src/server.js', '/__tests__'],
     coverageThreshold: {
         global: {
-            statements: 100,
-            branches: 100,
-            functions: 100,
-            lines: 100,
+            statements: 10,
+            branches: 10,
+            functions: 10,
+            lines: 10,
         },
     },
+    displayName: {
+        name: '@financial-targets/accounts',
+        color: 'red',
+    },
+    name: '@financial-targets/accounts',
+    testEnvironment: 'node',
+    testMatch: ['**/src/**/*+(spec|test).[jt]s?(x)'],
+    transform: {
+        '^.+\\.[t|j]sx?$': 'babel-jest',
+    },
+    verbose: true,
 };
