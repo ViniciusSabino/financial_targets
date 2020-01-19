@@ -11,7 +11,7 @@ router.route([
     {
         method: 'POST',
         path: '/',
-        handler: [validator.validCreate, controller.create],
+        handler: [validator.create, controller.create],
     },
     {
         method: 'GET',
@@ -22,8 +22,8 @@ router.route([
         method: 'PATCH',
         path: '/partiallypayment',
         handler: [
-            validator.validPatchPartiallyPayment,
-            validator.validPartiallyPayment,
+            validator.patchPartiallyPayment,
+            validator.partiallyPayment,
             controller.partiallyPayment,
         ],
     },

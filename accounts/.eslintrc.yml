@@ -2,14 +2,19 @@ env:
   node: true
   es6: true
   jest: true
-extends: [airbnb-base, "plugin:prettier/recommended", "plugin:jest/recommended"]
-plugins: [import, babel, jest]
-parser: babel-eslint
+extends: [airbnb-base, "plugin:prettier/recommended", "plugin:jest/recommended", "plugin:@typescript-eslint/recommended", "prettier/@typescript-eslint"]
+plugins: [import, babel, jest, "@typescript-eslint"]
+parser: '@typescript-eslint/parser'
 parserOptions:
   sourceType: module
   allowImportExportEverywhere: false
   parser: optionalChaining
   codeFrame: false
+  ecmaVersion: 2018
+settings:
+    import/resolver:
+        node:
+            extensions: [".js", ".jsx", ".ts", "tsx"]
 rules:
   arrow-body-style: [2, "as-needed"]
   arrow-spacing: 2

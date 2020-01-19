@@ -17,6 +17,7 @@ module.exports = {
         name: '@financial-targets/accounts',
         color: 'red',
     },
+    moduleFileExtensions: ['ts', 'tsx', 'js'],
     name: '@financial-targets/accounts',
     testEnvironment: 'node',
     testMatch: ['**/src/**/*+(spec|test).[jt]s?(x)'],

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Koa from 'koa';
 import respond from 'koa-respond';
 import bodyParser from 'koa-bodyparser';
@@ -13,11 +14,12 @@ const app = new Koa();
 
 mongo.createConnection();
 
+// middlewares
 app.use(errorHandling);
 app.use(bodyParser());
 app.use(logger());
 app.use(respond());
-app.use(routes);
+app.use(routes.openRoutes);
 
 app.listen(config.port, () =>
     console.log(`\n API: ${chalk.blue('Financial Targets - Accounts API')}
