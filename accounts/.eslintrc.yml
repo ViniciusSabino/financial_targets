@@ -2,9 +2,9 @@ env:
   node: true
   es6: true
   jest: true
-extends: [airbnb-base, "plugin:prettier/recommended", "plugin:jest/recommended", "plugin:@typescript-eslint/recommended", "prettier/@typescript-eslint"]
-plugins: [import, babel, jest, "@typescript-eslint"]
-parser: '@typescript-eslint/parser'
+extends: [airbnb-base, "plugin:prettier/recommended", "plugin:jest/recommended"]
+plugins: [import, babel, jest]
+parser: babel-eslint
 parserOptions:
   sourceType: module
   allowImportExportEverywhere: false
