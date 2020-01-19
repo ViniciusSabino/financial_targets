@@ -1,6 +1,4 @@
-import { Account } from '../types';
-
-const changeAccountAmountPaid = (currentAmountPaid: number, unpaidAccount: Account): number => {
+const changeAccountAmountPaid = (currentAmountPaid, unpaidAccount) => {
     const { amountPaid, value } = unpaidAccount;
 
     const updatedAmountPaid = amountPaid ? currentAmountPaid + amountPaid : currentAmountPaid;

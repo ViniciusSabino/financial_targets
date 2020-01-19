@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import findAccountFields from './find-account-fields';
 import { FieldTypes } from '../enum';
 
