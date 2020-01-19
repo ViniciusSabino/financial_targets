@@ -1,4 +1,2 @@
-declare const _default: {
-    createConnection: () => void;
-};
-export default _default;
+declare const createConnection: () => void;
+export default createConnection;

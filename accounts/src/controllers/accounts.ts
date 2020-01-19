@@ -1,14 +1,16 @@
-import service from '../domain/services';
+import { Context } from 'koa';
 
-const create = async (ctx) => {
-    const { body } = ctx;
+import * as service from '../services';
 
-    const accountCreated = await service.createAccount(body);
+const create = async (ctx: Context): Promise<void> => {
+    const { body } = ctx.request;
 
-    return ctx.created(accountCreated);
+    const created = await service.createAccount(body);
+
+    return ctx.created(created);
 };
 
-const find = async (ctx) => {
+const find = async (ctx: Context): Promise<void> => {
     const { header } = ctx.request;
 
     const accounts = await service.findAccounts(header);
@@ -16,13 +18,11 @@ const find = async (ctx) => {
     return ctx.ok(accounts);
 };
 
-const partiallyPayment = async (ctx) => {
-    const {
-        unpaidAccount,
-        body: { amountPaid },
-    } = ctx;
+const partiallyPayment = async (ctx: Context): Promise<void> => {
+    const { unpaidAccount } = ctx.state;
+    const { amountPaid: currentAmountPaid }: { amountPaid: number } = ctx.request.body;
 
-    const updatedAccount = await service.partiallyPayment(amountPaid, unpaidAccount);
+    const updatedAccount = await service.partiallyPaymentAccount(currentAmountPaid, unpaidAccount);
 
     return ctx.ok(updatedAccount);
 };

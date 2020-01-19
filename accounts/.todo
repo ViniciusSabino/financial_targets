@@ -1,0 +1,3 @@
+- Verificar possibilidade de utilizar meu arquivo de 'types' globalmente sem precisar ficar importante
+em qualquer lugar que for utilizado
+- Melhor forma de retornar os erros pela API (ex: create-account)

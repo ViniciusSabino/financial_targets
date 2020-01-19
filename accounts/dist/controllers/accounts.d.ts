@@ -1,6 +1,7 @@
+import { Context } from 'koa';
 declare const _default: {
-    create: (ctx: any) => Promise<any>;
-    find: (ctx: any) => Promise<any>;
-    partiallyPayment: (ctx: any) => Promise<any>;
+    create: (ctx: Context) => Promise<void>;
+    find: (ctx: Context) => Promise<void>;
+    partiallyPayment: (ctx: Context) => Promise<void>;
 };
 export default _default;

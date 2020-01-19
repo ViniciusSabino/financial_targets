@@ -1,7 +1,7 @@
 import Router from 'koa-joi-router';
 
 import controller from '../controllers/accounts';
-import * as validator from '../domain/validators/account';
+import * as validator from '../validators';
 
 const router = Router();
 
@@ -22,7 +22,7 @@ router.route([
         method: 'PATCH',
         path: '/partiallypayment',
         handler: [
-            validator.patchPartiallyPayment,
+            validator.pathPartiallyPayment,
             validator.partiallyPayment,
             controller.partiallyPayment,
         ],
