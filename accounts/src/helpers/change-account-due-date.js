@@ -8,7 +8,9 @@ const changeAccountDueDate = (account) => {
     if (status !== AccountStatus.done) return dueDate;
 
     const updatedDueDate =
-        type === AccountType.monthly ? moment().add('months', 1) : moment().add('years', 1);
+        type === AccountType.monthly
+            ? moment(dueDate).add('months', 1)
+            : moment(dueDate).add('years', 1);
 
     return updatedDueDate.format();
 };
