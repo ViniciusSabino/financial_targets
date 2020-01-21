@@ -10,7 +10,7 @@ const validCreate = async (ctx, next) => {
     try {
         await accountSchema.validateAsync(body);
 
-        if (moment(body.dueDate) < moment()) errors.push(AccountErrors.dueDateIsInvalid);
+        if (moment(body.dueDate).isAfter(moment())) errors.push(AccountErrors.dueDateIsInvalid);
 
         if (body.amountPaid > body.value) errors.push(AccountErrors.amountPaidIsInvalid);
 

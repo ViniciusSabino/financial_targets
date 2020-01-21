@@ -20,18 +20,19 @@ const schema = Joi.object({
     amountPaid: Joi.number()
         .positive()
         .min(0)
+        .default(0)
         .optional(),
 
     type: Joi.string()
-        .valid([AccountType.monthly, AccountType.yearly])
+        .valid(AccountType.monthly, AccountType.yearly)
         .required(),
 
     paymentForm: Joi.string()
-        .valid([AccountPaymentForm.credit, AccountPaymentForm.debitCard, AccountPaymentForm.ticket])
+        .valid(AccountPaymentForm.credit, AccountPaymentForm.debitCard, AccountPaymentForm.ticket)
         .required(),
 
     status: Joi.string()
-        .valid([AccountStatus.pending, AccountStatus.expired, AccountStatus.done])
+        .valid(AccountStatus.pending, AccountStatus.expired, AccountStatus.done)
         .required(),
 
     isRepeat: Joi.boolean().default(false),
