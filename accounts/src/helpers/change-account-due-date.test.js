@@ -40,7 +40,7 @@ describe('Helpers/changeAccountDueDate', () => {
 
         changeAccountDueDate(account);
 
-        expect(addMock).toHaveBeenLastCalledWith('months', 1);
+        expect(addMock).toHaveBeenCalledWith('months', 1);
     });
 
     it('should add 1 year to dueDate if the status is "DONE" and the team is "YEARLY"', () => {
