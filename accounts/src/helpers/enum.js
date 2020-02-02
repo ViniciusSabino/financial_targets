@@ -22,17 +22,15 @@ const AccountErrors = {
     accountIdIsEmpty: 'ACCOUNT_ID_IS_EMPTY',
     accountAlreadyPaid: 'ACCOUNT_ALREADY_PAID',
     accountNotExists: 'ACCOUNT_NOT_EXISTS',
+    accountIsNotPaidYet: 'ACCOUNT_IS_NOT_PAID_YET',
 };
 
 const FieldTypes = {
     number: 'NUMBER',
     string: 'STRING',
-    date: 'DATE',
     enum: 'ENUM',
     array: 'ARRAY',
     boolean: 'BOOLEAN',
-    dateStart: 'DATE_START',
-    dateEnd: 'DATE_END',
 };
 
 export { AccountType, AccountPaymentForm, AccountStatus, AccountErrors, FieldTypes };

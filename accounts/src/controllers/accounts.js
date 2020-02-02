@@ -1,5 +1,3 @@
-import {} from 'koa';
-
 import * as service from '../services';
 
 const create = async (ctx) => {

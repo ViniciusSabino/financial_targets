@@ -1,5 +1,5 @@
 import changeAccountStatus from './change-account-status';
-import { AccountStatus } from './enum';
+import { AccountStatus } from '../enum';
 
 describe('Helpers/ChangeAccountStatus', () => {
     it('should return the status "DONE" when the amountPaid is equal to the value of account', () => {
@@ -18,7 +18,7 @@ describe('Helpers/ChangeAccountStatus', () => {
         const account = {
             amountPaid: 100,
             value: 200,
-            status: AccountStatus.expired,
+            status: AccountStatus.pending,
         };
 
         const updatedStatus = changeAccountStatus(account);

@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { AccountType, AccountStatus } from './enum';
+import { AccountType, AccountStatus } from '../enum';
 
 const changeAccountDueDate = (account) => {
     const { status, type, dueDate } = account;

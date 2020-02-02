@@ -1,6 +1,8 @@
-import changeAccountAmountPaid from './change-account-amount-paid';
-import changeAccountDueDate from './change-account-due-date';
-import changeAccountStatus from './change-account-status';
+import {
+    changeAccountAmountPaid,
+    changeAccountStatus,
+    changeAccountDueDate,
+} from './change-account';
 
 const adapterPartiallyPayment = (currentAmountPaid, unpaidAccount) => {
     const updatedAmountPaid = changeAccountAmountPaid(currentAmountPaid, unpaidAccount);

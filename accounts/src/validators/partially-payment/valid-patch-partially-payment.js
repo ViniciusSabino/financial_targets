@@ -1,4 +1,4 @@
-import { AccountErrors } from '../helpers/enum';
+import { AccountErrors } from '../../helpers/enum';
 
 const validPatchPartiallyPayment = (ctx, next) => {
     const { id: accountId, amountPaid: currentAmountPaid } = ctx.request.body;

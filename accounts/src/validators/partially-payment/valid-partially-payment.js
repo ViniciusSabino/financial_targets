@@ -1,5 +1,5 @@
-import AccountModel from '../database/mongodb/models/Account';
-import { AccountStatus, AccountErrors } from '../helpers/enum';
+import AccountModel from '../../database/mongodb/models/Account';
+import { AccountStatus, AccountErrors } from '../../helpers/enum';
 
 export default async (ctx, next) => {
     const { id: accountId, amountPaid: currentAmountPaid } = ctx.request.body;

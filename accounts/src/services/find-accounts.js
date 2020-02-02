@@ -1,9 +1,9 @@
 import AccountModel from '../database/mongodb/models/Account';
-import { createMongoFilter, createMongoSort } from '../helpers/find-accounts';
+import { createFilter, createSort } from '../helpers/find-accounts';
 
 const findAccounts = async ({ sort, order, limit, ...fields }) => {
-    const filter = createMongoFilter(fields);
-    const ordination = createMongoSort(sort, order);
+    const filter = createFilter(fields);
+    const ordination = createSort(sort, order);
 
     const accounts = await AccountModel.find(filter)
         .sort(ordination)

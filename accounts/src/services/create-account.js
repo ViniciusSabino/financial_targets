@@ -1,10 +1,9 @@
 import AccountModel from '../database/mongodb/models/Account';
-import changeAccountStatus from '../helpers/change-account-status';
-import changeAccountDueDate from '../helpers/change-account-due-date';
+import { changeAccountStatus, changeAccountDueDate } from '../helpers/change-account';
 
 const createAccount = async (account) => {
     const updatedStatus = changeAccountStatus(account);
-    const updatedDueDate = changeAccountDueDate(account);
+    const updatedDueDate = changeAccountDueDate({ ...account, status: updatedStatus });
 
     const accountCreated = await AccountModel.create({
         ...account,

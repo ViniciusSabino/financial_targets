@@ -1,4 +1,4 @@
-import { AccountStatus } from './enum';
+import { AccountStatus } from '../enum';
 
 const changeAccountStatus = (account) => {
     const { amountPaid, value, status } = account;

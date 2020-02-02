@@ -1,20 +1,20 @@
 import moment from 'moment';
 
 import changeAccountDueDate from './change-account-due-date';
-import { AccountStatus, AccountType } from './enum';
+import { AccountStatus, AccountType } from '../enum';
 
 jest.mock('moment');
 
-const addMock = jest.fn(() => ({
+const momentAddMock = jest.fn(() => ({
     format: jest.fn(),
 }));
 
 moment.mockImplementation(() => ({
-    add: addMock,
+    add: momentAddMock,
 }));
 
 beforeEach(() => {
-    addMock.mockClear();
+    momentAddMock.mockClear();
 });
 
 describe('Helpers/changeAccountDueDate', () => {
@@ -28,7 +28,7 @@ describe('Helpers/changeAccountDueDate', () => {
         const updatedDueDate = changeAccountDueDate(account);
 
         expect(updatedDueDate).toBe(account.dueDate);
-        expect(addMock).not.toHaveBeenCalled();
+        expect(momentAddMock).not.toHaveBeenCalled();
     });
 
     it('should add 1 month to dueDate if the status is "DONE" and the type is "MONTHLY', () => {
@@ -40,7 +40,7 @@ describe('Helpers/changeAccountDueDate', () => {
 
         changeAccountDueDate(account);
 
-        expect(addMock).toHaveBeenLastCalledWith('months', 1);
+        expect(momentAddMock).toHaveBeenCalledWith('months', 1);
     });
 
     it('should add 1 year to dueDate if the status is "DONE" and the team is "YEARLY"', () => {
@@ -52,6 +52,6 @@ describe('Helpers/changeAccountDueDate', () => {
 
         changeAccountDueDate(account);
 
-        expect(addMock).toHaveBeenCalledWith('years', 1);
+        expect(momentAddMock).toHaveBeenCalledWith('years', 1);
     });
 });

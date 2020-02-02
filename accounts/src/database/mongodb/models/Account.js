@@ -4,7 +4,6 @@ const AccountSchema = mongoose.Schema;
 
 const accountSchema = new AccountSchema(
     {
-        userId: { type: Number, required: true },
         name: { type: String, required: true },
         description: { type: String },
         value: { type: Number, required: true },

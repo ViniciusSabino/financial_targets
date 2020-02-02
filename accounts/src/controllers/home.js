@@ -2,7 +2,7 @@ import config from '../config';
 
 export default (ctx) =>
     ctx.ok({
-        title: 'Financal Targets - Accounts API',
+        name: config.name,
         environment: config.environment,
         port: config.port,
     });

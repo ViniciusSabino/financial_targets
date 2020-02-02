@@ -1,5 +1,6 @@
-import createMongoFilter from './create-mongodb-filter';
-import createMongoSort from './create-mongodb-sort';
-import findAccountFields from './find-account-fields';
+import createFilter from './create-filter';
+import createSort from './create-sort';
+import getFilterableFields from './get-filterable-fields';
+import getMapFieldsAndTypes from './get-map-fields-and-types';
 
-export { createMongoFilter, createMongoSort, findAccountFields };
+export { createFilter, createSort, getFilterableFields, getMapFieldsAndTypes };
