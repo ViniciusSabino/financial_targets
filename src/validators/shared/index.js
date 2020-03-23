@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 
-import validAccount from './valid-save-account';
+import validSaveAccount from './valid-save-account';
 
-export { validAccount };
+export { validSaveAccount };
