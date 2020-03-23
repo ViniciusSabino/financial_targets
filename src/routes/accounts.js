@@ -1,7 +1,10 @@
 import Router from 'koa-joi-router';
 
 import controller from '../controllers/accounts';
-import * as validator from '../validators';
+
+import validCreate from '../validators/create-account/valid-create';
+import validPatchPartiallyPayment from '../validators/partially-payment/valid-patch-partially-payment';
+import validPartiallyPayment from '../validators/partially-payment/valid-partially-payment';
 
 const router = Router();
 
@@ -11,7 +14,7 @@ router.route([
     {
         method: 'POST',
         path: '/',
-        handler: [validator.create, controller.create],
+        handler: [validCreate, controller.create],
     },
     {
         method: 'GET',
@@ -21,11 +24,7 @@ router.route([
     {
         method: 'PATCH',
         path: '/partiallypayment',
-        handler: [
-            validator.pathPartiallyPayment,
-            validator.partiallyPayment,
-            controller.partiallyPayment,
-        ],
+        handler: [validPatchPartiallyPayment, validPartiallyPayment, controller.partiallyPayment],
     },
 ]);
 

@@ -1,8 +1,10 @@
-import { createAccount, findAccounts } from '../services';
-import { AccountStatus } from '../helpers/enum';
+import createAccount from '../modules/create-account/create-account-service';
+import findAccounts from '../modules/find-accounts/find-accounts-service';
+import { ACCOUNT_STATUS } from '../utils/enums';
 import controller from './accounts';
 
-jest.mock('../services');
+jest.mock('../modules/create-account/create-account-service');
+jest.mock('../modules/find-accounts/find-accounts-service');
 
 const createdResponse = jest.fn();
 const okResponse = jest.fn();
@@ -15,7 +17,7 @@ const ctx = {
 
 let ctxMock;
 
-describe('Controllers/Accounts', () => {
+describe('controllers => accounts', () => {
     beforeEach(() => {
         ctxMock = ctx;
 
@@ -23,12 +25,12 @@ describe('Controllers/Accounts', () => {
         okResponse.mockClear();
     });
 
-    it('should the "create" function be called correctly', async () => {
+    it('deve a controller create deve ser chamada corretamente', async () => {
         const accountCreatedMock = {
             name: 'Vivo',
             value: 400,
             amountPaid: 30,
-            status: AccountStatus.pending,
+            status: ACCOUNT_STATUS.pending,
             // ...
         };
 
@@ -42,8 +44,11 @@ describe('Controllers/Accounts', () => {
         expect(createdResponse).toHaveBeenCalledWith(accountCreatedMock);
     });
 
-    it('should the "find" function be called correctly', async () => {
-        const accountsMock = [{ name: 'Vivo', value: 400 }, { name: 'Banco', value: 2000 }];
+    it('deve a controller find deve ser chamada corretamente', async () => {
+        const accountsMock = [
+            { name: 'Vivo', value: 400 },
+            { name: 'Banco', value: 2000 },
+        ];
 
         ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
 

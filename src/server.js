@@ -7,11 +7,11 @@ import chalk from 'chalk';
 
 import config from './config';
 import routes from './routes';
-import createMongoConnection from './database/mongodb';
+import mongoDB from './database/mongodb';
 
 const app = new Koa();
 
-createMongoConnection();
+mongoDB();
 
 app.use(bodyParser());
 app.use(logger());

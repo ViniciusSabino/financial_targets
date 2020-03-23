@@ -11,7 +11,7 @@ const accountSchema = new AccountSchema(
         status: { type: String, required: true },
         amountPaid: { type: Number, default: 0 },
         type: { type: String, required: true },
-        paymentForm: { type: String, required: true },
+        paymentMethod: { type: String, required: true },
         isRepeat: { type: Boolean, default: false },
         tags: [{ type: String }],
     },

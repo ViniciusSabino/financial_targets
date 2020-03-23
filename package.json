@@ -11,7 +11,7 @@
         "test:watch": "jest --expand --detect-open-handles --only-changed --watch",
         "test:watch-all": "jest --expand --detect-open-handles -- --watch",
         "start": "node ./dist/server.js",
-        "lint": "eslint . --ext .ts"
+        "lint": "eslint ."
     },
     "husky": {
         "hooks": {
