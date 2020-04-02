@@ -9,7 +9,7 @@ jest.mock('moment');
 
 describe('modules', () => {
     describe('shared', () => {
-        describe('getDueDateByAccount', () => {
+        describe('get-due-date-by-account', () => {
             const formatFn = jest.fn();
 
             const addFn = jest.fn(() => ({

@@ -35,46 +35,48 @@ getMapFieldsAndTypes.mockImplementation(
 );
 
 describe('find-accounts', () => {
-    describe('helpers => createFilter', () => {
-        it('deve retornar um objeto para filtro no mongodb com base nos campos recebibos', () => {
-            const fields = {
-                value: 200,
-                tags: 'Vivo,NuBank,Compras',
-            };
+    describe('helpers', () => {
+        describe('create-filter', () => {
+            it('deve retornar um objeto para filtro no mongodb com base nos campos recebibos', () => {
+                const fields = {
+                    value: 200,
+                    tags: 'Vivo,NuBank,Compras',
+                };
 
-            const filter = createFilter(fields);
+                const filter = createFilter(fields);
 
-            expect(filter).toEqual({
-                value: {
-                    $eq: fields.value,
-                },
-                tags: {
-                    $in: fields.tags.split(','),
-                },
+                expect(filter).toEqual({
+                    value: {
+                        $eq: fields.value,
+                    },
+                    tags: {
+                        $in: fields.tags.split(','),
+                    },
+                });
             });
-        });
 
-        it('deve retornar um objeto vazio caso não tenha campos para filtrar', () => {
-            const fields = {};
+            it('deve retornar um objeto vazio caso não tenha campos para filtrar', () => {
+                const fields = {};
 
-            const filter = createFilter(fields);
+                const filter = createFilter(fields);
 
-            expect(filter).toEqual({});
-        });
+                expect(filter).toEqual({});
+            });
 
-        it('deve ignorar na filtragem propriedades que não fazem parte de uma conta', () => {
-            const fields = {
-                value: 400,
-                'Access-Control-Allow-Origin': '*',
-                'cache-control': 'no-cache',
-            };
+            it('deve ignorar na filtragem propriedades que não fazem parte de uma conta', () => {
+                const fields = {
+                    value: 400,
+                    'Access-Control-Allow-Origin': '*',
+                    'cache-control': 'no-cache',
+                };
 
-            const filter = createFilter(fields);
+                const filter = createFilter(fields);
 
-            expect(filter).toEqual({
-                value: {
-                    $eq: fields.value,
-                },
+                expect(filter).toEqual({
+                    value: {
+                        $eq: fields.value,
+                    },
+                });
             });
         });
     });

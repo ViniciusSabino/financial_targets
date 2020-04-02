@@ -7,7 +7,7 @@ jest.mock('moment');
 
 describe('modules', () => {
     describe('shared', () => {
-        describe('calculateNewAmountPaid', () => {
+        describe('calculate-new-amountPaid', () => {
             it('deve retornar o proprio valor da conta caso a soma entre o amountPaid e o currentAmountPaid seja maior ou igual ao valor', () => {
                 const unpaidAccount = {
                     amountPaid: 200,

@@ -17,46 +17,48 @@ const ctx = {
 
 let ctxMock;
 
-describe('controllers => accounts', () => {
-    beforeEach(() => {
-        ctxMock = ctx;
+describe('controllers', () => {
+    describe('accounts', () => {
+        beforeEach(() => {
+            ctxMock = ctx;
 
-        createdResponse.mockClear();
-        okResponse.mockClear();
-    });
+            createdResponse.mockClear();
+            okResponse.mockClear();
+        });
 
-    it('deve a controller create deve ser chamada corretamente', async () => {
-        const accountCreatedMock = {
-            name: 'Vivo',
-            value: 400,
-            amountPaid: 30,
-            status: ACCOUNT_STATUS.pending,
-            // ...
-        };
+        it('create account', async () => {
+            const accountCreatedMock = {
+                name: 'Vivo',
+                value: 400,
+                amountPaid: 30,
+                status: ACCOUNT_STATUS.pending,
+                // ...
+            };
 
-        ctxMock.request.body = accountCreatedMock;
+            ctxMock.request.body = accountCreatedMock;
 
-        createAccount.mockImplementation(() => Promise.resolve(accountCreatedMock));
+            createAccount.mockImplementation(() => Promise.resolve(accountCreatedMock));
 
-        await controller.create(ctx);
+            await controller.create(ctx);
 
-        expect(createAccount).toHaveBeenCalledWith(ctx.request.body);
-        expect(createdResponse).toHaveBeenCalledWith(accountCreatedMock);
-    });
+            expect(createAccount).toHaveBeenCalledWith(ctx.request.body);
+            expect(createdResponse).toHaveBeenCalledWith(accountCreatedMock);
+        });
 
-    it('deve a controller find deve ser chamada corretamente', async () => {
-        const accountsMock = [
-            { name: 'Vivo', value: 400 },
-            { name: 'Banco', value: 2000 },
-        ];
+        it('find accounts', async () => {
+            const accountsMock = [
+                { name: 'Vivo', value: 400 },
+                { name: 'Banco', value: 2000 },
+            ];
 
-        ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
+            ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
 
-        findAccounts.mockImplementation(() => Promise.resolve(accountsMock));
+            findAccounts.mockImplementation(() => Promise.resolve(accountsMock));
 
-        await controller.find(ctxMock);
+            await controller.find(ctxMock);
 
-        expect(findAccounts).toHaveBeenCalledWith(ctx.request.header);
-        expect(okResponse).toHaveBeenCalledWith(accountsMock);
+            expect(findAccounts).toHaveBeenCalledWith(ctx.request.header);
+            expect(okResponse).toHaveBeenCalledWith(accountsMock);
+        });
     });
 });

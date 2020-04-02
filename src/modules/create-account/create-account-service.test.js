@@ -21,30 +21,34 @@ const expectedAccount = {
     dueDate: '2021-11-21 00:00:00.000',
 };
 
-describe('Services/createAccount', () => {
-    it('deve salvar uma nova conta no mongodb', async () => {
-        getStatusByAccount.mockImplementation(() => ACCOUNT_STATUS.done);
-        getDueDateByAccount.mockImplementation(() => '2021-11-21 00:00:00.000');
+describe('modules', () => {
+    describe('create-account', () => {
+        describe('create-account-service', () => {
+            it('deve salvar uma nova conta no mongodb', async () => {
+                getStatusByAccount.mockImplementation(() => ACCOUNT_STATUS.done);
+                getDueDateByAccount.mockImplementation(() => '2021-11-21 00:00:00.000');
 
-        const mongoCreate = jest.fn(() => expectedAccount);
+                const mongoCreate = jest.fn(() => expectedAccount);
 
-        jest.spyOn(AccountModel, 'create').mockImplementation(mongoCreate);
+                jest.spyOn(AccountModel, 'create').mockImplementation(mongoCreate);
 
-        const account = await createAccount(accountMock);
+                const account = await createAccount(accountMock);
 
-        expect(getStatusByAccount).toHaveBeenCalledWith(accountMock);
+                expect(getStatusByAccount).toHaveBeenCalledWith(accountMock);
 
-        expect(getDueDateByAccount).toHaveBeenCalledWith({
-            ...accountMock,
-            status: ACCOUNT_STATUS.done,
+                expect(getDueDateByAccount).toHaveBeenCalledWith({
+                    ...accountMock,
+                    status: ACCOUNT_STATUS.done,
+                });
+
+                expect(mongoCreate).toHaveBeenCalledWith({
+                    ...accountMock,
+                    status: ACCOUNT_STATUS.done,
+                    dueDate: '2021-11-21 00:00:00.000',
+                });
+
+                expect(account).toEqual(expectedAccount);
+            });
         });
-
-        expect(mongoCreate).toHaveBeenCalledWith({
-            ...accountMock,
-            status: ACCOUNT_STATUS.done,
-            dueDate: '2021-11-21 00:00:00.000',
-        });
-
-        expect(account).toEqual(expectedAccount);
     });
 });

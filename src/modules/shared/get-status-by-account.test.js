@@ -7,7 +7,7 @@ jest.mock('moment');
 
 describe('create-account', () => {
     describe('helpers', () => {
-        describe('getStatusByAccount', () => {
+        describe('get-status-by-account', () => {
             it('deve retornar o status "DONE" caso o valor pago seja igual ao valor da conta', () => {
                 const status = getStatusByAccount({
                     amountPaid: 100,
