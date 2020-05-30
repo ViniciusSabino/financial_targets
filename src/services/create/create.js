@@ -1,17 +1,9 @@
-import AccountModel from '../../database/mongodb/models/Account';
-import { getStatusByAccount, getDueDateByAccount } from '../shared';
+import Account from '../../database/mongodb/models/Account';
 
 const createAccount = async (account) => {
-    const updatedStatus = getStatusByAccount(account);
-    const updatedDueDate = getDueDateByAccount({ ...account, status: updatedStatus });
+    const created = await Account.create(account);
 
-    const accountCreated = await AccountModel.create({
-        ...account,
-        status: updatedStatus,
-        dueDate: updatedDueDate,
-    });
-
-    return accountCreated;
+    return created;
 };
 
 export default createAccount;

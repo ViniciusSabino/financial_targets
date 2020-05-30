@@ -1,28 +1,19 @@
-import getFilterableFields from './get-filterable-fields';
+const getMapFieldsAndTypes = (filterableFields) => {
+    const arrayMapping = [];
 
-const createMap = (fields) => {
-    const mapArray = [];
+    const types = Object.keys(filterableFields);
 
-    const fieldTypeKeys = Object.keys(fields);
+    types.forEach((type) => {
+        const { fields } = filterableFields[type];
 
-    fieldTypeKeys.forEach((fieldType) => {
-        const accountFields = fields[fieldType].fields;
+        if (fields?.length) {
+            const mapItems = fields.map((field) => [field, type]);
 
-        if (accountFields && accountFields.length) {
-            const mapItems = accountFields.map((fieldName) => [fieldName, fieldType]);
-
-            mapArray.push(...mapItems);
+            arrayMapping.push(...mapItems);
         }
     });
 
-    return mapArray;
-};
-
-const getMapFieldsAndTypes = () => {
-    const fields = getFilterableFields();
-    const mapping = createMap(fields);
-
-    return new Map(mapping);
+    return new Map(arrayMapping);
 };
 
 export default getMapFieldsAndTypes;

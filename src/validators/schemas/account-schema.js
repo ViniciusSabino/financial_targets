@@ -22,7 +22,7 @@ const schema = Joi.object({
         .positive()
         .min(0)
         .default(0)
-        .optional(),
+        .required(),
 
     type: Joi.string()
         .valid(TYPES.monthly, TYPES.yearly)

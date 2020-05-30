@@ -1,7 +1,7 @@
 import AccountModel from '../../database/mongodb/models/Account';
 import { createFilter, createSort } from './helpers';
 
-const findAccounts = async ({ sort, order, limit, ...fields }) => {
+const find = async ({ sort, order, limit, ...fields }) => {
     const filter = createFilter(fields);
     const ordination = createSort(sort, order);
 
@@ -13,4 +13,4 @@ const findAccounts = async ({ sort, order, limit, ...fields }) => {
     return accounts;
 };
 
-export default findAccounts;
+export default find;

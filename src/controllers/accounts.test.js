@@ -1,4 +1,4 @@
-import { create } from '../services';
+import { create, find } from '../services';
 import { STATUS } from '../utils/enums';
 import controller from './accounts';
 
@@ -43,21 +43,30 @@ describe('Controllers', () => {
                 expect(createdRes).toHaveBeenCalledWith(accountCreatedMock);
             });
         });
+        describe('Find', () => {
+            it('should controller respond successfully', async () => {
+                const accountsMock = [
+                    {
+                        name: 'Vivo',
+                        value: 400,
+                        // ...
+                    },
+                    {
+                        name: 'Banco',
+                        value: 2000,
+                        // ...
+                    },
+                ];
 
-        // it('find accounts', async () => {
-        //     const accountsMock = [
-        //         { name: 'Vivo', value: 400 },
-        //         { name: 'Banco', value: 2000 },
-        //     ];
+                ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
 
-        //     ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
+                find.mockImplementation(() => Promise.resolve(accountsMock));
 
-        //     findAccounts.mockImplementation(() => Promise.resolve(accountsMock));
+                await controller.find(ctxMock);
 
-        //     await controller.find(ctxMock);
-
-        //     expect(findAccounts).toHaveBeenCalledWith(ctx.request.header);
-        //     expect(okResponse).toHaveBeenCalledWith(accountsMock);
-        // });
+                expect(find).toHaveBeenCalledWith(ctx.request.header);
+                expect(okRes).toHaveBeenCalledWith(accountsMock);
+            });
+        });
     });
 });

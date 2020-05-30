@@ -1,7 +1,7 @@
-import findAccounts from './find-accounts-service';
-import AccountModel from '../../database/mongodb/models/Account';
+import find from './find';
+import Account from '../../database/mongodb/models/Account';
 import { createFilter, createSort } from './helpers';
-import { ACCOUNT_STATUS } from '../../utils/enums';
+import { STATUS } from '../../utils/enums';
 
 jest.mock('./helpers');
 
@@ -25,8 +25,8 @@ createSort.mockImplementation(() => sortMock);
 
 const findAccountsSpy = jest.spyOn(AccountModel, 'find').mockImplementation(() => accountsMock);
 
-describe('modules', () => {
-    describe('find-accounts', () => {
+describe('Services', () => {
+    describe('find', () => {
         describe('find-accounts-service', () => {
             it('chamada simples', async () => {
                 const header = {

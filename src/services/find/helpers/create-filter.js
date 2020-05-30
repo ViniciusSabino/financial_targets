@@ -4,17 +4,19 @@ import getFilterableFields from './get-filterable-fields';
 const createFilter = (fields) => {
     const keys = Object.keys(fields);
 
-    const filter = keys.reduce((condition, key) => {
-        const fieldType = getMapFieldsAndTypes().get(key);
+    const filterableFields = getFilterableFields();
+    const mapFieldTypes = getMapFieldsAndTypes(filterableFields);
 
-        if (!fieldType) return { ...condition };
+    const filter = keys.reduce((currentFilter, key) => {
+        const type = mapFieldTypes.get(key);
 
-        const objectFieldType = getFilterableFields()[fieldType];
+        if (!type) return { ...currentFilter };
 
-        return {
-            ...condition,
-            ...objectFieldType.getFilter(key, fields[key]),
-        };
+        const fieldType = filterableFields[type];
+
+        const condition = fieldType.getFilter(key, fields[key]);
+
+        return { ...currentFilter, ...condition };
     }, {});
 
     return filter;
