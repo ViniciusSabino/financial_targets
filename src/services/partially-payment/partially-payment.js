@@ -1,4 +1,4 @@
-import { adapterPartiallyPayment } from './partially-payment-account-helpers';
+import { adapterPartiallyPayment } from './partially-payment-helper';
 import AccountModel from '../../database/mongodb/models/Account';
 
 export default async (currentAmountPaid, unpaidAccount) => {

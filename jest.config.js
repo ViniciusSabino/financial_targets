@@ -2,7 +2,7 @@ module.exports = {
     bail: true,
     clearMocks: true,
     collectCoverage: true,
-    collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!**/node_modules/**', '!**/vendor/**'],
+    collectCoverageFrom: ['src/**/*.{js,jsx}', '!**/node_modules/**'],
     coverageDirectory: '__tests__/coverage',
     coveragePathIgnorePatterns: ['/node_modules', '/src/server.js', '/__tests__'],
     coverageThreshold: {
@@ -17,7 +17,7 @@ module.exports = {
         name: '@financial-targets/accounts',
         color: 'red',
     },
-    moduleFileExtensions: ['ts', 'tsx', 'js'],
+    moduleFileExtensions: ['js'],
     name: '@financial-targets/accounts',
     testEnvironment: 'node',
     testMatch: ['**/src/**/*+(spec|test).[jt]s?(x)'],

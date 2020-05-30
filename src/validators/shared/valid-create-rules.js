@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { ERROR_CODES, ACCOUNT_STATUS } from '../../utils/enums';
+import { ERROR_CODES, STATUS } from '../../utils/enums';
 
 const validAccount = (account) => {
     const errors = [];
@@ -9,8 +9,9 @@ const validAccount = (account) => {
 
     if (account.amountPaid > account.value) errors.push(ERROR_CODES.amountPaidIsInvalid);
 
-    if (account.amountPaid < account.value && account.status === ACCOUNT_STATUS.done)
+    if (account.amountPaid < account.value && account.status === STATUS.done) {
         errors.push(ERROR_CODES.accountIsNotPaidYet);
+    }
 
     return errors;
 };

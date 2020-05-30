@@ -1,5 +1,6 @@
 import Joi from '@hapi/joi';
-import { ACCOUNT_PAYMENT_METHODS, ACCOUNT_STATUS, ACCOUNT_TYPES } from '../../utils/enums';
+
+import { PAYMENT_METHODS, STATUS, TYPES } from '../../utils/enums';
 
 const schema = Joi.object({
     name: Joi.string()
@@ -24,19 +25,15 @@ const schema = Joi.object({
         .optional(),
 
     type: Joi.string()
-        .valid(ACCOUNT_TYPES.monthly, ACCOUNT_TYPES.yearly)
+        .valid(TYPES.monthly, TYPES.yearly)
         .required(),
 
     paymentMethod: Joi.string()
-        .valid(
-            ACCOUNT_PAYMENT_METHODS.credit,
-            ACCOUNT_PAYMENT_METHODS.debitCard,
-            ACCOUNT_PAYMENT_METHODS.ticket
-        )
+        .valid(PAYMENT_METHODS.credit, PAYMENT_METHODS.debitCard, PAYMENT_METHODS.ticket)
         .required(),
 
     status: Joi.string()
-        .valid(ACCOUNT_STATUS.pending, ACCOUNT_STATUS.expired, ACCOUNT_STATUS.done)
+        .valid(STATUS.pending, STATUS.expired, STATUS.done)
         .required(),
 
     isRepeat: Joi.boolean().default(false),

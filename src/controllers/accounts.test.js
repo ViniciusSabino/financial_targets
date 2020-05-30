@@ -1,64 +1,63 @@
-import createAccount from '../modules/create-account/create-account-service';
-import findAccounts from '../modules/find-accounts/find-accounts-service';
-import { ACCOUNT_STATUS } from '../utils/enums';
+import { create } from '../services';
+import { STATUS } from '../utils/enums';
 import controller from './accounts';
 
-jest.mock('../modules/create-account/create-account-service');
-jest.mock('../modules/find-accounts/find-accounts-service');
+jest.mock('../services');
 
-const createdResponse = jest.fn();
-const okResponse = jest.fn();
+const createdRes = jest.fn();
+const okRes = jest.fn();
 
 const ctx = {
     request: {},
-    created: createdResponse,
-    ok: okResponse,
+    created: createdRes,
+    ok: okRes,
 };
 
 let ctxMock;
 
-describe('controllers', () => {
-    describe('accounts', () => {
+describe('Controllers', () => {
+    describe('Accounts', () => {
         beforeEach(() => {
             ctxMock = ctx;
 
-            createdResponse.mockClear();
-            okResponse.mockClear();
+            createdRes.mockClear();
+            okRes.mockClear();
+        });
+        describe('Create', () => {
+            it('should controller respond successfully', async () => {
+                const accountCreatedMock = {
+                    name: 'Vivo',
+                    value: 400,
+                    amountPaid: 30,
+                    status: STATUS.pending,
+                    // ...
+                };
+
+                ctxMock.request.body = accountCreatedMock;
+
+                create.mockImplementation(() => Promise.resolve(accountCreatedMock));
+
+                await controller.create(ctx);
+
+                expect(create).toHaveBeenCalledWith(ctx.request.body);
+                expect(createdRes).toHaveBeenCalledWith(accountCreatedMock);
+            });
         });
 
-        it('create account', async () => {
-            const accountCreatedMock = {
-                name: 'Vivo',
-                value: 400,
-                amountPaid: 30,
-                status: ACCOUNT_STATUS.pending,
-                // ...
-            };
+        // it('find accounts', async () => {
+        //     const accountsMock = [
+        //         { name: 'Vivo', value: 400 },
+        //         { name: 'Banco', value: 2000 },
+        //     ];
 
-            ctxMock.request.body = accountCreatedMock;
+        //     ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
 
-            createAccount.mockImplementation(() => Promise.resolve(accountCreatedMock));
+        //     findAccounts.mockImplementation(() => Promise.resolve(accountsMock));
 
-            await controller.create(ctx);
+        //     await controller.find(ctxMock);
 
-            expect(createAccount).toHaveBeenCalledWith(ctx.request.body);
-            expect(createdResponse).toHaveBeenCalledWith(accountCreatedMock);
-        });
-
-        it('find accounts', async () => {
-            const accountsMock = [
-                { name: 'Vivo', value: 400 },
-                { name: 'Banco', value: 2000 },
-            ];
-
-            ctxMock.request.header = { name: 'Banco', sort: 'value', order: 'desc' };
-
-            findAccounts.mockImplementation(() => Promise.resolve(accountsMock));
-
-            await controller.find(ctxMock);
-
-            expect(findAccounts).toHaveBeenCalledWith(ctx.request.header);
-            expect(okResponse).toHaveBeenCalledWith(accountsMock);
-        });
+        //     expect(findAccounts).toHaveBeenCalledWith(ctx.request.header);
+        //     expect(okResponse).toHaveBeenCalledWith(accountsMock);
+        // });
     });
 });

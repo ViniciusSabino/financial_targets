@@ -1,5 +1,5 @@
 import accountSchema from '../schemas/account-schema';
-import { validSaveAccount } from '../shared';
+import { validCreateRules } from '../shared';
 
 const validCreate = async (ctx, next) => {
     const { body } = ctx.request;
@@ -7,7 +7,7 @@ const validCreate = async (ctx, next) => {
     try {
         await accountSchema.validateAsync(body);
 
-        const errors = validSaveAccount(body);
+        const errors = validCreateRules(body);
 
         return errors.length ? ctx.badRequest(errors) : next();
     } catch (error) {
