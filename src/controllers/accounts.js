@@ -3,9 +3,9 @@ import * as service from '../services';
 const create = async (ctx) => {
     const { body } = ctx.request;
 
-    const created = await service.create(body);
+    const account = await service.create(body);
 
-    return ctx.created(created);
+    return ctx.created(account);
 };
 
 const find = async (ctx) => {
