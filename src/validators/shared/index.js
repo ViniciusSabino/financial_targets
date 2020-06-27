@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 
-import validCreateRules from './valid-create-rules';
+import validSaveRules from './valid-save-rules';
 
-export { validCreateRules };
+export { validSaveRules };

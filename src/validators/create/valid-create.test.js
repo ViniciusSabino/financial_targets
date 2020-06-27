@@ -1,5 +1,5 @@
 import accountSchema from '../schemas/account-schema';
-import { validCreateRules } from '../shared';
+import { validSaveRules } from '../shared';
 import validCreate from './valid-create';
 import { ERROR_CODES } from '../../utils/enums';
 
@@ -21,6 +21,8 @@ const ctxMock = {
     badRequest: badRequestMock,
 };
 
+const ACTION = 'create';
+
 describe('Validators', () => {
     describe('Create', () => {
         describe('Valid Create', () => {
@@ -34,29 +36,32 @@ describe('Validators', () => {
                 const response = await validCreate(ctxMock, nextMock);
 
                 expect(validateAsyncMock).toHaveBeenCalledWith(ctxMock.request.body);
-                expect(validCreateRules).not.toHaveBeenCalled();
+                expect(validSaveRules).not.toHaveBeenCalled();
                 expect(nextMock).not.toHaveBeenCalled();
                 expect(badRequestMock).toHaveBeenCalledWith(errorMessage);
                 expect(response).toEqual(errorMessage);
             });
 
             it('shoud return a "badRequest" when an error occurs in the validations in the creation rules', async () => {
-                const errorsMock = [
-                    ERROR_CODES.dueDateIsInvalid,
-                    ERROR_CODES.amountPaidIsEmpty,
-                    ERROR_CODES.accountIsNotPaidYet,
-                ];
+                const errorsMock = {
+                    errors: [
+                        ERROR_CODES.dueDateIsInvalid,
+                        ERROR_CODES.amountPaidIsEmpty,
+                        ERROR_CODES.accountIsNotPaidYet,
+                    ],
+                    action: 'test',
+                };
 
                 const validateAsyncMock = jest
                     .spyOn(accountSchema, 'validateAsync')
                     .mockImplementation(() => Promise.resolve());
 
-                validCreateRules.mockImplementation(() => errorsMock);
+                validSaveRules.mockImplementation(() => errorsMock);
 
                 const response = await validCreate(ctxMock, nextMock);
 
                 expect(validateAsyncMock).toHaveBeenCalledWith(ctxMock.request.body);
-                expect(validCreateRules).toHaveBeenCalledWith(ctxMock.request.body);
+                expect(validSaveRules).toHaveBeenCalledWith(ctxMock.request.body, ACTION);
                 expect(nextMock).not.toHaveBeenCalledWith();
                 expect(badRequestMock).toHaveBeenCalledWith(errorsMock);
                 expect(response).toEqual(errorsMock);
@@ -67,12 +72,12 @@ describe('Validators', () => {
                     .spyOn(accountSchema, 'validateAsync')
                     .mockImplementation(() => Promise.resolve());
 
-                validCreateRules.mockImplementation(() => []);
+                validSaveRules.mockImplementation(() => ({ errors: [], action: ACTION }));
 
                 await validCreate(ctxMock, nextMock);
 
                 expect(validateAsyncMock).toHaveBeenCalledWith(ctxMock.request.body);
-                expect(validCreateRules).toHaveBeenCalledWith(ctxMock.request.body);
+                expect(validSaveRules).toHaveBeenCalledWith(ctxMock.request.body, ACTION);
                 expect(nextMock).toHaveBeenCalled();
                 expect(badRequestMock).not.toHaveBeenCalled();
             });

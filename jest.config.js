@@ -4,7 +4,13 @@ module.exports = {
     collectCoverage: true,
     collectCoverageFrom: ['src/**/*.{js,jsx}', '!**/node_modules/**'],
     coverageDirectory: '__tests__/coverage',
-    coveragePathIgnorePatterns: ['/node_modules', '/src/server.js', '/__tests__'],
+    coveragePathIgnorePatterns: [
+        '/node_modules',
+        '/src/server.js',
+        '/__tests__',
+        '/src/database',
+        '/src/config',
+    ],
     coverageThreshold: {
         global: {
             statements: 10,

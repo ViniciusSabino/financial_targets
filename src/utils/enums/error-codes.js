@@ -7,6 +7,7 @@ const ERROR_CODES = {
     accountNotExists: 'ACCOUNT_NOT_EXISTS',
     accountIsNotPaidYet: 'ACCOUNT_IS_NOT_PAID_YET',
     accountIsInvalid: 'ACCOUNT_IS_INVALID',
+    notExpiredAccount: 'NOT_EXPIRED_ACCOUNT',
 };
 
 export default ERROR_CODES;

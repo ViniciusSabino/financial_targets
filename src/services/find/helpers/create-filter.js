@@ -2,7 +2,7 @@ import getMapFieldsAndTypes from './get-map-fields-and-types';
 import getFilterableFields from './get-filterable-fields';
 
 const createFilter = (fields) => {
-    const keys = Object.keys(fields);
+    const keys = fields ? Object.keys(fields) : [];
 
     const filterableFields = getFilterableFields();
     const mapFieldTypes = getMapFieldsAndTypes(filterableFields);

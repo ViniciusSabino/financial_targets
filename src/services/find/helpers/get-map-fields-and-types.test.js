@@ -8,7 +8,7 @@ describe('Services', () => {
     describe('Find', () => {
         describe('Helpers', () => {
             describe('Get Map Fields and Types', () => {
-                it('deve retornar um Map onde a chave é um atributo de uma conta e o valor é o tipo do campo', () => {
+                it('should return a Map where the key is the attribute of an account and the value is the type of the field', () => {
                     const filterableFields = {
                         [FIELD_TYPES.enum]: {
                             fields: ['type', 'status', 'paymentMethod'],
@@ -28,7 +28,7 @@ describe('Services', () => {
                     ]);
                 });
 
-                it('não deve adicionar ao Map os tipos que não possuem campos', () => {
+                it('should not add to the Map types that do not have linked fields', () => {
                     const filterableFields = {
                         [FIELD_TYPES.number]: {
                             fields: ['value'],

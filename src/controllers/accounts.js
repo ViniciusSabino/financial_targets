@@ -16,17 +16,7 @@ const find = async (ctx) => {
     return ctx.ok(accounts);
 };
 
-const partiallyPayment = async (ctx) => {
-    const { unpaidAccount } = ctx.state;
-    const { amountPaid } = ctx.request.body;
-
-    const updatedAccount = await service.partiallyPayment(amountPaid, unpaidAccount);
-
-    return ctx.ok(updatedAccount);
-};
-
 export default {
     create,
     find,
-    partiallyPayment,
 };

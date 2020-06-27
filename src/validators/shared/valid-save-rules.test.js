@@ -1,7 +1,9 @@
 import { ERROR_CODES, STATUS } from '../../utils/enums';
-import validCreateRules from './valid-create-rules';
+import validSaveRules from './valid-save-rules';
 
 const dateNowDefault = Date.now;
+
+const ACTION = 'test';
 
 describe('Validators', () => {
     describe('Shared', () => {
@@ -19,9 +21,9 @@ describe('Validators', () => {
                     dueDate: '2019-12-31 00:00:00.000',
                 };
 
-                const errors = validCreateRules(account);
+                const errors = validSaveRules(account, ACTION);
 
-                expect(errors).toEqual([ERROR_CODES.dueDateIsInvalid]);
+                expect(errors).toEqual({ errors: [ERROR_CODES.dueDateIsInvalid], action: ACTION });
             });
 
             it('should return an array with the error "amountPaidIsInvalid" if the amount paid is greater than the account amount', () => {
@@ -30,9 +32,12 @@ describe('Validators', () => {
                     value: 100,
                 };
 
-                const errors = validCreateRules(account);
+                const errors = validSaveRules(account, ACTION);
 
-                expect(errors).toEqual([ERROR_CODES.amountPaidIsInvalid]);
+                expect(errors).toEqual({
+                    errors: [ERROR_CODES.amountPaidIsInvalid],
+                    action: ACTION,
+                });
             });
 
             it('should return an array with the error "accountIsNotPaidYet" if the amount paid is less than the value of the account "DONE"', () => {
@@ -42,9 +47,25 @@ describe('Validators', () => {
                     status: STATUS.done,
                 };
 
-                const errors = validCreateRules(account);
+                const errors = validSaveRules(account, ACTION);
 
-                expect(errors).toEqual([ERROR_CODES.accountIsNotPaidYet]);
+                expect(errors).toEqual({
+                    errors: [ERROR_CODES.accountIsNotPaidYet],
+                    action: ACTION,
+                });
+            });
+
+            it('should return an array with the error "notExpiredAccount" if you try to register an expired account', () => {
+                const account = {
+                    status: STATUS.expired,
+                };
+
+                const errors = validSaveRules(account, ACTION);
+
+                expect(errors).toEqual({
+                    errors: [ERROR_CODES.notExpiredAccount],
+                    action: ACTION,
+                });
             });
 
             it('should return an empty array if there are no errors in validating the account', () => {
@@ -52,9 +73,9 @@ describe('Validators', () => {
                     dueDate: '9999-12-31 00:00:00.000',
                 };
 
-                const errors = validCreateRules(account);
+                const errors = validSaveRules(account, ACTION);
 
-                expect(errors.length).toEqual(0);
+                expect(errors).toEqual({ errors: [], action: ACTION });
             });
         });
     });

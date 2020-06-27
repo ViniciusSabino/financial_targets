@@ -1,5 +1,5 @@
-const createSort = (sort, order = 'asc') => ({
-    [sort]: order === 'desc' ? -1 : 1,
+const createSort = ({ sort, order }) => ({
+    [sort || 'name']: order === 'desc' ? -1 : 1,
 });
 
 export default createSort;
