@@ -12,7 +12,7 @@ PARTIALLY PAYMENT
     - Se a data para pagar for maior ou igual a data atual então atualiza também o status da conta para PENDING
 - Não permitir AMOUNT_PAID > VALOR DA CONTA 
 
-- Criar um objeto onde somente ele terá a relação de quais campos uma conta possui (usar esse objeto no get-filterable-fields) (No mesmo arquivo criar um array com o nome de todos os campos de uma conta (accountAllFields))
+- (FEITO) Criar um objeto onde somente ele terá a relação de quais campos uma conta possui (usar esse objeto no get-filterable-fields) (No mesmo arquivo criar um array com o nome de todos os campos de uma conta (accountAllFields))
 
 - VALIDAÇÃO DINAMICA DO JOI PARA 1 OU N CAMPOS DE UMA CONTA (MONTA O SCHEMA COM BASE NO QUE VIER NA REQUEST NO BODY)
 - 1 - SE NÃO VIER NADA NO BODY ENTÃO RESPONDE UM 404 

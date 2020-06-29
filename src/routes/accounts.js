@@ -2,7 +2,7 @@ import Router from 'koa-joi-router';
 
 import controller from '../controllers/accounts';
 
-import { validCreate } from '../validators';
+import { validCreate, validPatch } from '../validators';
 
 const router = Router();
 
@@ -22,7 +22,7 @@ router.route([
     {
         method: 'PATCH',
         path: '/',
-        handler: [],
+        handler: [validPatch],
     },
 ]);
 

@@ -1,6 +1,10 @@
 import { getFilterableFields } from './index';
 import { FIELD_TYPES } from '../../../utils/enums';
 
+import constants from '../../../utils/constants';
+
+const { accountSchema } = constants;
+
 describe('Services', () => {
     describe('Find', () => {
         describe('Helpers', () => {
@@ -22,7 +26,7 @@ describe('Services', () => {
                     expect(typeNumber).toHaveProperty('getFilter');
                     expect(typeNumber.fields).toEqual(expect.any(Array));
 
-                    const filter = typeNumber.getFilter('value', 300);
+                    const filter = typeNumber.getFilter(accountSchema.value.name, 300);
 
                     expect(filter).toStrictEqual({
                         value: {
@@ -38,7 +42,7 @@ describe('Services', () => {
                     expect(typeEnum).toHaveProperty('getFilter');
                     expect(typeEnum.fields).toEqual(expect.any(Array));
 
-                    const filter = typeEnum.getFilter('status', 'PENDING');
+                    const filter = typeEnum.getFilter(accountSchema.status.name, 'PENDING');
 
                     expect(filter).toStrictEqual({
                         status: {
@@ -54,7 +58,7 @@ describe('Services', () => {
                     expect(typeString).toHaveProperty('getFilter');
                     expect(typeString.fields).toEqual(expect.any(Array));
 
-                    const filter = typeString.getFilter('name', 'NuBank');
+                    const filter = typeString.getFilter(accountSchema.name.name, 'NuBank');
 
                     expect(filter).toStrictEqual({
                         name: {
@@ -71,7 +75,7 @@ describe('Services', () => {
                     expect(typeBoolean).toHaveProperty('getFilter');
                     expect(typeBoolean.fields).toEqual(expect.any(Array));
 
-                    const filter = typeBoolean.getFilter('isRepeat', true);
+                    const filter = typeBoolean.getFilter(accountSchema.isRepeat.name, true);
 
                     expect(filter).toStrictEqual({
                         isRepeat: true,
@@ -85,7 +89,10 @@ describe('Services', () => {
                     expect(typeArray).toHaveProperty('getFilter');
                     expect(typeArray.fields).toEqual(expect.any(Array));
 
-                    const filter = typeArray.getFilter('tags', 'Banco,Celular,Internet,Viagens');
+                    const filter = typeArray.getFilter(
+                        accountSchema.tags.name,
+                        'Banco,Celular,Internet,Viagens'
+                    );
 
                     expect(filter).toStrictEqual({
                         tags: {

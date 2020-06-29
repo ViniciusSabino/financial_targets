@@ -1,8 +1,11 @@
 import { FIELD_TYPES } from '../../../utils/enums';
+import constants from '../../../utils/constants';
+
+const { accountSchema } = constants;
 
 const getFilterableFields = () => ({
     [FIELD_TYPES.number]: {
-        fields: ['value', 'amountPaid'],
+        fields: [accountSchema.value.name, accountSchema.amountPaid.name],
         getFilter: (key, value) => ({
             [key]: {
                 $eq: value,
@@ -11,7 +14,11 @@ const getFilterableFields = () => ({
     },
 
     [FIELD_TYPES.enum]: {
-        fields: ['type', 'status', 'paymentMethod'],
+        fields: [
+            accountSchema.type.name,
+            accountSchema.status.name,
+            accountSchema.paymentMethod.name,
+        ],
         getFilter: (key, value) => ({
             [key]: {
                 $eq: value,
@@ -20,7 +27,7 @@ const getFilterableFields = () => ({
     },
 
     [FIELD_TYPES.string]: {
-        fields: ['name'],
+        fields: [accountSchema.name.name],
         getFilter: (key, value) => ({
             [key]: {
                 $regex: value,
@@ -30,14 +37,14 @@ const getFilterableFields = () => ({
     },
 
     [FIELD_TYPES.boolean]: {
-        fields: ['isRepeat'],
+        fields: [accountSchema.isRepeat.name],
         getFilter: (key, value) => ({
             [key]: value,
         }),
     },
 
     [FIELD_TYPES.array]: {
-        fields: ['tags'],
+        fields: [accountSchema.tags.name],
         getFilter: (key, value) => ({
             [key]: {
                 $in: value.split(','),
