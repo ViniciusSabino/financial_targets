@@ -5,7 +5,8 @@ import constants from '../../utils/constants';
 const { accountFields, accountSchema } = constants;
 
 const schema = Joi.object(
-    accountFields.map((field) => ({
+    accountFields.reduce((accSchema, field) => ({
+        ...accSchema,
         [field]: accountSchema[field].validator,
     }))
 );
