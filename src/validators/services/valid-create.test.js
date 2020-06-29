@@ -24,7 +24,7 @@ const ctxMock = {
 const ACTION = 'create';
 
 describe('Validators', () => {
-    describe('Create', () => {
+    describe('Services', () => {
         describe('Valid Create', () => {
             it('should return a "badRequest" in case of an error in the schema validation', async () => {
                 const errorMessage = 'error occurred in the validation of the schema';

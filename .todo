@@ -18,7 +18,7 @@ PARTIALLY PAYMENT
 - 1 - SE NÃO VIER NADA NO BODY ENTÃO RESPONDE UM 404 
 - 2 - SE VIER PELO MENOS 1 CAMPO QUE NÃO FAÇA PARTE DE UMA CONTA ENTÃO RETORNA UM ERRO 400
 - nesse objeto que irá retornar a relação dos campos, para cada campo ter uma propriedade nome e a propriedade joiValidator com a validação do schema para aquele campo
-- criar uma função onde eu passo um array de string (name do campo) e retorne seu schema montado com base nos joiValidator
+- (FEITO) criar uma função onde eu passo um array de string (name do campo) e retorne seu schema montado com base nos joiValidator
     - Se existir um campo nesse array que não faça parte de uma conta então retorne um erro 400 no novo padrão
 
 - PADRONIZAR OS RETORNOS DE ERRO EM TODA A API (400)

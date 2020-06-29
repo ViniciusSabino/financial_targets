@@ -2,7 +2,7 @@ import Router from 'koa-joi-router';
 
 import controller from '../controllers/accounts';
 
-import { validCreate, validPatch } from '../validators';
+import { validCreate, validPatch } from '../validators/services';
 
 const router = Router();
 
