@@ -6,10 +6,13 @@ module.exports = {
     coverageDirectory: '__tests__/coverage',
     coveragePathIgnorePatterns: [
         '/node_modules',
-        '/src/server.js',
         '/__tests__',
+
         '/src/database',
         '/src/config',
+        '/src/routes',
+        '/src/server.js',
+        '/src/controllers/home.js',
     ],
     coverageThreshold: {
         global: {
