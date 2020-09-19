@@ -2,7 +2,8 @@ import Router from 'koa-joi-router';
 
 import controller from '../controllers/accounts';
 
-import { validCreate, validPatch } from '../validators/services';
+import { validCreate, validPatch, checkEditingRules } from '../validators/services';
+import { setAccountState } from '../middlewares/account-middlewares';
 
 const router = Router();
 
@@ -21,8 +22,8 @@ router.route([
     },
     {
         method: 'PATCH',
-        path: '/',
-        handler: [validPatch],
+        path: '/:id',
+        handler: [validPatch, setAccountState, checkEditingRules, controller.patch],
     },
 ]);
 

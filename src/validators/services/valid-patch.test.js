@@ -14,6 +14,7 @@ describe('Validators', () => {
             it('should validate the schema correctly and "next ()" be called', async () => {
                 const ctxMock = {
                     request: {
+                        params: { id: 1 },
                         body: {
                             name: 'new Name',
                             description: 'new Description',
@@ -32,6 +33,7 @@ describe('Validators', () => {
             it('should return a badRequest when invalid fields are passed for the update', async () => {
                 const ctxMock = {
                     request: {
+                        params: { id: 1 },
                         body: {
                             name: 'New Name',
                             description: 'new Description',
@@ -57,6 +59,7 @@ describe('Validators', () => {
             it('should return a badRequest when the passed schema is invalid', async () => {
                 const ctxMock = {
                     request: {
+                        params: { id: 1 },
                         body: {
                             name: 'ab', // invalid (min 3)
                             description: 'new Description',
